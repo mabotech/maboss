@@ -1,0 +1,13 @@
+
+{
+
+"db":{
+"conString":"postgres://mabotech:mabouser@localhost:6432/maboss"
+},
+
+"logging":
+{
+	
+}
+
+}
