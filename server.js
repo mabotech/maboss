@@ -21,6 +21,8 @@ var session = require('koa-session');
  */
 var winston = require('winston');
 
+var nconf = require('nconf');
+
 //winston.add(winston.transports.Console, {silent:true} );
 //winston.remove(winston.transports.Console);
 /*
@@ -108,8 +110,6 @@ transports: [
 //var category1 = winston.loggers.get('category1');
 
 var error = require('koa-error');
-
-var nconf = require('nconf');
 
 var koa_body = require('koa-body');
 
@@ -253,7 +253,9 @@ var port = 6226
 //app.listen(port);
 
 logger.log('info', 'node version:', process.version);
-logger.log('info', 'processor architecture: ' + process.arch);
+//logger.log('info', 'processor architecture: ' + process.arch);
+logger.log('info', 'pid: %s', process.pid);
+logger.log('info', 'execPath: %s, Cwd: %s', process.execPath, process.cwd());
 
 http.createServer(app.callback()).listen(port);
 logger.log('info', 'listening on port %s', port);

@@ -1,41 +1,78 @@
 var request = require('request');
 
-//request.post(  'http://127.0.0.1:3003/v2/si/002'   , {form:{key:'value'} })
+var should = require("should");
 
-var start = new Date()
+describe('maboss', function() {
+    describe('dataset', function() {
+        //pass parameter done when do call async method.
+        it('dataset should success', function(done) {
 
-var url_dataset = 'http://127.0.0.1:6226/dataset'
+            var start = new Date();
 
-request.post(url_dataset, function(err, httpResponse, body) {
+            var url = 'http://127.0.0.1:6226/dataset';
+            request.post(url, function(err, httpResponse, body) {
 
-    ms = new Date() - start;
-    console.log(url_dataset);
-    console.log(ms);
+                console.log(url);
+                console.log(body);
 
-    if (err) {
-        return console.error('failed:', err);
-    }
-    console.log('debug:', body);
-}).form({});
+                httpResponse.headers['content-type'].should.equal('application/json');
+                httpResponse.statusCode.should.equal(200);
 
-var url_dbfunc = 'http://127.0.0.1:6227/dbfunc'
+                JSON.parse(body).jsonrpc.should.equal("2.0");
 
-request.post(url_dbfunc, function(err, httpResponse, body) {
+                (err == null).should.be.true;
 
-    ms = new Date() - start;
-    console.log(url_dbfunc);
-    console.log(ms);
+                if (err) {
+                    return console.error('failed:', err);
+                }
 
-    if (err) {
-        return console.error('failed:', err);
-    }
-    console.log('debug:', body);
-}).form({
-    key: 'value',
-    attr: {
-        'name': 'tobi',
-        'info': {
-            "time": start.toISOString()
-        }
-    }
-})
+                done();
+            }).form({});
+
+        })
+    });
+
+    describe('dbfunc', function() {
+        it('dbfunc should success', function(done) {
+
+            var start = new Date();
+            var url = 'http://127.0.0.1:6227/dbfunc';
+
+            request.post(url, function(err, httpResponse, body) {
+
+                /*
+            ms = new Date() - start;
+            console.log(url_dbfunc);
+            console.log(ms);
+            */
+                (err == null).should.be.true;
+                if (err) {
+                    return console.error('failed:', err);
+                }
+                //throw("err");
+                console.log(url);
+                console.log(body);
+
+                httpResponse.headers['content-type'].should.equal('application/json');
+                httpResponse.statusCode.should.equal(200);
+
+                done();
+            }).form({
+                key: 'value',
+                attr: {
+                    'name': 'tobi',
+                    'info': {
+                        "time": start.toISOString()
+                    }
+                }
+            })
+
+        })
+    });
+
+    after(function() {
+
+        //console.log("after")
+    });
+
+});
