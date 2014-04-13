@@ -13,12 +13,12 @@ describe('maboss', function() {
             request.post(url, function(err, httpResponse, body) {
 
                 console.log(url);
-                console.log(body);
+                body.should.equal('Not Found');
+                httpResponse.statusMessage.should.equal('Not Found');
+                //httpResponse.headers['content-type'].should.equal('application/json');
+                httpResponse.statusCode.should.equal(404);
 
-                httpResponse.headers['content-type'].should.equal('application/json');
-                httpResponse.statusCode.should.equal(200);
-
-                JSON.parse(body).jsonrpc.should.equal("2.0");
+                //JSON.parse(body).jsonrpc.should.equal("2.0");
 
                 (err == null).should.be.true;
 
@@ -32,11 +32,11 @@ describe('maboss', function() {
         })
     });
 
-    describe('dbfunc', function() {
-        it('dbfunc should success', function(done) {
+    describe('callproc', function() {
+        it('callproc should success', function(done) {
 
             var start = new Date();
-            var url = 'http://127.0.0.1:6227/dbfunc';
+            var url = 'http://127.0.0.1:6226/callproc';
 
             request.post(url, function(err, httpResponse, body) {
 
@@ -51,10 +51,11 @@ describe('maboss', function() {
                 }
                 //throw("err");
                 console.log(url);
-                console.log(body);
+                body.should.equal('some error');
+                httpResponse.statusMessage.should.equal('Internal Server Error');
 
-                httpResponse.headers['content-type'].should.equal('application/json');
-                httpResponse.statusCode.should.equal(200);
+                //httpResponse.headers['content-type'].should.equal('application/json');
+                httpResponse.statusCode.should.equal(500);
 
                 done();
             }).form({

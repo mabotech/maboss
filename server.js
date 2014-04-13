@@ -286,8 +286,11 @@ app.post('work','/work', dataset.work);
 
 app.on('error', function(err, ctx) {
     // Log errors.
-    logger.log('error', ctx.request.ip, ctx.originalUrl);
-    logger.log('error', err.status);
+    logger.log('error', ["remote:",ctx.request.ip, "url:",ctx.originalUrl].join(" "));
+    logger.log('error', err.status||500);
+    //logger.log('error', Object.keys(ctx.response));
+    logger.log('error', ctx.response.res.statusCode);
+    logger.log('error', err.stack);
 });
 
 /*

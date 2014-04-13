@@ -3,20 +3,20 @@ var request = require('request');
 var should = require("should");
 
 describe('maboss', function() {
-    describe('dataset', function() {
+    describe('app', function() {
         //pass parameter done when do call async method.
-        it('dataset should success', function(done) {
+        it('root should success', function(done) {
 
             var start = new Date();
 
-            var url = 'http://127.0.0.1:6226/dataset';
-            request.post(url, function(err, httpResponse, body) {
+            var url = 'http://127.0.0.1:6226/';
+            request.get(url, function(err, httpResponse, body) {
 
                 console.log(url);
-                console.log(body);
-
+                //body.should.equal('Not Found');
+                //httpResponse.statusMessage.should.equal('Not Found');
                 httpResponse.headers['content-type'].should.equal('application/json');
-                httpResponse.statusCode.should.equal(200);
+                //httpResponse.statusCode.should.equal(404);
 
                 JSON.parse(body).jsonrpc.should.equal("2.0");
 
@@ -27,34 +27,35 @@ describe('maboss', function() {
                 }
 
                 done();
-            }).form({});
+            });
 
         })
     });
 
-    describe('dbfunc', function() {
-        it('dbfunc should success', function(done) {
+    describe('app', function() {
+        it('work should success', function(done) {
 
             var start = new Date();
-            var url = 'http://127.0.0.1:6227/dbfunc';
+            var url = 'http://127.0.0.1:6226/work';
 
             request.post(url, function(err, httpResponse, body) {
 
                 /*
-            ms = new Date() - start;
-            console.log(url_dbfunc);
-            console.log(ms);
-            */
+                ms = new Date() - start;
+                console.log(url_dbfunc);
+                console.log(ms);
+                */
                 (err == null).should.be.true;
                 if (err) {
                     return console.error('failed:', err);
                 }
                 //throw("err");
                 console.log(url);
-                console.log(body);
+                //body.should.equal('some error');
+                //httpResponse.statusMessage.should.equal('Internal Server Error');
 
                 httpResponse.headers['content-type'].should.equal('application/json');
-                httpResponse.statusCode.should.equal(200);
+                //httpResponse.statusCode.should.equal(500);
 
                 done();
             }).form({

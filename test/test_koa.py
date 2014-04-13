@@ -19,16 +19,8 @@ class TestCallProc(unittest.TestCase):
         
         headers = {'content-type': 'application/json', 'accept':'json','User-Agent':'mabo'}
         r = requests.get(url, headers = headers)
+        assert 'jsonrpc' in  r.json()
         
-        #v = r.text #json.loads(r.text)
-        try:
-            v = r.json()
-        
-            print(url, v)        
-        except:
-            print url, r.status_code
-            print r
-            
     def test_work(self):
         
         url = 'http://127.0.0.1:6226/work'
@@ -40,14 +32,11 @@ class TestCallProc(unittest.TestCase):
         #payload = json.dumps(payload)
         
         r = requests.post(url, data =   payload , headers={})
-        #v = r.text #json.loads(r.text)
-        print url, r.status_code
         v = r.json()
-        print "json:",r.json()
-        print "text:",r.text
-        print "reason:",r.reason
+        assert 'result' in r.json()
+
         
-    def test_app_throw(self):
+    def test_internal_server_error(self):
         
         url = 'http://127.0.0.1:6226/callproc'
         
@@ -57,23 +46,14 @@ class TestCallProc(unittest.TestCase):
         #payload = json.dumps(payload)
         
         r = requests.post(url, data =   payload , headers={})
-        print  r.headers
+        #print  r.headers
         #v = r.text #json.loads(r.text)
-        print url,  r.status_code
+        assert r.status_code == 500
+        assert r.reason == 'Internal Server Error'
+        assert r.text == 'some error'
         
-        #print r.json()
         
-        try:
-            v = r.json()
-            
-            print(v)
-        except:
-            print url,  r.status_code
-            print 'reason:',r.reason
-            print r.text
-            print(dir(r))           
-        
-    def test_callproc(self):
+    def test_not_found(self):
         
         url = 'http://127.0.0.1:6226/test'
         
@@ -85,19 +65,9 @@ class TestCallProc(unittest.TestCase):
         
         r = requests.post(url, data =   payload , headers=headers)
         #v = r.text #json.loads(r.text)
-        print url,  r.status_code
-        
-        try:
-            v = r.json()
-            
-            print(v)
-        except:
-            print url,  r.status_code
-            print r
-            print r.status_code
-            print r.text  #content
-            print r.content
-            #print(dir(r))   
+        assert r.status_code == 404
+        assert r.text == 'Not Found'
+        assert r.reason == 'Not Found'
         
 if __name__ == "__main__":
     
