@@ -11,7 +11,7 @@ var _ = require('koa-route');
 var portal = require('../app/portal');
 var dataset = require('../app/dataset');
 var callproc = require('../app/callproc');
-var user = require('../app/user')
+//var user = require('../app/user');
 
 
 module.exports = {

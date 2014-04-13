@@ -20,7 +20,7 @@ describe('maboss', function() {
 
                 JSON.parse(body).jsonrpc.should.equal("2.0");
 
-                (err == null).should.be.true;
+                //(err == null).should.be.true;
 
                 if (err) {
                     return console.error('failed:', err);
@@ -29,7 +29,7 @@ describe('maboss', function() {
                 done();
             });
 
-        })
+        });
     });
 
     describe('app', function() {
@@ -45,7 +45,7 @@ describe('maboss', function() {
                 console.log(url_dbfunc);
                 console.log(ms);
                 */
-                (err == null).should.be.true;
+                //(err === null).should.be.true;
                 if (err) {
                     return console.error('failed:', err);
                 }
@@ -66,9 +66,9 @@ describe('maboss', function() {
                         "time": start.toISOString()
                     }
                 }
-            })
+            });
 
-        })
+        });
     });
 
     after(function() {

@@ -1,3 +1,5 @@
+BASE = .
+
 TESTS = test/test_*.js
 TIMEOUT = 10
 
@@ -20,5 +22,8 @@ py.test:
 help:
 	@echo "'win' for installation on windows"
 	@echo "dev with nodemon"
+
+lint:
+	jshint . --exclude backup --config jshintrc
 
 .PHONY: test start install install.win

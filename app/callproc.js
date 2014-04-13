@@ -16,10 +16,14 @@ module.exports = {
 
             //throw("in test");
             //this.throw("in test", 500);
-             throw new Error('some error');
+           
             var v = qs.parse(this.request.body);
             logger.log(v);
+            sql = "select now()";
+            var result = yield this.pg.db.client.query_(sql);
+
             this.body = {"val":v};
+            throw new Error('some error');
 
     },
 

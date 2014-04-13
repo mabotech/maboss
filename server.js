@@ -115,7 +115,7 @@ var error = require('koa-error');
 
 var koa_body = require('koa-body');
 
-var koaPg = require('koa-pg')
+var koaPg = require('koa-pg');
 
 
 var route = require('./config/route');
@@ -162,8 +162,8 @@ app.use(session());
  *
  */
 
-var conString = nconf.get('db').conString
-app.use(koaPg(conString))
+var conString = nconf.get('db').conString;
+app.use(koaPg(conString));
 
 /*
  * body parse
@@ -224,7 +224,7 @@ app.use(function * (next) {
 
     yield next;
 
-    var ms = new Date() - start
+    var ms = new Date() - start;
 
     this.set('X-Response-Time', ms + 'ms');
 
@@ -296,7 +296,7 @@ app.on('error', function(err, ctx) {
 /*
  * start server
  */
-var port = 6226
+var port = 6226;
 
 //app.listen(port);
 

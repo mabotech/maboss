@@ -1,0 +1,8 @@
+{
+    // Settings
+    "passfail" : false, // Stop on first error.
+    "maxerr" : 500, // Maximum errors before stopping.
+    "es5"    : false,
+    "esnext" : true
+
+}
