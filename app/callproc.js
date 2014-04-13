@@ -19,8 +19,9 @@ module.exports = {
            
             var v = qs.parse(this.request.body);
             logger.log(v);
-            sql = "select now()";
-            var result = yield this.pg.db.client.query_(sql);
+            //sql = "select now()";
+            //var result = yield this.pg.db.client.query_(sql);
+            //yield next;
 
             this.body = {"val":v};
             throw new Error('some error');

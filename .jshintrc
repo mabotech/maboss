@@ -3,6 +3,7 @@
     "passfail" : false, // Stop on first error.
     "maxerr" : 500, // Maximum errors before stopping.
     "es5"    : false,
+    
+    "noyield":true, // the innermost koa app with yield.
     "esnext" : true
-
 }

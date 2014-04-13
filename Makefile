@@ -24,6 +24,7 @@ help:
 	@echo "dev with nodemon"
 
 lint:
-	jshint . --exclude backup --config jshintrc
+# set CYGWIN=nodosfilewarning
+	jshint . --exclude backup --config .jshintrc
 
 .PHONY: test start install install.win

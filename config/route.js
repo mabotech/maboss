@@ -7,7 +7,7 @@ var _ = require('koa-route');
 /*
  * load apps
  */
-
+var poc = require('../app/poc');
 var portal = require('../app/portal');
 var dataset = require('../app/dataset');
 var callproc = require('../app/callproc');
@@ -22,6 +22,8 @@ module.exports = {
          * route
          */
         app.use(_.get('/', portal.show));
+
+        app.use(_.post('/poc.test', poc.test));
 
         app.use(_.post('/fetch', dataset.fetch));
 
