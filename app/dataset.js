@@ -28,7 +28,7 @@ module.exports = {
         console.log(v);
         console.log('info', JSON.stringify(v));
         this.body = {
-            "worker": "work1"
+            "work": "work 2014"
         };
 
     }

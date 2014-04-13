@@ -10,7 +10,7 @@ var _ = require('koa-route');
 
 var portal = require('../app/portal');
 var dataset = require('../app/dataset');
-var dbfunc = require('../app/dbfunc');
+var callproc = require('../app/callproc');
 var user = require('../app/user')
 
 
@@ -23,9 +23,11 @@ module.exports = {
          */
         app.use(_.get('/', portal.show));
 
-        app.use(_.post('/dataset', dataset.fetch));
+        app.use(_.post('/fetch', dataset.fetch));
 
-        app.use(_.post('/dbfunc', dbfunc.call));
+        app.use(_.post('/work', dataset.work));
+
+        app.use(_.post('/callproc', callproc.test));
 
         //console.log(Object.keys(app));
         //console.log(Functioins.keys(app));

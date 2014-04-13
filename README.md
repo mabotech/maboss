@@ -1,28 +1,17 @@
 maboss
 ======
 
-maboss mes platform
+maboss MES platform is built on open source software and released with MIT license.
 
+Open source components: 
 
-Installation
-=======
+- NodeJS
+- PostgreSQL
+- Redis
+- ...
 
-nssm
-----
-nssm for windows services installation 
+Features
+===============
 
-
-`net start servicename`
-
-`net stop servicename`
-
-NodeJS
-----
-nodejs > 0.11.9, which support --harmony
-
-PostgreSQL
-----------
-
-PostgreSQL `9.3`, plpython3u, plv8, pgBouncer
-
-plpython3u require `Python3.2`
+- session
+- logging: app logging and performance logging.
