@@ -17,7 +17,7 @@ module.exports = {
             //throw("in test");
             //this.throw("in test", 500);
            
-            var params = qs.parse(this.request.body);
+            var params = this.params; //qs.parse(this.request.body);
             logger.log(params);
             
             sql = "select now()";
@@ -34,7 +34,7 @@ module.exports = {
 
         //default loggers
         
-        var params = qs.parse(this.request.body);
+        var params = this.params; //qs.parse(this.request.body);
 
         var method = params.method;
 
@@ -55,7 +55,14 @@ module.exports = {
             "context":{"user":'u1', "languageid":"1033", "sessionid":"123" } 
             };
         */
-        var sql = util.format("select %s as rdata from %s('%s')", method, method, JSON.stringify(json_data));
+        json_str = JSON.stringify(json_data);
+
+        //escape "single quote"(')
+        json_str = json_str.replace("'", "''");
+        
+        console.log(json_str);
+
+        var sql = util.format("select %s as rdata from %s('%s')", method, method, json_str);
 
         logger.log('debug', sql);
 

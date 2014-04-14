@@ -2,6 +2,8 @@
  * maboss server
  * version: 0.0.1
  * require nodejs with harmony
+ * request MUST be jsonrpc all, and reply in jsonrpc
+ * 
  */
 
 /*
@@ -115,6 +117,8 @@ var error = require('koa-error');
 
 var koa_body = require('koa-body');
 
+var qs = require('qs');
+
 var koaPg = require('koa-pg');
 
 
@@ -149,17 +153,16 @@ app.use(function *(next) {
 })
  
 */
+
+/*
+ * error handling, as the first(outermost) middleware 
+ */
 app.use(error());
 
 app.use(session());
 
 /*
- * error handling
- */
-
-
-/*
- *
+ * init
  */
 
 var conString = nconf.get('db').conString;
@@ -183,6 +186,9 @@ client.on("error", function(err) {
     console.log("Error " + err);
 });
 
+/*
+ * redis client
+ */
 app.use(function * (next) {
 
     var start = new Date();
@@ -202,8 +208,7 @@ app.use(function * (next) {
  * performance
  */
 app.use(function * (next) {
-    logger.log('debug', '------------------------------------------');
-
+    
     //logger.log('debug', this.req.rawHeaders);
 
     var start = new Date();
@@ -214,6 +219,7 @@ app.use(function * (next) {
     //this.throw("test throw", 500);
 
     var n = this.session.views || 0;
+    
     this.session.views = ++n;
 
     if (this.session.views < 1) {
@@ -226,8 +232,10 @@ app.use(function * (next) {
 
     var ms = new Date() - start;
 
+    //set process time in millisecond
     this.set('X-Response-Time', ms + 'ms');
 
+    //performance log
     perf.log("debug", "%s - %s", ms, this.originalUrl);
 
 });
@@ -238,13 +246,24 @@ app.use(function * (next) {
  */
 app.use(function * (next) {
 
-    var id = 123;
+    var params = qs.parse(this.request.body);
+    
+    //add parsed params for this(ctx).
+    //be care name conflict.
+    this.params = params;
 
+    //set default jsonrpc id.
+    var id = "r1";
+
+    if("id" in params){
+        id = params.id;
+    }
+
+    // TODO: security check
+    
     yield next;
 
     logger.log('info', this.response._status);
-
-
 
     if (this.response._status != 200) { //this.body == undefined){//) {  //(app.outputErrors
 
@@ -260,6 +279,7 @@ app.use(function * (next) {
         */
     } else {
 
+        //make jsonrpc reply.
         this.body = {
             "jsonrpc": "2.0",
             "result": this.body,
@@ -308,7 +328,9 @@ logger.log('info', 'execPath: %s, Cwd: %s', process.execPath, process.cwd());
 http.createServer(app.callback()).listen(port);
 logger.log('info', 'listening on port %s', port);
 
-
+/*
+//second port
 http.createServer(app.callback()).listen(port + 1);
 logger.log('info', 'listening on port %s', port + 1);
+*/
 //console.log('listening on port %s', port);

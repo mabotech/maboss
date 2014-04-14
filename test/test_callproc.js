@@ -15,9 +15,7 @@ var get_word = function(maxlen){
     }else{
         return companyName;
     }
-
-
-}
+};
 
 describe('maboss', function() {
     describe('app', function() {
@@ -71,8 +69,8 @@ describe('maboss', function() {
     /*
      *
      */
-    describe('app', function() {
-        it('call should success', function(done){
+    describe('callproc', function() {
+        it('call upsert should success', function(done){
 
             var url = 'http://127.0.0.1:6226/callproc.call';
 
@@ -80,6 +78,7 @@ describe('maboss', function() {
 
                 console.log(err);
                 
+                //normal
                 httpResponse.statusCode.should.equal(200);
                 httpResponse.statusMessage.should.equal('OK');
 
@@ -91,13 +90,13 @@ describe('maboss', function() {
                     {
                         "jsonrpc":"2.0",
                         "id":"r2",
-                        "method":"mtp_upsert_cf3",
+                        "method":"mtp_upsert_cf4",
                         "params":
                         {
                             "table":"company", 
-                            "kv":{
+                            "columns":{
                                 "company":get_word(4),
-                                "texths":get_word(20),
+                                "texths":"ab'c",//get_word(20),
                                 "currencycode":get_word(3),
                                 "domainmanagerid":Faker.random.number(1100),
                                 "objectclass":get_word(40)            
@@ -109,8 +108,48 @@ describe('maboss', function() {
 
         });
 
-    });
+    });//end describe
 
+describe('callproc', function() {
+        it('call upsert should success', function(done){
 
+            var url = 'http://127.0.0.1:6226/callproc.call';
+
+            request.post(url, function(err, httpResponse, body) {
+
+                console.log(err);
+                
+                //normal
+                httpResponse.statusCode.should.equal(200);
+                httpResponse.statusMessage.should.equal('OK');
+
+                console.log(url);
+                console.log(body);
+                //body.should.equal('Not Found');
+                done();
+            }).form(
+                    {
+                        "jsonrpc":"2.0",
+                        "id":"r3",
+                        "method":"mtp_upsert_cf4",
+                        "params":
+                        {
+                            "table":"company", 
+                            "columns":{
+                                "company":get_word(4),
+                                "texths":get_word(10),
+                                "currencycode":get_word(3),
+                                "domainmanagerid":Faker.random.number(1100),
+                                "objectclass":get_word(40)            
+                            },
+                           "context":{"user":Faker.Name.firstName(), "languageid":"1033", "sessionid":"123" } 
+                       }
+                    }
+                );
+
+        });
+
+    });//end describe
+        
 
 });
