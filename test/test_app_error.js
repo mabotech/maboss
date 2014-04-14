@@ -32,11 +32,11 @@ describe('maboss', function() {
         });
     });
 
-    describe('callproc', function() {
-        it('callproc should success', function(done) {
+    describe('poc', function() {
+        it('error in poc should be true', function(done) {
 
             var start = new Date();
-            var url = 'http://127.0.0.1:6226/callproc';
+            var url = 'http://127.0.0.1:6226/poc.test';
 
             request.post(url, function(err, httpResponse, body) {
 
@@ -51,7 +51,7 @@ describe('maboss', function() {
                 }
                 //throw("err");
                 console.log(url);
-                body.should.equal('some error');
+                body.should.equal('error in poc');
                 httpResponse.statusMessage.should.equal('Internal Server Error');
 
                 //httpResponse.headers['content-type'].should.equal('application/json');

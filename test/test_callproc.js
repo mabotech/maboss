@@ -18,39 +18,8 @@ var get_word = function(maxlen){
 };
 
 describe('maboss', function() {
-    describe('app', function() {
-        //pass parameter done when do call async method.
-        it('faker should success', function(done) {
-            
-            var firstName = Faker.Name.firstName();
-            console.log(firstName);
-            
-            var userName = Faker.Internet.userName();
-            console.log(userName);
-
-            var color1 = Faker.Internet.color(1);
-            console.log(color1);
-
-            var companyName = Faker.Company.companyName();
-            console.log(companyName);
-
-            var recent = Faker.Date.recent(10);
-            console.log(recent);
-
-            var past = Faker.Date.past(1);
-            console.log(past);
-
-            var number = Faker.random.number(110);
-            console.log(number);
-
-            done();
-        });
-
-    });
-     /*
-     *
-     */
-    describe('app', function() {
+   
+ describe('app', function() {
         it('pgtime should success', function(done){
 
             var url = 'http://127.0.0.1:6226/callproc.pgtime';
