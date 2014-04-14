@@ -17,6 +17,42 @@
 - jshint / jshint
 - cygwin64, make
 
+## API
+
+### JSONRPC
+
+jsonrpc
+
+
+### request
+
+	{"jsonrpc":"2.0",
+	"method",
+	"id":"r1",
+	"params":[]
+	}
+
+params:
+
+
+
+
+
+### response
+
+result
+
+	{"jsonrpc":"2.0",
+	"result":"",
+	"id":"r1"
+	}
+
+error
+
+	{"jsonrpc":"2.0",
+	"error":"",
+	"id":"r1"
+	}
 
 ## Debug
 

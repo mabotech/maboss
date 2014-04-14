@@ -29,7 +29,9 @@ module.exports = {
 
         app.use(_.post('/work', dataset.work));
 
-        app.use(_.post('/callproc', callproc.test));
+        app.use(_.post('/callproc.pgtime', callproc.pgtime));
+        
+        app.use(_.post('/callproc.call', callproc.call));
 
         //console.log(Object.keys(app));
         //console.log(Functioins.keys(app));

@@ -8,6 +8,17 @@ var request = require('request');
 // npm install should
 var should = require("should");
 
+var get_word = function(maxlen){
+    var companyName = Faker.Company.companyName();
+    if (companyName.length > maxlen){
+        return companyName.substring(0, maxlen);
+    }else{
+        return companyName;
+    }
+
+
+}
+
 describe('maboss', function() {
     describe('app', function() {
         //pass parameter done when do call async method.
@@ -38,5 +49,68 @@ describe('maboss', function() {
         });
 
     });
+     /*
+     *
+     */
+    describe('app', function() {
+        it('pgtime should success', function(done){
+
+            var url = 'http://127.0.0.1:6226/callproc.pgtime';
+
+            request.post(url, function(err, httpResponse, body) {
+
+                console.log(url);
+                console.log(body);
+                //body.should.equal('Not Found');
+                done();
+            });
+
+        });
+
+    });
+    /*
+     *
+     */
+    describe('app', function() {
+        it('call should success', function(done){
+
+            var url = 'http://127.0.0.1:6226/callproc.call';
+
+            request.post(url, function(err, httpResponse, body) {
+
+                console.log(err);
+                
+                httpResponse.statusCode.should.equal(200);
+                httpResponse.statusMessage.should.equal('OK');
+
+                console.log(url);
+                console.log(body);
+                //body.should.equal('Not Found');
+                done();
+            }).form(
+                    {
+                        "jsonrpc":"2.0",
+                        "id":"r2",
+                        "method":"mtp_upsert_cf3",
+                        "params":
+                        {
+                            "table":"company", 
+                            "kv":{
+                                "company":get_word(4),
+                                "texths":get_word(20),
+                                "currencycode":get_word(3),
+                                "domainmanagerid":Faker.random.number(1100),
+                                "objectclass":get_word(40)            
+                            },
+                           "context":{"user":Faker.Name.firstName(), "languageid":"1033", "sessionid":"123" } 
+                       }
+                    }
+                );
+
+        });
+
+    });
+
+
 
 });
