@@ -10,44 +10,51 @@ domain = [ '|',
   [ 'message_follower_ids', 'in', [ 'A', 'B' ] ],
   [ 'user_id', '=', 'user.id' ] ]
 
-n = domain.length
 
-st = []
+make_filter_str = (domain) ->
+    n = domain.length
 
-y = {"|":" OR ","&":" AND ", "!" : " NOT "}
+    st = []
 
-while n>0
-    
-    n = n - 1
-    
-    if domain[n] not in ["|","&", "!"]
+    y = {"|":" OR ","&":" AND ", "!" : " NOT "}
+
+    while n>0
         
-        # in / not in 
-        if typeof (domain[n][2]) == 'object'
+        n = n - 1
         
-            vlist = []
+        if domain[n] not in ["|","&", "!"]
             
-            arr = domain[n][2]
+            # in / not in 
+            if typeof (domain[n][2]) == 'object'
             
-            #add single quote for value
-            for i in [0 ..arr.length-1]
-                vlist.push("'#{arr[i]}'")
-            
-            arr_str = vlist.join(", ")
-            arr_str = "(#{arr_str})"
-            in_ = [ domain[n][0], domain[n][1], arr_str ].join(' ')
-            st.push(in_)
+                vlist = []
+                
+                arr = domain[n][2]
+                
+                #add single quote for value
+                for i in [0 ..arr.length-1]
+                    vlist.push("'#{arr[i]}'")
+                
+                arr_str = vlist.join(", ")
+                arr_str = "(#{arr_str})"
+                in_ = [ domain[n][0], domain[n][1], arr_str ].join(' ')
+                st.push(in_)
 
+            else
+                #console.log("not obj")
+                domain[n][2] = "'#{domain[n][2]}'"
+                st.push(domain[n].join(' '))
         else
-            #console.log("not obj")
-            domain[n][2] = "'#{domain[n][2]}'"
-            st.push(domain[n].join(' '))
-    else
-        
-        conditions = st.join(" #{y[ domain[n] ]} ")
-        st.pop()
-        st.pop()
-        st.push("(#{conditions})")
+            
+            conditions = st.join(" #{y[ domain[n] ]} ")
+            st.pop()
+            st.pop()
+            st.push("(#{conditions})")
 
-#result
-console.log(st.pop())
+    #result
+    return st.pop()
+    
+    
+filters = make_filter_str(domain)
+
+console.log(filters)
