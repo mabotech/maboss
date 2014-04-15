@@ -1,4 +1,14 @@
 
+select * from make_filters_str3('{
+	"domain":[ "!", [ "user_id", "=", "user.id" ] ]}');
+
+select * from make_filters_str3('{
+	"domain":[  "&", [ "c", "<>", "d" ],  "!", [ "a", "=", "b" ]  ]}');
+
+select * from make_filters_str3('{
+			"domain":[ "|",[ "project_id", "=", "public" ],"|",["a","=","b"], 
+			"&",  [ "project_id", "not in", [ "portal", "followers" ] ],  
+		"&", "!", [ "message_follower_ids", "in", ["A", "B" ] ], [ "user_id", "=", "user.id" ] ]}');
 
 -- Polish notation
 select * from make_filters_str2('{
