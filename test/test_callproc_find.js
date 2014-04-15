@@ -44,9 +44,7 @@ describe('maboss', function() {
             var url = 'http://127.0.0.1:6226/callproc.call';
 
             request.post(url, function(err, httpResponse, body) {
-
-                console.log(err);
-                
+               
                 //normal
                 httpResponse.statusCode.should.equal(200);
                 httpResponse.statusMessage.should.equal('OK');
@@ -80,14 +78,12 @@ describe('maboss', function() {
     });//end describe
 
 describe('callproc', function() {
-        it('call upsert should success', function(done){
+        it('jsonrpc request call upsert should success', function(done){
 
             var url = 'http://127.0.0.1:6226/callproc.call';
 
             request.post(url, function(err, httpResponse, body) {
-
-                console.log(err);
-                
+              
                 //normal
                 httpResponse.statusCode.should.equal(200);
                 httpResponse.statusMessage.should.equal('OK');
