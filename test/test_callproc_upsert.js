@@ -8,6 +8,12 @@ var request = require('request');
 // npm install should
 var should = require("should");
 
+var nconf = require('nconf');
+
+nconf.file('test_config.json');
+
+var root = nconf.get('root');
+
 var get_word = function(maxlen){
     var companyName = Faker.Company.companyName();
     if (companyName.length > maxlen){
@@ -22,8 +28,8 @@ describe('maboss', function() {
  describe('app', function() {
         it('pgtime should success', function(done){
 
-            var url = 'http://127.0.0.1:6226/callproc.pgtime';
-
+            var url = root+'/callproc.pgtime';
+            console.log(url);
             request.post(url, function(err, httpResponse, body) {
 
                 console.log(url);
@@ -41,7 +47,7 @@ describe('maboss', function() {
     describe('callproc', function() {
         it('call upsert should success', function(done){
 
-            var url = 'http://127.0.0.1:6226/callproc.call';
+            var url = root+'/callproc.call';
 
             request.post(url, function(err, httpResponse, body) {
                
@@ -80,7 +86,7 @@ describe('maboss', function() {
 describe('callproc', function() {
         it('jsonrpc request call upsert should success', function(done){
 
-            var url = 'http://127.0.0.1:6226/callproc.call';
+            var url = root+'/callproc.call';
 
             request.post(url, function(err, httpResponse, body) {
               

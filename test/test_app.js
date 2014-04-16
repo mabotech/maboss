@@ -2,6 +2,12 @@ var request = require('request');
 
 var should = require("should");
 
+var nconf = require('nconf');
+
+nconf.file('./test_config.json');
+
+var root = nconf.get('root');
+
 describe('maboss', function() {
     describe('app', function() {
         //pass parameter done when do call async method.
@@ -9,7 +15,7 @@ describe('maboss', function() {
 
             var start = new Date();
 
-            var url = 'http://127.0.0.1:6226/';
+            var url = root;
             request.get(url, function(err, httpResponse, body) {
 
                 console.log(url);
@@ -36,7 +42,7 @@ describe('maboss', function() {
         it('work should success', function(done) {
 
             var start = new Date();
-            var url = 'http://127.0.0.1:6226/work';
+            var url = root+'/work';
 
             request.post(url, function(err, httpResponse, body) {
 
