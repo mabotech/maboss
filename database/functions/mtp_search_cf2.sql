@@ -34,9 +34,9 @@ if i_json.cols
 if not v_filter or v_filter.length == 0
 	v_filter = "true"
 else
-	make_filters_str = plv8.find_function("make_filters_str");
+	make_criteria = plv8.find_function("mtp_make_criteria_a");
 
-	v_filter= make_filters_str({"domain":v_filter})
+	v_filter= make_criteria({"domain":v_filter})
 
 if not v_orderby
 	v_orderby = "1"	

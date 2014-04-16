@@ -10,6 +10,43 @@ maboss development environment and api.
 - redis, 2.6
 - python, 2.7
 
+
+### Python
+
+pip install
+
+modules:
+
+- pylint
+- requests
+- pyro / OpenOPC
+- flask
+- mako
+- virtualenv
+- psycopg2
+- sqlalchemy
+- cx_Oracle
+- pytest / nose
+- faker
+- pywin32
+- fysom
+- jsbeautifier
+- lxml
+- yaml
+- tablib
+- matplotlib
+- msgpack
+- zmq
+- pyzmq
+- zerorpc
+- numpy
+- scipy
+- Pillow
+- sphinx
+- gevent
+- marrow
+
+
 ## Tools
 - npm
 - git
@@ -19,6 +56,30 @@ maboss development environment and api.
 - py.test
 - jshint / jshint
 - cygwin64, make
+
+
+### scite
+
+python: command:  
+
+go:  python -3
+
+build: pylint 
+
+javascript command:
+
+go: node --harmony
+
+build: jshint / jslint
+
+coffeescript command:
+
+go: coffee
+
+build: coffeelint
+
+compile: coffee -c
+
 
 ## API
 

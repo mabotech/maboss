@@ -1,11 +1,11 @@
 
-select * from make_filters_str3('{
+select * from mtp_make_criteria_p('{
 	"domain":[ "!", [ "user_id", "=", "user.id" ] ]}');
 
-select * from make_filters_str3('{
+select * from mtp_make_criteria_p('{
 	"domain":[  "&", [ "c", "<>", "d" ],  "!", [ "a", "=", "b" ]  ]}');
 
-select * from make_filters_str3('{
+select * from mtp_make_criteria_p('{
 			"domain":[ "|",[ "project_id", "=", "public" ],"|",["a","=","b"], 
 			"&",  [ "project_id", "not in", [ "portal", "followers" ] ],  
 		"&", "!", [ "message_follower_ids", "in", ["A", "B" ] ], [ "user_id", "=", "user.id" ] ]}');
@@ -17,7 +17,7 @@ select * from make_filters_str2('{
 			"|",  [ "message_follower_ids", "in", ["A", "B" ] ], [ "user_id", "=", "user.id" ] ]}');
 
 -- array notation
-select * from make_filters_str('{
+select * from mtp_make_criteria_a('{
                 "domain" :  [ [ [ "col1", "=", "1", "int" ],
                     [ "col2", "ilike", "a5%", "varchar" ],
                     [ "col3", "<", "100", "int" ] ]                 ,
