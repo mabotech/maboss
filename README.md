@@ -26,3 +26,11 @@ pg install on windows
 
 npm install --msvs_version=2012
 
+Development
+===========
+
+Windows
+
+start_server.bat: use nodemon to monitor files update.
+
+-e js,json : monitor js and json config files.

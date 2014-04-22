@@ -2,6 +2,6 @@
 
 set DEBUG=koa,koa-route
 
-nodemon --harmony server.js
+nodemon -e js,json --harmony server.js
 
 pause

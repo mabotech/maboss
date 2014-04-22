@@ -2,30 +2,26 @@
  * maboss server
  * version: 0.0.1
  * require nodejs with harmony
- * request MUST be jsonrpc all, and reply in jsonrpc
+ * HTTP request MUST be jsonrpc all, and reply in jsonrpc
  * 
  */
 
 /*
  * init
  */
-
-var debug = require('debug')('http');
+var nconf = require('nconf');
+var debug = require("debug")('http');
 var http = require('http');
 
 //var process = require('process');
 
 var koa = require('koa');
-
 var redis = require("redis");
-
 var session = require('koa-session');
 /*
  * logging
  */
 var winston = require('winston');
-
-var nconf = require('nconf');
 
 //winston.add(winston.transports.Console, {silent:true} );
 //winston.remove(winston.transports.Console);
@@ -121,8 +117,6 @@ var qs = require('qs');
 
 var koaPg = require('koa-pg');
 
-
-var route = require('./config/route');
 //var router = require('koa-router')
 
 var crypto = require('crypto');
@@ -135,9 +129,11 @@ var password = md5.update('mabotech').digest('hex'); //md5.update('mabotech').di
  */
 nconf.file('config/config.json');
 
+var route = require('./config/route');
+
 var app = koa();
 
-app.keys = ['mabo secret'];
+app.keys = [nconf.get("app").keys];
 
 /*
 app.use(function *(next) {
@@ -165,8 +161,8 @@ app.use(session());
  * init
  */
 
-var conString = nconf.get('db').conString;
-app.use(koaPg(conString));
+var con_string = nconf.get('db').con_string;
+app.use(koaPg(con_string));
 
 /*
  * body parse
@@ -175,12 +171,11 @@ app.use(koa_body());
 
 // TODO: add body parse here
 
-
 /*
  * redis config and connect
  */
 
-var client = redis.createClient(6379, '127.0.0.1', {});
+var client = redis.createClient(nconf.get('redis').port, nconf.get('redis').server, {});
 
 client.on("error", function(err) {
     console.log("Error " + err);
@@ -316,7 +311,7 @@ app.on('error', function(err, ctx) {
 /*
  * start server
  */
-var port = 6226;
+var port = nconf.get("app").port;
 
 //app.listen(port);
 
