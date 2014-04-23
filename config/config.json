@@ -1,7 +1,8 @@
 {
-    "comment":"nconf configuration file for maboss app",
+    "comment":"nconf configuration file for maboss app 0.0.1",
     "app":{
         "name": "maboss",
+        "version":"0.0.1",
         "keys": "mabo.secret",
         "port": 6226
         },

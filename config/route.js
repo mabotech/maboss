@@ -21,7 +21,7 @@ module.exports = {
         /*
          * route
          */
-        app.use(_.get('/', portal.show));
+        app.use(_.get('/', portal.index));
 
         app.use(_.post('/poc.test', poc.test));
 

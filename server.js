@@ -205,6 +205,8 @@ app.use(function * (next) {
 app.use(function * (next) {
     
     //logger.log('debug', this.req.rawHeaders);
+    
+    this.nconf = nconf;
 
     var start = new Date();
     // console.log(start);
