@@ -19,7 +19,9 @@ describe('maboss', function() {
             request.post(url, function(err, httpResponse, body) {
 
                 console.log(url);
-                body.should.equal('Not Found');
+                json_ = JSON.parse(body)
+                //console.log(json_)
+                json_["error"].should.equal('Not Found');
                 httpResponse.statusMessage.should.equal('Not Found');
                 //httpResponse.headers['content-type'].should.equal('application/json');
                 httpResponse.statusCode.should.equal(404);
@@ -57,7 +59,10 @@ describe('maboss', function() {
                 }
                 //throw("err");
                 console.log(url);
-                body.should.equal('error in poc');
+                
+                json_ = JSON.parse(body)
+                
+                json_["error"].should.equal('error in poc');
                 httpResponse.statusMessage.should.equal('Internal Server Error');
 
                 //httpResponse.headers['content-type'].should.equal('application/json');

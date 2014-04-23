@@ -18,7 +18,6 @@ module.exports = {
 
     list: function *(){
         var names = Object.keys(db);
-        yield [1];
         this.body = 'workers: ' + names.join(', ');
     },
 
@@ -27,7 +26,6 @@ module.exports = {
         //return this.throw('{"error":"test"}', 500);
         console.log("worker 2014");
         var v = qs.parse(this.request.body);
-        yield [1];
         console.log(v);
         console.log('info', JSON.stringify(v));
         this.body = {"worker":"work1"};

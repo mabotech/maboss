@@ -44,6 +44,7 @@ var logger = winston.loggers.add('server', {
     },
     file: {
         filename: 'logs/maboss.log',
+         label: 'server',
         level: 'debug',
         json: false,
         maxsize: 10240000,
@@ -109,7 +110,7 @@ transports: [
 
 //var category1 = winston.loggers.get('category1');
 
-var error = require('koa-error');
+//var error = require('koa-error');
 
 var koa_body = require('koa-body');
 
@@ -153,8 +154,36 @@ app.use(function *(next) {
 /*
  * error handling, as the first(outermost) middleware 
  */
-app.use(error());
+//app.use(error());
 
+// customized error handling
+app.use(function *(next){
+     var env = process.env.NODE_ENV || 'development';
+    try {
+        
+        yield next;
+        
+        if (null == this.status) this.throw(404);
+        
+    } catch (err) {
+        
+        
+        this.status = err.status || 500;
+        
+        if ('development' == env){
+             this.body = {jsonrpc:"2.0", error: err.message , id:"r1"}
+        }
+        else if (err.expose) {
+            this.body = { jsonrpc:"2.0", error: err.message, id: "r1" }
+        }
+        else{ 
+            this.body = { jsonrpc:"2.0", error: http.STATUS_CODES[this.status] , id: "r1"}
+        }
+        
+    }
+});
+
+//
 app.use(session());
 
 /*
@@ -252,8 +281,8 @@ app.use(function * (next) {
     //set default jsonrpc id.
     var id = "r1";
 
-    if("id" in params){
-        id = params.id;
+    if("id" in this.params){
+        id = this.params.id;
     }
 
     // TODO: security check
@@ -261,19 +290,34 @@ app.use(function * (next) {
     yield next;
 
     logger.log('info', this.response._status);
+    
+    
+    logger.debug("info", this.res._headers)
+    for(k in Object.keys(this)){
+        
+     //   logger.debug("info",k );    
+        
+    }
+    
 
     if (this.response._status != 200) { //this.body == undefined){//) {  //(app.outputErrors
-
-        //logger.debug("error",Object.keys(this));
         /*
+        if(this.status == null){
+                this.status = 404;
+        }
+        
+        logger.log('error', ["remote:",this.request.ip, "url:",this.originalUrl].join(" "));
+        
         this.body = {
             "jsonrpc": "2.0",
-            "error": [this.res.statusCode, this.originalUrl, this.response.statusString].join(' '),
+            "error": this.response.statusString,
             "id": id,
-            "session": this.session.views,
+            "session": this.session,
             "sec": password
         };
         */
+        //logger.debug("error",Object.keys(this));
+    
     } else {
 
         //make jsonrpc reply.
@@ -300,7 +344,9 @@ app.post('test','/test', callproc.test);
 app.post('work','/work', dataset.work);
 */
 
-
+/*
+ * koa.error:  this.app.emit('error', err, this);
+*/
 app.on('error', function(err, ctx) {
     // Log errors.
     logger.log('error', ["remote:",ctx.request.ip, "url:",ctx.originalUrl].join(" "));
