@@ -4,6 +4,10 @@
 #backup
 backup/
 
+#js/css libs
+public/
+libs/*
+
 # Runtime data
 pids
 *.pid
