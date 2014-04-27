@@ -34,17 +34,21 @@ module.exports = {
 
         //default loggers
         
-        var params = this.params; //qs.parse(this.request.body);
+        var params = this.jsonrpc_params; //qs.parse(this.request.body);
 
         var method = params.method;
 
-        var json_data = params.params;
+        //var json_data = params.params;
 
         //console.log(typeof(json_data));  object
         
-        logger.log(params);
+        logger.log('debug', JSON.stringify(params));
 
-        logger.log('debug', 'callproc');
+        logger.log('debug', this.jsonrpc_params);
+        
+    //var params2 = qs.parse(this.request.body);
+    
+    //logger.log('debug', JSON.stringify(params2.params));        
         /*
         var func_name = "mtp_find_cf1";
 
@@ -55,13 +59,20 @@ module.exports = {
             "context":{"user":'u1', "languageid":"1033", "sessionid":"123" } 
             };
         */
-        json_str = JSON.stringify(json_data);
+        json_str = JSON.stringify(params);
 
         //escape "single quote"(')
-        json_str = json_str.replace("'", "''");
+        if (json_str != undefined){
+            
+            json_str = json_str.replace("'", "''");        
+            console.log(json_str);
+        }
+        else{
+            
+            this.throw("params undefined", 500);
+            
+        }
         
-        console.log(json_str);
-
         var sql = util.format("select %s as rdata from %s('%s')", method, method, json_str);
 
         logger.log('debug', sql);

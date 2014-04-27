@@ -166,6 +166,7 @@ app.use(function *(next){
         yield next;
         
         if (null == this.status) this.throw(404);
+        if(405 == this.status) this.throw('Method Not Allowed', 405);
         
     } catch (err) {
         
@@ -276,17 +277,31 @@ app.use(function * (next) {
 
     var params = qs.parse(this.request.body);
     
-    //add parsed params for this(ctx).
-    //be care name conflict.
-    this.params = params;
-
-    //set default jsonrpc id.
     var id = "r1";
-
-    if("id" in this.params){
-        id = this.params.id;
+    
+    logger.log('debug', typeof(params))
+    
+    if (params != undefined){
+        
+        if ("params" in params){
+            logger.log('debug', JSON.stringify(params.params));
+            //add parsed params for this(ctx).
+            //be care name conflict.
+            this.jsonrpc_params = params.params;
+            
+            logger.log('debug', JSON.stringify(this.jsonrpc_params));
+            //set default jsonrpc id.
+       
+        }
+        if("id" in params){
+            id = params.id;
+        }
     }
-
+    else{
+        
+        //this.jsonrpc_params = [] ;
+        
+    }
     // TODO: security check
     
     yield next;

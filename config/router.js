@@ -1,7 +1,13 @@
 
+/*
+ * router configuration
+ */
+ 
 var Router = require('koa-router')
 
 var mount = require('koa-mount')
+
+var api = new Router();
 
 // app
 var poc = require('../app/poc');
@@ -9,44 +15,29 @@ var portal = require('../app/portal');
 var dataset = require('../app/dataset');
 var callproc = require('../app/callproc');
 
-var api = new Router();
-
-
-var showFoo = function * (){
-    
-    this.body = "showFoo"
-    
-    }
-    
-var createFoo = function *(){
-    
-    this.body = "createFoo"
-    
-    }
-
-
-    module.exports = {
-
+module.exports = {
+        
+        /*
+            * mount router
+            */
         app_mount : function (app){
-            
-            api
-              .get('/foo', showFoo)
-              .post('/foo', createFoo);
             
             api.get('/', portal.index);
 
             api.post('/poc.test', poc.test);
 
-            api.post('/fetch', dataset.fetch);
+            api
+                .post('/fetch', dataset.fetch)
+                .post('/work', dataset.work);
 
-            api.post('/work', dataset.work);
-
-            api.post('/callproc.pgtime', callproc.pgtime);
-            
-            api.post('/callproc.call', callproc.call);
+            api
+                .post('/callproc.pgtime', callproc.pgtime)
+                .post('/callproc.call', callproc.call);
             
             //mount
             app.use(mount('/api', api.middleware()));
+            
+            //app.use(mount('/web', api.middleware()));
             
             return app;
         }
