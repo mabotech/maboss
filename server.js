@@ -130,7 +130,9 @@ var password = md5.update('mabotech').digest('hex'); //md5.update('mabotech').di
  */
 nconf.file('config/config.json');
 
-var route = require('./config/route');
+//var route = require('./config/route');
+
+var router = require('./config/router');
 
 var app = koa();
 
@@ -334,7 +336,10 @@ app.use(function * (next) {
 
 //add route
 
-app = route.add(app);
+//app = route.add(app);
+
+//mount Router
+app = router.app_mount(app);
 
 /*
 app.use(router(app));
