@@ -29,6 +29,18 @@ node modules
 
 nodemon 
 
+Nginx
+-----
+
+Javascript Libs
+---------------
+
+- AngularJS
+- Angular-ui
+- Angular-utils
+- Select2
+- jQuery
+- underscore
 
 PostgreSQL
 ----------

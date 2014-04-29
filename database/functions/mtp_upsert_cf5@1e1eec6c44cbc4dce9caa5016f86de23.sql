@@ -1,4 +1,6 @@
-
+CREATE OR REPLACE FUNCTION mtp_upsert_cf5(i_json json)
+  RETURNS json AS
+$BODY$
 
 #init
 cols = []
@@ -133,3 +135,6 @@ catch err
 	
 return {"returning":result, "sql":v_sql}
 
+$BODY$
+  LANGUAGE plcoffee VOLATILE
+  

@@ -75,6 +75,13 @@ select mtp_upsert_cf4 as rdata from mtp_upsert_cf4('{"method":"mtp_upsert_cf4","
 
 -- update
 
+select mtp_upsert_cf5 as rdata from mtp_upsert_cf5('{"method":"mtp_upsert_cf5","table":"company","columns":{"id":"2182db72-bb21-4e41-8ca4-460f1ae03cef","seq":483,"company":"ss","texths":"test","currencycode":"11","codesystemtype":null,"domainmanagerid":null,"formattype":null,"objectclass":"33","rowversion":1,"modifiedon":"2014-04-29T15:42:11.170Z","modifiedby":"idea","createdon":"2014-04-29T15:42:11.170Z","createdby":"idea"},"context":{"user":"idea","languageid":"1033"}}');
+
+-----
+-- get
+select mtp_get_cf1 as rdata from mtp_get_cf1('{"method":"mtp_get_cf1","table":"company","id":"a334df32-5977-4d7c-847c-4cd46be22397","languageid":"1033","context":{"user":"idea","languageid":"1033"}}');
+
+
 
 
 
