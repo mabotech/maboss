@@ -174,10 +174,12 @@ app.use(function *(next){
         this.status = err.status || 500;
         
         if ('development' == env){
-             this.body = {jsonrpc:"2.0", error: err.message , id:"r1"}
+              //this.body = {jsonrpc:"2.0", error: err.message, id:"r1"}
+              this.body = {jsonrpc:"2.0", error: err.stack, id:"r1"}
         }
         else if (err.expose) {
-            this.body = { jsonrpc:"2.0", error: err.message, id: "r1" }
+            //this.body = { jsonrpc:"2.0", error: err.messag, id: "r1" }
+            this.body = { jsonrpc:"2.0", error: err.stack, id: "r1" }
         }
         else{ 
             this.body = { jsonrpc:"2.0", error: http.STATUS_CODES[this.status] , id: "r1"}

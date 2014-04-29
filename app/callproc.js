@@ -74,7 +74,8 @@ module.exports = {
         json_str = JSON.stringify(params);
 
         //escape "single quote"(')
-        if (json_str != undefined){
+        //modified on 2014-04-29 15:13:45
+        if ( typeof (json_str) == 'string'){
             
             json_str = json_str.replace("'", "''");        
             console.log(json_str);

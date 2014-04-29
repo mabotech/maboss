@@ -61,3 +61,20 @@ select * from mtp_find_cf2('{
 "context":{"user":"abc", "languageid":1033}
 }');
 
+-- search
+
+select mtp_search_cf3 as rdata from mtp_search_cf3('{"method":"mtp_search_cf3","table":"company","cols":["company","texths","createdon","seq","id"],"orderby":"4 desc","offset":0,"limit":15,"languageid":"1033"}');
+
+/**  
+ *  upsert: insert or update
+ */
+-- insert
+select mtp_upsert_cf4 as rdata from mtp_upsert_cf4('{"method":"mtp_upsert_cf4","table":"company","columns":{"company":"Mabo","texths":"Company Name","currencycode":"11","domainmanagerid":"11","objectclass":"123"},"languageid":"1033"}');
+
+select mtp_upsert_cf4 as rdata from mtp_upsert_cf4('{"method":"mtp_upsert_cf4","table":"company","columns":{"company":"Mab6","texths":"Company Name","objectclass":"obj"},"context":{"languageid":"1033"}}');
+
+-- update
+
+
+
+

@@ -28,38 +28,45 @@ if not languageid
 for key in Object.keys(i_json.columns)
 
 	if key == 'id'
-		if i_json.columns['id'] != ''
+		if i_json.columns['id'] != null and i_json.columns['id'] != ''
 			#update  = true
 			v_id = i_json.columns['id']
 		else
 			continue
 
-	cols.push(key)
 	
-	if key != 'texths'
-		x = i_json.columns[key]
+	
+	if key == 'texths'
+		val = i_json.columns[key]
 
-		if typeof(x) == 'string'
+		if val != null
+			#if no value for hstore then bypass
+			cols.push(key)
 		
-			y = x.split('::')
+			if typeof(val) == 'string'
+				val = val.replace("'","''") # escape single quote
+			v = "hstore('#{languageid}', '#{val}')"
+			vals.push(v)
+	else
+		cols.push(key)
+		val = i_json.columns[key]
+
+		if typeof(val) == 'string'
+		
+			y = val.split('::')
 			
 			if y.length == 2
 				v = "'#{y[0]}'::#{y[1]}"
 				vals.push(v)
 			
 			else
-				x = x.replace("'","''")  # escape single quote
-				v = "'#{x}'"
+				val = val.replace("'","''")  # escape single quote
+				v = "'#{val}'"
 				vals.push(v)
 		else
-			vals.push(x)
-	else
-		val = i_json.columns[key]
-		val = val.replace("'","''") # escape single quote
-		v = "hstore('#{languageid}', '#{val}')"
-		vals.push(v)	
+			vals.push(val)
 
-if v_id != undefined and v_id != ""
+if v_id != undefined and v_id != "" and v_id != null
 	#build update sql
 	
 	#c= cols.join(",")	 
@@ -72,11 +79,15 @@ if v_id != undefined and v_id != ""
 		col = cols[i]
 		val = vals[i]
 
-		if col in ["id","modifiedon","modifiedby","rowversion"]
+		if val == null
+			continue
+
+		if col in ["id","seq", "modifiedon","modifiedby","createdon","createdby","rowversion"]
 			continue
 		
 		if col == "texths"
-			fields.push("#{col} = #{col}||#{val}")
+			#fields.push("#{col} = #{col}||#{val}")
+			fields.push("#{col} = #{val}")
 		else
 			
 			fields.push("#{col} = #{val}")
@@ -84,7 +95,7 @@ if v_id != undefined and v_id != ""
 	setfields = fields.join(", ")
 	
 	v_sql = "update #{v_table} set #{setfields}, modifiedon = now(), modifiedby = '#{v_user}', rowversion = rowversion + 1 
-		where id='#{v_id}' and rowversion = #{v_rowversion} returning id, seq, modifiedon, rowversion"
+		where id='#{v_id}' and rowversion = #{v_rowversion} returning id, seq, modifiedon, modifiedby, createdon, createdby, rowversion"
 	
 else
 	#build insert sql
@@ -93,20 +104,24 @@ else
 	t_vals = []
 
 	for i in [0 .. cols.length-1 ]
-		
-		if cols[i] in ["id", "modifiedon", "modifiedby", "createdon", "createdby", "rowversion"]
+
+		col = cols[i]
+		val = vals[i]
+		if val == null
+			continue
+		if col in ["id", "seq", "modifiedon", "modifiedby", "createdon", "createdby", "rowversion"]
 			#alert?
 			continue
 		else
-			t_cols.push(cols[i])
-			t_vals.push(vals[i])
+			t_cols.push(col)
+			t_vals.push(val)
 
 	v_cols= t_cols.join(", ")
 
 	v_vals = t_vals.join(", ")
 
 	v_sql = "insert into #{v_table} (#{v_cols}, modifiedon, modifiedby, createdon, createdby) 
-			values(#{v_vals}, now(), '#{v_user}', now(), '#{v_user}') returning id, seq, createdon, rowversion"
+			values(#{v_vals}, now(), '#{v_user}', now(), '#{v_user}') returning id, seq, modifiedon, modifiedby, createdon, createdby, rowversion"
 
 try
 	result = plv8.execute( v_sql )
@@ -116,5 +131,5 @@ catch err
 	#return {"sql":v_sql,"error":msg}
 	throw(msg)
 	
-return {"result":result, "sql":v_sql}
+return {"returning":result, "sql":v_sql}
 
