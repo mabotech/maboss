@@ -35,8 +35,20 @@ module.exports = {
         //default loggers
         
         var params = this.jsonrpc_params; //qs.parse(this.request.body);
-
-        var method = params.method;
+        var method;
+        
+        if(params == undefined){
+            
+         this.throw("please provide params to callproc.call", 500)
+        }
+        
+        if ("method" in params){
+            method = params.method;
+        }
+        else{
+            
+            this.throw("please provide method to callproc.call", 500)
+        }
 
         //var json_data = params.params;
 
@@ -100,7 +112,7 @@ module.exports = {
             "data":"error data"
         };
 
-        this.body = result.rows[0].rdata.result;
+        this.body = result.rows[0].rdata;
         /*{
             //"error": null,
             //"result":params, // result or error, only one could be sent to client.
