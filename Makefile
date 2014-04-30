@@ -14,6 +14,12 @@ start:
 
 test:
 	mocha -R spec
+    
+bower:
+	bower install
+
+component:
+	component install
 
 py.test:
 	py.test

@@ -1,0 +1,14 @@
+{
+    "name": "maboss",
+    "componentsDirectory": "public/components",
+    "repo": "mabotech/maboss",
+    "description": "MES platform",
+    "version": "0.0.1",
+    "keywords": ["MES"],
+    "dependencies": {
+        "FortAwesome/Font-Awesome": "*"
+    },
+    "development": {},
+    "license": "MIT"
+
+}

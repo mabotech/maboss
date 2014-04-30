@@ -35,12 +35,14 @@ Nginx
 Javascript Libs
 ---------------
 
-- AngularJS
+- [AngularJS](https://angularjs.org/ "AngularJS")
 - Angular-ui
-- Angular-utils
+- Angular-UI-Utils
+- Angular-UI-Bootstrap
 - Select2
 - jQuery
 - underscore
+- momentjs
 
 PostgreSQL
 ----------

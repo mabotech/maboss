@@ -1,0 +1,19 @@
+{
+    "name": "maboss",
+    "description": "A open source MES platform",
+    "directory": "public/components",
+    "version": "0.0.1",
+    "homepage": "https://github.com/mabotech/maboss",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "angular": "1.2.x",
+        "angular-mocks": "~1.2.x",
+        "bootstrap": "~3.1.1",
+        "font-awesome": "*",
+        "angular-route": "~1.2.x",
+        "angular-ui-utils": "*",
+        "angular-bootstrap": "*",
+        "angular-ui-select2": "*"
+    }
+}
