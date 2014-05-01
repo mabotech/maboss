@@ -36,7 +36,6 @@ Javascript Libs
 ---------------
 
 - [AngularJS](https://angularjs.org/ "AngularJS")
-- Angular-ui
 - Angular-UI-Utils
 - Angular-UI-Bootstrap
 - Select2
