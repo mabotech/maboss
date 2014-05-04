@@ -82,6 +82,13 @@ select mtp_upsert_cf5 as rdata from mtp_upsert_cf5('{"method":"mtp_upsert_cf5","
 select mtp_get_cf1 as rdata from mtp_get_cf1('{"method":"mtp_get_cf1","table":"company","id":"a334df32-5977-4d7c-847c-4cd46be22397","languageid":"1033","context":{"user":"idea","languageid":"1033"}}');
 
 
+----
+-- select
+
+select * from mtp_select_cf1('{"table":"company","key":"seq", "value":"texths","filter":null, "languageid":1033, "limit":10}');
+
+
+
 
 
 
