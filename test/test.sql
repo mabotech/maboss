@@ -83,6 +83,7 @@ select mtp_get_cf1 as rdata from mtp_get_cf1('{"method":"mtp_get_cf1","table":"c
 
 
 ----
+--  modified on 2014-05-04 15:59:28
 -- select
 
 select * from mtp_select_cf1('{"table":"company","key":"seq", "value":"texths","filter":null, "languageid":1033, "limit":10}');
