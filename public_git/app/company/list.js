@@ -56,7 +56,7 @@ function CompanyListCtrl($scope, $http) {
     $scope.bigCurrentPage = 1;
     $scope.init = function() {
         $scope.table = "company";
-        $scope.cols = [ "company", "texths", "createdon", "createdby", "seq",  "id" ];
+        $scope.cols = [ "company", "texths", "createdon", "createdby",  "id" ];
         $scope.sort_icons = {};
         var i;
         for (i = 1; i <= $scope.cols.length; i++) {
@@ -100,7 +100,7 @@ function CompanyListCtrl($scope, $http) {
                 orderby: [ $scope.sort_col_seq, $scope.sort_dir ].join(" "),
                 offset: $scope.limit * ($scope.currentPage - 1),
                 limit: $scope.limit,
-                domain:[[["active","=","1"], ["seq",">","10"]]], // or[ and[ filter[], ], ]
+                domain:[[["active","=","1"]]], // or[ and[ filter[], ], ]
                 languageid: "1033"
             }
         };

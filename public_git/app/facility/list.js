@@ -21,7 +21,7 @@ function FacilityListCtrl($scope, $http, sessionService, common) {
         session: "sess"
     };
     /*
-    init    
+    initialize ctrl
     */
     $scope.init = function() {
         $scope.session = sessionService.get("FACILITY");
@@ -61,7 +61,7 @@ function FacilityListCtrl($scope, $http, sessionService, common) {
         }
         $scope.pagesize = [ 2, 10, 15, 20, 30, 50, 100 ];
         $scope.table = "facility";
-        $scope.cols = [ "facility", "texths", "createdon", "seq", "id" ];
+        $scope.cols = [ "facility", "texths", "createdon", "id" ];
         $scope.sort_icons = {};
         //$scope.bigTotalItems = 80;
         // $scope.currentPage = 1;

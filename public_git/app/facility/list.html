@@ -62,7 +62,7 @@ tidy -xml -i -utf8 -w 300
     <tbody>
       <tr ng-repeat="facility in facility_list" ng-click="alert(facility.id)">
         <td> <input type="checkbox"/>
-          <a href="#/facility.form/{{facility.id}}">{{facility.seq}}</a>
+          <a href="#/facility.form/{{facility.id}}">{{facility.id}}</a>
         </td>
         <td>{{facility.facility}}</td>
         <td>{{facility.texths}}</td>

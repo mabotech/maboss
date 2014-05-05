@@ -35,10 +35,10 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
         */
         $scope.facility = {
             id: null,
-            seq: null,
+            //seq: null,
             facility: "",
             texths: null,
-            company: null,
+            company_id: null,
             purchasingorganization: null,
             /*
                 codesystemtype: null,
@@ -84,7 +84,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
             params: {
                 method: "mtp_select_cf2",
                 table: "company",
-                key: "seq",
+                key: "id",
                 value: "texths",
                 languageid: "1033"
                 //filter: term
@@ -134,7 +134,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
                     params: {
                         method: "mtp_select_cf2",
                         table: "company",
-                        key: "seq",
+                        key: "id",
                         value: "texths",
                         languageid: "1033",
                         filter: term
@@ -176,13 +176,13 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
         common.elog("post");
         common.elog($scope.facility.texths);
         //
-        $scope.facility.company = $scope.facility.company.id;
+        $scope.facility.company_id = $scope.facility.company_id.id;
         var jsonrpc_params = {
             jsonrpc: "2.0",
             id: common.getId(),
             method: "call",
             params: {
-                method: "mtp_upsert_cf5",
+                method: "mtp_upsert_cf6",
                 table: $scope.table,
                 //eneity
                 columns: $scope.facility,
@@ -207,7 +207,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
             }
             // fill entity
             $scope.facility.id = data.result.returning[0].id;
-            $scope.facility.seq = data.result.returning[0].seq;
+            //$scope.facility.seq = data.result.returning[0].seq;
             $scope.facility.modifiedon = data.result.returning[0].modifiedon;
             $scope.facility.modifiedby = data.result.returning[0].modifiedby;
             $scope.facility.createdon = data.result.returning[0].createdon;

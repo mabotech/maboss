@@ -38,7 +38,7 @@ function CompanyFormCtrl($scope,  $routeParams,  $location,  $http) {
     // entity
     $scope.company = {
         id: null,
-        seq: null,
+        //seq: null,
         company: "",
         texths: null,
         currencycode: null,
@@ -109,7 +109,7 @@ function CompanyFormCtrl($scope,  $routeParams,  $location,  $http) {
             id: "r2",
             method: "call",
             params: {
-                method: "mtp_upsert_cf5",
+                method: "mtp_upsert_cf6",
                 table: $scope.table,
                 //eneity
                 columns: $scope.company,
@@ -134,7 +134,7 @@ function CompanyFormCtrl($scope,  $routeParams,  $location,  $http) {
             }
             // fill entity
             $scope.company.id = data.result.returning[0].id;
-            $scope.company.seq = data.result.returning[0].seq;
+            //$scope.company.seq = data.result.returning[0].seq;
             $scope.company.modifiedon = data.result.returning[0].modifiedon;
             $scope.company.modifiedby = data.result.returning[0].modifiedby;
             $scope.company.createdon = data.result.returning[0].createdon;
