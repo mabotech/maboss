@@ -1,0 +1,78 @@
+<!-- facility -->
+<!-- 
+tidy -xml -i -utf8 -w 300 
+-->
+<div class="row">
+  <div class="col-md-6">
+    <b>Facility</b>
+  </div>
+  <div class="col-md-6">
+    <a type="button" class="btn btn-default" href="#/facility.form">
+    <span class="fa fa-plus"></span> New</a>
+    <a type="button" class="btn btn-default" href="#/facility.list">
+    <span class="fa fa-minus"></span> Delete</a>
+    <a type="button" class="btn btn-default" href="#/facility.form">
+    <span class="fa fa-file-text-o"></span> Properties</a>    
+    <a type="button" class="btn btn-default" href="#/facility.list">
+    <span class="fa fa-cog"></span> Setup</a>
+  </div>
+</div>
+<br />
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <label>&#160;/ Page</label>
+    <div style="float:left;">
+      <span>
+        <!--select id="limit" name="limit" class="input-small" ng-model="limit" ng-options="e for e in pagesize" required="" ng-change="change_limit()"></select-->
+        <select style="width:100px" id="limit" ui-select2="select2Options" ng-model="limit" ng-change="change_limit()">
+          <option value=""></option>
+          <option ng-repeat="item in pagesize" value="{{item}}">{{item}}</option>
+        </select>
+      </span>
+    </div>
+    <div style="float:right;">
+      <input placeholder="Filter" ng-model="filter" ng-change="filter_change(1)"></input>
+      <button class="btn btn-xs" ng-click="filter_change(0)">X</button>
+    </div>
+  </div>
+  <!-- Table -->
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>
+          <a href="" ng-click="sort(1)">Facility Code</a>
+          <i style="float:right" class="fa fa-{{sort_icons[1]}}"></i>
+        </th>
+        <th>
+          <a href="" ng-click="sort(2)">Facility Name</a>
+          <i style="float:right" class="fa fa-{{sort_icons[2]}}"></i>
+        </th>
+        <th>
+          <a href="" ng-click="sort(3)">Created On</a>
+          <i style="float:right" class="fa fa-{{sort_icons[3]}}"></i>
+        </th>
+        <th>
+          <a href="" ng-click="sort(4)">Sequence</a>
+          <i style="float:right" class="fa fa-{{sort_icons[4]}}"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="facility in facility_list" ng-click="alert(facility.id)">
+        <td> <input type="checkbox"/>
+          <a href="#/facility.form/{{facility.id}}">{{facility.seq}}</a>
+        </td>
+        <td>{{facility.facility}}</td>
+        <td>{{facility.texths}}</td>
+        <td>{{facility.createdon}}</td>
+        <td>{{facility.seq}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<pagination items-per-page="limit" total-items="totalItems" page="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" on-select-page="page_changed(page)" first-text="首页" previous-text="前页" next-text="后页" last-text="尾页"></pagination>
+<!-- {{bigCurrentPage}} / {{numPages}} -->
+<span>
+<i class="fa fa-tachometer fa-2x"></i>fa-tachometer</span>
