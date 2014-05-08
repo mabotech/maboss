@@ -3,6 +3,23 @@ maboss
 
 maboss MES platform is built on open source software and released with MIT license.
 
+Project Struct
+==============
+
+- public/components
+- public/css
+- public/mabolib
+- public/maboss
+
+- admin
+- dashboard
+- monitor
+- portal
+- reports
+- tables
+
+
+
 Open source components: 
 
 - NodeJS
