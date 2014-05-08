@@ -88,8 +88,8 @@ if v_id != undefined and v_id != "" and v_id != null
 			continue
 		
 		if col == "texths"
-			#fields.push("#{col} = #{col}||#{val}")
-			fields.push("#{col} = #{val}")
+			fields.push("#{col} = #{col}||#{val}")
+			#fields.push("#{col} = #{val}")
 		else
 			
 			fields.push("#{col} = #{val}")

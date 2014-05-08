@@ -72,8 +72,6 @@ catch err
 	plv8.elog(DEBUG, v_sql)
 	msg = "#{err}"
 	return {"error":msg, "sql": v_sql}
-	
-
 
 count = rtn.length
 
