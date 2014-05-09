@@ -1,4 +1,6 @@
-
+CREATE OR REPLACE FUNCTION mtp_get_ptable_pg2(i_json json)
+  RETURNS json AS
+$BODY$
 
 declare
 
@@ -28,7 +30,7 @@ WHERE c.contype = 'f'
 	--AND c.confrelid = a2.attrelid
 	--AND a2.attnum = ANY (c.confkey)
 	AND n.nspname = i_json ->>'schema'
-	AND p2.relname = i_json ->>'table_name'
+	AND p1.relname = i_json ->>'table_name'
 order by 3
 )row;
 
@@ -38,3 +40,6 @@ return v_result;
 end;
 
 
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  

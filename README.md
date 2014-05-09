@@ -31,24 +31,24 @@ start_server.bat: use nodemon to monitor files update.
 
 ----
 
-Project Struct
+Folders Structure
 ==============
 
-- public/components, installed libs by bower & component
-- public/css, global css
-- public/mabolib, mabo js/css lib
-- public/maboss, app folder
+- `public/components`, installed libs by bower & component
+- `public/css`, global css
+- `public/mabolib`, mabo js/css lib
+- `public/maboss`, app folder
 
 maboss directory:
 
-- admin
-- dashboard
-- monitor
-- portal
-- reports
-- tables
+- `admin`
+- `dashboard`
+- `monitor`
+- `portal`
+- `reports`
+- `tables`
 
-## Recommended resources:
+## Recommended Resources:
 
 - [hackathon-starter](https://github.com/sahat/hackathon-starter "hackathon-starter")
 - [x-editable](http://vitalets.github.io/x-editable/ "x-editable") 

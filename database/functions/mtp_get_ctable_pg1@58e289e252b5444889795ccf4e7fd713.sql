@@ -1,4 +1,6 @@
-
+CREATE OR REPLACE FUNCTION mtp_get_ctable_pg1(i_json json)
+  RETURNS json AS
+$BODY$
 
 declare
 
@@ -38,3 +40,6 @@ return v_result;
 end;
 
 
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  
