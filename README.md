@@ -3,30 +3,6 @@ maboss
 
 maboss MES platform is built on open source software and released with MIT license.
 
-Project Struct
-==============
-
-- public/components
-- public/css
-- public/mabolib
-- public/maboss
-
-- admin
-- dashboard
-- monitor
-- portal
-- reports
-- tables
-
-
-
-Open source components: 
-
-- NodeJS
-- PostgreSQL
-- Redis
-- ...
-
 Features
 ===============
 
@@ -51,3 +27,35 @@ Windows
 start_server.bat: use nodemon to monitor files update.
 
 -e js,json : monitor js and json config files.
+
+
+----
+
+Project Struct
+==============
+
+- public/components, installed libs by bower & component
+- public/css, global css
+- public/mabolib, mabo js/css lib
+- public/maboss, app folder
+
+maboss directory:
+
+- admin
+- dashboard
+- monitor
+- portal
+- reports
+- tables
+
+## Recommended resources:
+
+- [hackathon-starter](https://github.com/sahat/hackathon-starter "hackathon-starter")
+- [x-editable](http://vitalets.github.io/x-editable/ "x-editable") 
+
+Open source components: 
+
+- NodeJS
+- PostgreSQL
+- Redis
+- ...
