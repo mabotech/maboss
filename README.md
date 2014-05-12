@@ -1,13 +1,15 @@
 maboss
 ======
 
-maboss MES platform is built on open source software and released with MIT license.
+maboss is an Enterprise Application Platform, it is built on open source software and released with MIT license.
 
 Features
-===============
+========
 
-- session
+- central session management
+- data flow based programming
 - logging: app logging and performance logging.
+- micro services: json, restful
 
 
 Install
@@ -50,12 +52,13 @@ maboss directory:
 
 ## Recommended Resources:
 
+- AngularJS
 - [hackathon-starter](https://github.com/sahat/hackathon-starter "hackathon-starter")
 - [x-editable](http://vitalets.github.io/x-editable/ "x-editable") 
 
 Open source components: 
 
 - NodeJS
-- PostgreSQL
+- PostgreSQL, PLV8
 - Redis
 - ...
