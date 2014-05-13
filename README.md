@@ -1,7 +1,7 @@
-maboss
+Maboss
 ======
 
-maboss is an Enterprise Application Platform, it is built on open source software and released with MIT license.
+Maboss is an Enterprise Application Platform, it is built on open source software and released with MIT license.
 
 Features
 ========
@@ -9,10 +9,10 @@ Features
 - central session management
 - data flow based programming
 - logging: app logging and performance logging.
-- micro services: json, restful
+- micro services: json, restful, jsonrpc
 
 
-Install
+Installation
 =======
 
 NodeJs 0.11.12
@@ -52,7 +52,7 @@ maboss directory:
 
 ## Recommended Resources:
 
-- AngularJS
+- AngularJSx
 - [hackathon-starter](https://github.com/sahat/hackathon-starter "hackathon-starter")
 - [x-editable](http://vitalets.github.io/x-editable/ "x-editable") 
 
@@ -62,3 +62,9 @@ Open source components:
 - PostgreSQL, PLV8
 - Redis
 - ...
+
+
+License
+=======
+
+MIT
