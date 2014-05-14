@@ -1,21 +1,28 @@
 {
-    "name": "maboss",
-    "description": "A open source MES platform",
-    "directory": "public/components",
-    "version": "0.0.1",
-    "homepage": "https://github.com/mabotech/maboss",
-    "license": "MIT",
-    "private": true,
-    "dependencies": {
+  "name": "maboss",
+  "description": "open source Enterprise Application Platform",
+  "directory": "public/components",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mabotech/maboss",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+        "jquery":"*",
         "angular": "1.2.x",
         "angular-mocks": "~1.2.x",
         "bootstrap": "~3.1.1",
-        "font-awesome": "*",
+        "font-awesome":"*",
         "angular-route": "~1.2.x",
-        "angular-ui-utils": "*",
-        "angular-bootstrap": "*",
-        "angular-ui-select2": "*",
+        "angular-ui-utils":"*",
+        "angular-bootstrap":"*",
+        "angular-ui-select2":"*",
+
+        "select2":"*",
         "underscore":"*",
-        "moment":"*"
-    }
+        "moment":"*",
+        "messenger":"*",
+        "vis":"*",
+        "d3":"*" ,
+        "nvd3":"*"            
+  }
 }

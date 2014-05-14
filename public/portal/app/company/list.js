@@ -52,27 +52,6 @@ function CompanyListCtrl($scope, $http) {
         elog(page);
         $scope.post();
     };
-    
-    $scope.log_class = "";
-    
-    $scope.get_log_class = function(){
-        
-        return log_class;
-        
-        }
-    
-    $scope.log_toggle = function(){
-        
-        console.log($scope.log_class);
-        
-        if ($scope.log_class == ""){
-            $scope.log_class = "log-max";
-            }else{
-                $scope.log_class = "";
-                }
-        
-        }
-    
     //$scope.bigTotalItems = 80;
     $scope.bigCurrentPage = 1;
     $scope.init = function() {

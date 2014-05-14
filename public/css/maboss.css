@@ -1,0 +1,76 @@
+
+#logo {
+  position:relative;
+  background: #525252 url(/img/devoops_pattern_b10.png) 0 0 repeat;
+}
+
+#logo a {
+  color: #fff;
+  font-family: 'Righteous', cursive;
+  display: block;
+  font-size: 20px;
+  line-height: 50px;
+  background: url(/img/logo.png) right 42px no-repeat;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+#logo a:hover {
+  background-position: right 25px;
+  text-decoration: none;
+}
+
+a.show-sidebar {
+  float: left;
+  color:#6d6d6d;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+a.show-sidebar:hover {
+  color:#000;
+}
+
+#sidebar-left {
+  position:relative;
+  z-index: inherit;
+  padding-bottom: 550px !important;
+  margin-bottom: -550px !important;
+  background: #6AA6D6 url(../img/devoops_pattern_b10.png) 0 0 repeat;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+
+
+#log {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid rgba(180,180,180,1);
+    height: 18px;
+    overflow-y hidden;
+    background: rgba(50,50,50,1);
+    color: rgba(255,255,255,1);
+}
+
+#log:hover{
+    background: rgba(50,50,50,1);
+    cursor:pointer;
+}
+
+.log-max {
+    height: 100% !important;
+    z-index:9999;
+    overflow-y: scroll !important;
+}
+
+.log-item {
+    display: block;
+    font-family: Monaco, "Courier New", Courier, monospace;
+    font-size: 12px;
+}

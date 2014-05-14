@@ -6,32 +6,59 @@
   */
 angular.module("service.entity", []).factory("entity", [ "$q", "$http", function($q, $http) {
     // jsonrpc id
-    var ID = 0;
+    var rpc_id = 0;
     //methods
     return {
         /*
             * get  value - text for select 2
             */
         getkv: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
+            var deferred = $q.defer();
+            params.method = "mtp_select_cf2";
+            var jsonrpc_params = {
+                jsonrpc: "2.0",
+                id: rpc_id,
+                method: "call",
+                params: {
+                    method: params.method,
+                    table: params.table,
+                    key: params.key,
+                    value: params.text,
+                    languageid: params.languageid
+                }
+            };
+            $http({
+                method: "POST",
+                url: "/api/callproc.call",
+                data: jsonrpc_params
+            }).success(function(data, status) {
+                result = [];
+                if (data.result.rows) {
+                    result = data.result.rows;
+                    deferred.resolve(result);
+                }
+            }).error(function(reason, status) {});
+            deferred.reject(reason);
         },
         /*
             *   get value - text  on demand for select 2
             */
         getkv2: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
+            var deferred = $q.defer();
         },
         /*
             * save
             */
         save: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             //defer
             var deferred = $q.defer();
             //jsonrpc payload
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: {
                     // insert or update
@@ -80,7 +107,31 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             * delete
             */
         del: function(params) {
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
+            params.method = "mtp_delete_cf2";
+            var jsonrpc_params = {
+                jsonrpc: "2.0",
+                id: rpc_id,
+                method: "call",
+                params: {
+                    method: params.method,
+                    table: params.table,
+                    ids: params.ids,
+                    user: "system"
+                }
+            };
+            // ajax call, move into service?
+            $http({
+                method: "POST",
+                url: "/api/callproc.call",
+                data: jsonrpc_params
+            }).success(function(data, status) {
+                var result = {};
+                deferred.resolve(result);
+            }).error(function(reason, status) {
+                deferred.reject(reason);
+            });
             return deferred.promise;
         },
         // <- end delete
@@ -88,7 +139,37 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             * get
             */
         get: function(params) {
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
+            params.method = "mtp_fetch_one_cf1";
+            var jsonrpc_params = {
+                jsonrpc: "2.0",
+                id: rpc_id,
+                method: "call",
+                params: {
+                    method: params.method,
+                    table: params.table,
+                    //eneity
+                    pkey: params.pkey,
+                    cols: Object.keys(params.model),
+                    languageid: params.languageid,
+                    context: {
+                        user: "idea",
+                        languageid: "1033"
+                    }
+                }
+            };
+            $http({
+                method: "POST",
+                url: "/api/callproc.call",
+                data: jsonrpc_params
+            }).success(function(data, status) {
+                if (data.result.returning.length === 0) {}
+                var result = {};
+                deferred.resolve(result);
+            }).error(function(reason, status) {
+                deferred.reject(reason);
+            });
             return deferred.promise;
         },
         // <- end delete
@@ -96,14 +177,14 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             * list
             */
         list: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             // method
             params.method = "mtp_search_cf4";
             //construct jsonrpc msg
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: params
             };

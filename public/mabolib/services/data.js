@@ -1,24 +1,24 @@
 "use strict";
 
-//uglifyjs entity.js -b  --comments all 
+//uglifyjs data.js -b  --comments all 
 /**
-  *Entity  Services 
+  *Data  Services
   */
-angular.module("service.entity", []).factory("entity", [ "$q", "$http", function($q, $http) {
+angular.module("service.data", []).factory("data", [ "$q", "$http", function($q, $http) {
     // jsonrpc id
-    var ID = 0;
+    var rpc_id = 0;
     //methods
     return {
         /*
             * get  value - text for select 2
             */
         getkv: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             params.method = "mtp_select_cf2";
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: {
                     method: params.method,
@@ -45,20 +45,20 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             *   get value - text  on demand for select 2
             */
         getkv2: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
         },
         /*
             * save
             */
         save: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             //defer
             var deferred = $q.defer();
             //jsonrpc payload
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: {
                     // insert or update
@@ -107,12 +107,12 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             * delete
             */
         del: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             params.method = "mtp_delete_cf2";
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: {
                     method: params.method,
@@ -139,12 +139,12 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             * get
             */
         get: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             params.method = "mtp_fetch_one_cf1";
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: {
                     method: params.method,
@@ -177,14 +177,14 @@ angular.module("service.entity", []).factory("entity", [ "$q", "$http", function
             * list
             */
         list: function(params) {
-            ID = ID + 1;
+            rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             // method
             params.method = "mtp_search_cf4";
             //construct jsonrpc msg
             var jsonrpc_params = {
                 jsonrpc: "2.0",
-                id: ID,
+                id: rpc_id,
                 method: "call",
                 params: params
             };
