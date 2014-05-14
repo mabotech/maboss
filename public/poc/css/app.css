@@ -1,0 +1,71 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* steamtools start */
+
+#log {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    border-top: 1px solid rgba(180,180,180,1);
+    height: 18px;
+    overflow-y hidden;
+    background: rgba(50,50,50,1);
+    color: rgba(255,255,255,1);
+}
+
+#log:hover{
+    background: rgba(50,50,50,1);
+    cursor:pointer;
+}
+
+.log-max {
+    height: 100% !important;
+    overflow-y: scroll !important;
+}
+
+.log-item {
+    display: block;
+    font-family: Monaco, "Courier New", Courier, monospace;
+    font-size: 12px;
+}
+
+/* steamtools end */
+
+.mt-menu-item{
+/* color: #7C7BAD; */
+font-weight: bold;
+margin-left: 4px;
+font-size:14px;
+margin-bottom: 4px;
+padding-bottom: 4px;
+}
