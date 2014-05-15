@@ -16,26 +16,18 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
     $scope.pkey = "facility";
     //configuration for datatables 
     $scope.columns = [ {
-        data: "facility",
-        title: "Facility Code",
-         "render": function ( data, type, row ) {
-                    return  '<a href="#/facility.form/'+data +'">'+data+'</a>';
-                }
+        data: "facility"
     }, {
-        data: "texths",
-        title: "Facility"
+        data: "texths"
     }, {
         data: "company",
         orderable: false,
         title: "公司",
         name: "company"
     }, {
-        data: "createdon",
-        title: "Created On"
+        data: "createdon"
     }, {
-        data: "createdby",
-        title: "Created By",
-        orderable: false,        
+        data: "createdby"
     } ];
     /*
      call service
@@ -75,7 +67,7 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
     /*
     table config
     */
-    $("#main_table").dataTable({
+    $("#facility").dataTable({
         //"processing": true,
         serverSide: true,
         //data:get_data(),
@@ -88,11 +80,6 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
         ajax: function(data, callback, setting) {
             list(data, callback);
         },
-        columns: $scope.columns,
-        columnDefs:{
-            "render": function ( data, type, row ) {
-                    return data +' ('+ row[3]+')';
-                },
-            }
+        columns: $scope.columns
     });
 } ]);

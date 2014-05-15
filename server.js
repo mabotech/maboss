@@ -340,12 +340,19 @@ app.use(function * (next) {
         //logger.debug("error",Object.keys(this));
     
     } else if (this.path == '/api/datatables.call'){
+        var data;
+        if(this.body.rows){
+                data = this.body.rows   
+        }else{
+            
+            data = [];
+            }
         
         this.body = {         
-              "draw": 1,
+              "draw": this.body.draw,
               "recordsTotal": this.body.total,
               "recordsFiltered":  this.body.count,
-              "data":this.body.rows            
+              "data":data         
             };
         
     }else {

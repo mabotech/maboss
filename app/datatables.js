@@ -55,10 +55,15 @@ module.exports = {
         json_params.pkey = params.pkey
         json_params.limit = params.length
         json_params.offset = params.start
-        if (params.order[0].column != '0'){
-            json_params.orderby = [params.order[0].column, params.order[0].dir].join(" ")
+        
+        var draw = params.draw
+        
+        //if (params.order[0].column != '0'){
+        json_params.orderby = [parseInt(params.order[0].column)+1, params.order[0].dir].join(" ")
+        //}
+        if(params.search.value !== ""){
+            json_params.domain = [[[cols[0], "ilike", params.search.value+"%"]]]
         }
-        //json_params.domain = params.search
         var method;
         
         if(params == undefined){
@@ -138,6 +143,7 @@ module.exports = {
         };
 
         this.body = result.rows[0].rdata;
+        this.body.draw = draw;
         /*{
             //"error": null,
             //"result":params, // result or error, only one could be sent to client.

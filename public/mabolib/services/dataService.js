@@ -197,8 +197,10 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
                 data: jsonrpc_params
             }).success(function(data, status) {
                 var result = {};
+                
                 result.data = data.result.rows;
                 result.total = data.result.total;
+                result.count = data.result.count;
                 //resolve
                 deferred.resolve(result);
             }).error(function(reason, status) {

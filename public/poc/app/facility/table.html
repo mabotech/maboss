@@ -4,41 +4,25 @@ tidy -xml -i -utf8 -w 300
 -->
 <div class="row">
   <div class="col-md-6">
-    <b>Facility</b>
+    <b>{{table}}</b>
   </div>
   <div class="col-md-6">
-    <a type="button" class="btn btn-default" href="#/facility.form">
+    <a type="button" class="btn btn-default" href="#/{{table}}.form">
     <span class="fa fa-plus">&#160;</span>New</a>
-    <a type="button" class="btn btn-default" href="#/facility.list">
+    <a type="button" class="btn btn-default" href="#/{{table}}.list">
     <span class="fa fa-minus">&#160;</span>Delete</a>
-    <a type="button" class="btn btn-default" href="#/facility.form">
+      <a type="button" class="btn btn-default" href="#/{{table}}.table">
+    <span class="fa fa-minus">&#160;</span>DataTable</a>
+    <a type="button" class="btn btn-default" href="#/{{table}}.form">
     <span class="fa fa-file-text-o">&#160;</span>Properties</a>
-    <a type="button" class="btn btn-default" href="#/facility.list">
+    <a type="button" class="btn btn-default" href="#/{{table}}.list">
     <span class="fa fa-cog">&#160;</span>Setup</a>
   </div>
 </div>
 <br />
-<div class="panel panel-default">
+<div class="box-content no-padding">
   <!-- table -->
-<table id="facility" class="display" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Facility Code</th>
-                <th>Facility Name</th>
-                <th>Company</th>
-                <th>Created On</th>
-                <th>Created By</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>Facility Code</th>
-                <th>Facility Name</th>
-                <th>Company</th>
-                <th>Created On</th>
-                <th>Created By</th>
-            </tr>
-        </tfoot>        
-    </table>
+<table id="main_table" class="table table-bordered table-striped table-hover table-heading table-datatable">
+</table>
   <!-- End table -->
 </div>

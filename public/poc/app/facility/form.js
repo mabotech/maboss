@@ -234,10 +234,11 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
             id: common.getId(),
             method: "call",
             params: {
-                method: "mtp_fetch_one_cf1",
+                method: "mtp_get_cs3",
                 table: $scope.table,
                 //eneity
-                pkey: $scope.facility_id,
+                pkey: "facility",
+                id:$scope.facility_id,
                 cols: Object.keys($scope.facility),
                 languageid: "1033",
                 context: {
