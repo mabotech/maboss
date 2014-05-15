@@ -9,13 +9,18 @@
 //function FacilityListCtrl($scope, $routeParams, $http,  sessionService, entity, common) {
 var module = angular.module("maboss.FacilityListCtrl", []);
 
-module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "entity", "common", function($scope, $routeParams, $http, sessionService, entity, common) {
+module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "dataService", "common", function($scope, $routeParams, $http, sessionService, dataService, common) {
+    $scope.table = "facility";
+    // columns in html table
+    $scope.cols = [ "facility", "texths", "createdon", "createdby" ];
     // global
     var DEFAULT_SORT_ICON = "";
     var SORT_UP_ICON = "chevron-up";
     var SORT_DOWN_ICON = "chevron-down";
     var DEFAULT_PAGE_SIZE = 15;
     var filter = $routeParams.filter;
+    $scope.limitOptions = {};
+    // filter in url
     if (filter) {
         //facility list with given company
         $scope.domain = [ [ [ "company", "=", "MTP" ] ] ];
@@ -34,30 +39,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     */
     $scope.init = function() {
         $scope.session = sessionService.get("FACILITY");
-        /*
-        $scope.view_params = sessionService.get("FACILITY_VIEW");
-        common.elog("currentPage:"+$scope.view_params.currentPage);
-        if ($scope.view_params.currentPage === undefined)
-        {
-                    common.elog("else");
-                $scope.view_params = {
-                currentPage: 1,
-                sort_col_seq: 1,
-                sort_dir: "asc"
-            };
-            sessionService.put("FACILITY_VIEW", $scope.view_params);
-        }
-        
-        common.elog($scope.view_params);
-        */
         $scope.domain = null;
-        $scope.filter = "";
-        $scope.currentPage = 1;
-        //$scope.view_params.currentPage;
-        $scope.sort_col_seq = 1;
-        //$scope.view_params.sort_col_seq;
-        $scope.sort_dir = "asc";
-        //$scope.view_params.sort_dir;
         if ($scope.session.user === undefined) {
             sessionService.put("FACILITY", context);
         } else {
@@ -68,31 +50,30 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         } else {
             $scope.limit = DEFAULT_PAGE_SIZE;
         }
-        $scope.pagesize = [ 2, 10, 15, 20, 30, 50, 100 ];
-        $scope.table = "facility";
-        // columns in html table
-        $scope.cols = [ "facility", "texths", "createdon", "createdby" ];
+        init_table();
+        $scope.list();
+    };
+    // <-- init end
+    //----------------------------------------------------
+    /*
+    * initial table
+    */
+    var init_table = function() {
+        $scope.filter = "";
+        $scope.currentPage = 1;
+        //$scope.view_params.currentPage;
+        $scope.sort_col_seq = 1;
+        //$scope.view_params.sort_col_seq;
+        $scope.sort_dir = "asc";
+        //$scope.view_params.sort_dir;
+        $scope.pagesize = [ 15, 20, 30, 50, 100 ];
         $scope.sort_icons = {};
-        //$scope.bigTotalItems = 80;
-        // $scope.currentPage = 1;
-        //$scope.totalItems = 35;
-        //$scope.currentPage = 1;
         $scope.maxSize = 10;
-        // sort 
-        //default sort column
-        //   $scope.sort_col_seq = 1;
-        // default sort dir
-        //    $scope.sort_dir = "asc";
         var i;
         for (i = 1; i <= $scope.cols.length; i++) {
             $scope.sort_icons[i] = DEFAULT_SORT_ICON;
         }
-        //$scope.sort_icons[col_seq] = 
-        //
-        //
-        $scope.list();
     };
-    // <-- init end
     /*       
     on_limit_change
     */
@@ -124,10 +105,17 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     $scope.page_changed = function(page) {
         common.elog("page_changed");
         $scope.currentPage = page;
-        //$scope.view_params.currentPage = $scope.currentPage;
-        //sessionService.put("FACILITY_VIEW", $scope.view_params);
-        //common.elog(page);
         $scope.list();
+    };
+    /*
+       * ng-class
+    */
+    $scope.get_icon = function(seq) {
+        if ($scope.sort_icons[seq] !== "") {
+            return [ "fa fa", $scope.sort_icons[seq] ].join("-");
+        } else {
+            return "fa";
+        }
     };
     /*
      orderby
@@ -147,12 +135,10 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             $scope.sort_dir = "asc";
             $scope.sort_icons[col_seq] = SORT_UP_ICON;
         }
-        // $scope.view_params.sort_col_seq = $scope.sort_col_seq;
-        //$scope.view_params.sort_dir = $scope.sort_dir;
-        // sessionService.put("FACILITY_VIEW", $scope.view_params);
         $scope.list();
     };
     // <-- sort end
+    //----------------------------------------------------
     /*
         construct jsonrpc call in service, if switch to other web service 
         provider, just modify the service lay
@@ -170,7 +156,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             limit: $scope.limit,
             languageid: "1033"
         };
-        entity.list(params).then(function(result) {
+        dataService.list(params).then(function(result) {
             //common.elog(data);
             $scope.facility_list = result.data;
             // data.result.rows;

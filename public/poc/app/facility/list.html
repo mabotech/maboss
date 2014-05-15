@@ -25,7 +25,7 @@ tidy -xml -i -utf8 -w 300
     <div style="float:left;">
       <span>
         <!--select id="limit" name="limit" class="input-small" ng-model="limit" ng-options="e for e in pagesize" required="" ng-change="change_limit()"></select-->
-        <select style="width:100px" id="limit" ui-select2="select2Options" ng-model="limit" ng-change="change_limit()">
+        <select style="width:100px" id="limit" ui-select2="limitOptions" ng-model="limit" ng-change="change_limit()">
           <option value=""></option>
           <option ng-repeat="item in pagesize" value="{{item}}">{{item}}</option>
         </select>
@@ -43,19 +43,19 @@ tidy -xml -i -utf8 -w 300
         <th>#</th>
         <th>
           <a href="" ng-click="sort(1)">Facility Code</a>
-          <i style="float:right" class="fa fa-{{sort_icons[1]}}"></i>
+          <i style="float:right" ng-class="get_icon(1)"></i>
         </th>
         <th>
           <a href="" ng-click="sort(2)">Facility Name</a>
-          <i style="float:right" class="fa fa-{{sort_icons[2]}}"></i>
+          <i style="float:right" ng-class="get_icon(2)"></i>
         </th>
         <th>
           <a href="" ng-click="sort(3)">Created On</a>
-          <i style="float:right" class="fa fa-{{sort_icons[3]}}"></i>
+          <i style="float:right" ng-class="get_icon(3)"></i>
         </th>
         <th>
           <a href="" ng-click="sort(4)">Sequence</a>
-          <i style="float:right" class="fa fa-{{sort_icons[4]}}"></i>
+          <i style="float:right" ng-class="get_icon(4)"></i>
         </th>
       </tr>
     </thead>

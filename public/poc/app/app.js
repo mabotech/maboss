@@ -9,7 +9,7 @@ angular.module('maboss', [
   'ui.select2',
   //'maboss.filters',
   'maboss.services',
-  'service.entity',
+  'service.dataService',
  // 'maboss.directives',
  //controllers
   'maboss.FacilityListCtrl'
