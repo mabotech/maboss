@@ -10,25 +10,28 @@
 var module = angular.module("maboss.FacilityListCtrl", []);
 
 module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "dataService", "common", function($scope, $routeParams, $http, sessionService, dataService, common) {
+    //hardcode
     $scope.table = "facility";
     // columns in html table
+    //hardcode
     $scope.cols = [ "facility", "texths", "createdon", "createdby" ];
     // global
     var DEFAULT_SORT_ICON = "";
-    var SORT_UP_ICON = "chevron-up";
-    var SORT_DOWN_ICON = "chevron-down";
+    var DEFAULT_DIR = "asc";
+    //var SORT_UP_ICON = "chevron-up";
+    //var SORT_DOWN_ICON = "chevron-down";
+    
+    var SORT_ICON = {'asc':'chevron-up', 'desc':'chevron-down'}
+    
     var DEFAULT_PAGE_SIZE = 15;
-    var filter = $routeParams.filter;
+    
     $scope.limitOptions = {};
-    // filter in url
-    if (filter) {
-        //facility list with given company
-        $scope.domain = [ [ [ "company", "=", "MTP" ] ] ];
-        $scope.list();
-    }
+        
+
     //global context
     // g?
     //local context
+    //hardcode
     var context = {
         user: "idea",
         languageid: "1033",
@@ -37,10 +40,12 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     /*
     initialize ctrl
     */
-    $scope.init = function() {
+    var init = function() {
+        //hardcode
         $scope.session = sessionService.get("FACILITY");
         $scope.domain = null;
         if ($scope.session.user === undefined) {
+            //hardcode
             sessionService.put("FACILITY", context);
         } else {
             common.elog($scope.session);
@@ -51,12 +56,22 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             $scope.limit = DEFAULT_PAGE_SIZE;
         }
         init_table();
-        $scope.list();
+        
+        var filter = $routeParams.filter;
+    // filter in url
+        if (filter) {
+            //facility list with given company
+            //hardcode
+            $scope.domain = [ [ [ "company", "=", "MTP" ] ] ];
+          //  list();
+        }
+        //get data
+       list();
     };
     // <-- init end
     //----------------------------------------------------
     /*
-    * initial table
+     initial variables for table(filter, sort, pagination)
     */
     var init_table = function() {
         $scope.filter = "";
@@ -64,7 +79,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         //$scope.view_params.currentPage;
         $scope.sort_col_seq = 1;
         //$scope.view_params.sort_col_seq;
-        $scope.sort_dir = "asc";
+        $scope.sort_dir = "";
         //$scope.view_params.sort_dir;
         $scope.pagesize = [ 15, 20, 30, 50, 100 ];
         $scope.sort_icons = {};
@@ -75,13 +90,15 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         }
     };
     /*       
-    on_limit_change
+    on_limit_change, save configuraton into session.
+    user level or table level ?
     */
     $scope.change_limit = function() {
         common.elog("change_limit");
         context.limit = $scope.limit;
+        //hardcode
         sessionService.put("FACILITY", context);
-        $scope.list();
+        list();
     };
     /*
     on filter change
@@ -95,9 +112,10 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             $scope.filter = "";
             $scope.domain = null;
         } else {
+            // hardcode
             $scope.domain = [ [ [ "facility", "ilike", $scope.filter + "%" ] ], [ [ "texths", "ilike", $scope.filter + "%" ] ] ];
         }
-        $scope.list();
+       list();
     };
     /*
      on_page_change
@@ -105,7 +123,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     $scope.page_changed = function(page) {
         common.elog("page_changed");
         $scope.currentPage = page;
-        $scope.list();
+        list();
     };
     /*
        * ng-class
@@ -118,42 +136,46 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         }
     };
     /*
-     orderby
+      order by,  table view
      */
     $scope.sort = function(col_seq) {
         if ($scope.sort_col_seq == col_seq) {
             if ($scope.sort_dir == "asc") {
-                $scope.sort_dir = "desc";
-                $scope.sort_icons[col_seq] = SORT_DOWN_ICON;
-            } else {
+                $scope.sort_dir = "desc";               
+            } else if($scope.sort_dir == "desc"){
                 $scope.sort_dir = "asc";
-                $scope.sort_icons[col_seq] = SORT_UP_ICON;
+            //    $scope.sort_icons[col_seq] = SORT_UP_ICON;
+            }else{
+                $scope.sort_dir = DEFAULT_DIR;
+            //    $scope.sort_icons[col_seq] = DEFAULT_ICON_DIR;
             }
         } else {
             $scope.sort_icons[$scope.sort_col_seq] = DEFAULT_SORT_ICON;
             $scope.sort_col_seq = col_seq;
-            $scope.sort_dir = "asc";
-            $scope.sort_icons[col_seq] = SORT_UP_ICON;
+            $scope.sort_dir = DEFAULT_DIR;
+          //  $scope.sort_icons[col_seq] = SORT_UP_ICON;
         }
-        $scope.list();
+         $scope.sort_icons[col_seq] = SORT_ICON[$scope.sort_dir];
+        list();
     };
-    // <-- sort end
+    // <-- End sort
     //----------------------------------------------------
     /*
         construct jsonrpc call in service, if switch to other web service 
         provider, just modify the service lay
       */
-    $scope.list = function() {
-        common.elog("post");
+    var list = function() {
         // construct jsonrpc params
         var params = {
             table: $scope.table,
+            //hardcode
             pkey: "facility",
             cols: $scope.cols,
             orderby: [ $scope.sort_col_seq, $scope.sort_dir ].join(" "),
             offset: $scope.limit * ($scope.currentPage - 1),
             domain: $scope.domain,
             limit: $scope.limit,
+            //hardcode
             languageid: "1033"
         };
         dataService.list(params).then(function(result) {
@@ -166,7 +188,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             common.elog(result);
         });
     };
-    // <- post end
-    // initialize
-    $scope.init();
+    // <- End list
+    // initialize controller
+    init();
 } ]);

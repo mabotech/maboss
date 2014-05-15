@@ -9,9 +9,11 @@
 //function FacilityListCtrl($scope, $routeParams, $http,  sessionService, entity, common) {
 var module = angular.module("maboss.FacilityListCtrl", []);
 
-module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "entity", "common", function($scope, $routeParams, $http, sessionService, entity, common) {
+module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "dataService", "common", function($scope, $routeParams, $http, sessionService, dataService, common) {
+    //hardcode
     $scope.table = "facility";
     // columns in html table
+    //hardcode
     $scope.cols = [ "facility", "texths", "createdon", "createdby" ];
     // global
     var DEFAULT_SORT_ICON = "";
@@ -23,12 +25,14 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     // filter in url
     if (filter) {
         //facility list with given company
+        //hardcode
         $scope.domain = [ [ [ "company", "=", "MTP" ] ] ];
         $scope.list();
     }
     //global context
     // g?
     //local context
+    //hardcode
     var context = {
         user: "idea",
         languageid: "1033",
@@ -38,9 +42,11 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     initialize ctrl
     */
     $scope.init = function() {
+        //hardcode
         $scope.session = sessionService.get("FACILITY");
         $scope.domain = null;
         if ($scope.session.user === undefined) {
+            //hardcode
             sessionService.put("FACILITY", context);
         } else {
             common.elog($scope.session);
@@ -56,7 +62,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     // <-- init end
     //----------------------------------------------------
     /*
-    * initial table
+     initial variables for table(filter, sort, pagination)
     */
     var init_table = function() {
         $scope.filter = "";
@@ -75,11 +81,13 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         }
     };
     /*       
-    on_limit_change
+    on_limit_change, save configuraton into session.
+    user level or table level ?
     */
     $scope.change_limit = function() {
         common.elog("change_limit");
         context.limit = $scope.limit;
+        //hardcode
         sessionService.put("FACILITY", context);
         $scope.list();
     };
@@ -95,6 +103,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             $scope.filter = "";
             $scope.domain = null;
         } else {
+            // hardcode
             $scope.domain = [ [ [ "facility", "ilike", $scope.filter + "%" ] ], [ [ "texths", "ilike", $scope.filter + "%" ] ] ];
         }
         $scope.list();
@@ -118,7 +127,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         }
     };
     /*
-     orderby
+      order by,  table view
      */
     $scope.sort = function(col_seq) {
         if ($scope.sort_col_seq == col_seq) {
@@ -148,15 +157,17 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         // construct jsonrpc params
         var params = {
             table: $scope.table,
+            //hardcode
             pkey: "facility",
             cols: $scope.cols,
             orderby: [ $scope.sort_col_seq, $scope.sort_dir ].join(" "),
             offset: $scope.limit * ($scope.currentPage - 1),
             domain: $scope.domain,
             limit: $scope.limit,
+            //hardcode
             languageid: "1033"
         };
-        entity.list(params).then(function(result) {
+        dataService.list(params).then(function(result) {
             //common.elog(data);
             $scope.facility_list = result.data;
             // data.result.rows;
@@ -166,7 +177,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             common.elog(result);
         });
     };
-    // <- post end
+    // <- End list
     // initialize
     $scope.init();
 } ]);
