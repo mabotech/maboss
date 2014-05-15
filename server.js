@@ -267,7 +267,7 @@ app.use(function * (next) {
     this.set('X-Response-Time', ms + 'ms');
 
     //performance log
-    perf.log("debug", "%s - %s", ms, this.originalUrl);
+    perf.log("debug", "%s - %s", ms, this.path);//originalUrl);
 
 });
 
@@ -280,6 +280,8 @@ app.use(function * (next) {
     var params = qs.parse(this.request.body);
     
     var id = "r1";
+    
+    logger.log('debug', params)
     
     logger.log('debug', typeof(params))
     
@@ -337,7 +339,16 @@ app.use(function * (next) {
         */
         //logger.debug("error",Object.keys(this));
     
-    } else {
+    } else if (this.path == '/api/datatables.call'){
+        
+        this.body = {         
+              "draw": 1,
+              "recordsTotal": this.body.total,
+              "recordsFiltered":  this.body.count,
+              "data":this.body.rows            
+            };
+        
+    }else {
 
         //make jsonrpc reply.
         this.body = {

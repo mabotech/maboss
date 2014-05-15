@@ -15,6 +15,8 @@ var portal = require('../app/portal');
 var dataset = require('../app/dataset');
 var callproc = require('../app/callproc');
 
+var datatables = require('../app/datatables');
+
 module.exports = {
         
         /*
@@ -33,6 +35,9 @@ module.exports = {
             api
                 .post('/callproc.pgtime', callproc.pgtime)
                 .post('/callproc.call', callproc.call);
+
+            api
+                .get('/datatables.call', datatables.call);
             
             //mount
             app.use(mount('/api', api.middleware()));

@@ -12,7 +12,8 @@ angular.module('maboss', [
   'service.dataService',
  // 'maboss.directives',
  //controllers
-  'maboss.FacilityListCtrl'
+  'maboss.FacilityListCtrl',
+  'maboss.FacilityTableCtrl'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/company.form', {templateUrl: 'app/company/form.html', controller: 'CompanyFormCtrl'});
@@ -22,6 +23,8 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/facility.form', {templateUrl: 'app/facility/form.html', controller: 'FacilityFormCtrl'});
   $routeProvider.when('/facility.form/:id', {templateUrl: 'app/facility/form.html', controller: 'FacilityFormCtrl'});
   $routeProvider.when('/facility.list', {templateUrl: 'app/facility/list.html', controller: 'FacilityListCtrl'});
+  
+  $routeProvider.when('/facility.table', {templateUrl: 'app/facility/table.html', controller: 'FacilityTableCtrl'});
   
   $routeProvider.otherwise({redirectTo: '/company.list'});
 }]);
