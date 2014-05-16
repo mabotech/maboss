@@ -26,8 +26,8 @@ module.run([
             rule: '[url]'
           }
         ],
-        templateUrl: 'app/template.html',
-        popoverTemplateUrl: 'app/popoverTemplate.html'
+        templateUrl: 'app/components/c1/template.html',
+        popoverTemplateUrl: 'app/components/c1/popoverTemplate.html'
       });
     }
   ]);
@@ -35,6 +35,13 @@ module.run([
     module.controller('BuilderCtrl', function($scope, $builder, $validator) {
         
     var checkbox, textbox;
+        
+        $scope.r = 1;
+        
+    $scope.get_readonly = function(){
+        console.log("readonly");
+        return true;        
+    };
         
     textbox = $builder.addFormObject('default', {
       component: 'textInput',
@@ -54,15 +61,31 @@ module.run([
     
     $builder.addFormObject('default', {
       component: 'sampleInput'
-    });
+    });    
     
     $scope.form = $builder.forms['default'];
+    
+    $scope.form_json = JSON.stringify  ($scope.form  , null, 4)
+    
+    $scope.$watch('form', function(newVal, oldVal) {
+       // console.log(JSON.stringify(newVal), oldVal);
+        $scope.form_json = JSON.stringify  ($scope.form  , null, 4)
+    }, true);// <- $watch, the third parameter for compare value, not reference.
+    // JSON.stringify  (  , null, 4)
     $scope.input = [];
+    
+      $scope.input_json = JSON.stringify  ($scope.form  , null, 4)
+    
+    $scope.$watch('input', function(newVal, oldVal) {
+       // console.log(JSON.stringify(newVal), oldVal);
+        $scope.input_json = JSON.stringify  ($scope.input  , null, 4)
+    }, true);
+    
     $scope.defaultValue = {};
     $scope.defaultValue[textbox.id] = 'default value';
     $scope.defaultValue[checkbox.id] = [true, true];
-        
-     $scope.submit = function() {
+
+    $scope.submit = function() {
       return $validator.validate($scope, 'default').success(function() {
         return console.log('success');
       }).error(function() {

@@ -22,8 +22,8 @@
             rule: '[url]'
           }
         ],
-        templateUrl: 'example/template.html',
-        popoverTemplateUrl: 'example/popoverTemplate.html'
+        templateUrl: 'components/c1/template.html',
+        popoverTemplateUrl: 'components/c1/popoverTemplate.html'
       });
     }
   ]).controller('DemoController', function($scope, $builder, $validator) {
