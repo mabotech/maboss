@@ -10,7 +10,7 @@ angular.module("fbpoc.FormCtrl", []).controller("FormCtrl", [ "$scope", "$builde
     var fdict = {
         //       id:"facility",
         name: "facility",
-        component: "textInput",
+        component: "sampleInput",
         label: "New Name",
         description: "",
         placeholder: "Your name",

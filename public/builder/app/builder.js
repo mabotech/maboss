@@ -6,6 +6,7 @@ var module = angular.module("fbpoc.BuilderCtrl", [ "builder", "builder.component
 /**
   *  registerComponent
   */
+  /*
 module.run([ "$builder", function($builder) {
     return $builder.registerComponent("sampleInput", {
         group: "from html",
@@ -15,7 +16,7 @@ module.run([ "$builder", function($builder) {
         required: false,
         validationOptions: [ {
             label: "none",
-            rule: "/.*/"
+            rule: "/.* /"
         }, {
             label: "number",
             rule: "[number]"
@@ -30,7 +31,7 @@ module.run([ "$builder", function($builder) {
         popoverTemplateUrl: "app/components/c1/popoverTemplate.html"
     });
 } ]);
-
+*/
 /**
   *  BuilderCtrl
   */
