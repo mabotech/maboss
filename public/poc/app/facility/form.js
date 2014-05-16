@@ -23,7 +23,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
         if(common.auth()){
             //window.location="/login";
         }else{      
-            window.location="/url";
+            //window.location="/url";
             //current app:
             //$location.path("/login");      
         }

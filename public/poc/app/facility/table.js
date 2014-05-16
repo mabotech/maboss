@@ -15,6 +15,12 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
     //primary key
     $scope.pkey = "facility";
     //configuration for datatables 
+    
+    var _t = function(msgid){
+        
+        return "更新时间";
+        
+        }
     $scope.columns = [ {
         data: "facility",
         title: "Facility Code",
@@ -29,7 +35,13 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
         orderable: false,
         title: "公司",
         name: "company"
-    }, {
+    },{
+        data: "modifiedon",
+        title: _t('modifiedon')
+    },
+        
+
+    {
         data: "createdon",
         title: "Created On"
     }, {
