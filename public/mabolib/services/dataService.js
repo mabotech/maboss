@@ -176,9 +176,9 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
         },
         // <- end delete
         /**
-            * list
+            * fetch
             */
-        list: function(params) {
+        fetch: function(params) {
             rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             // method
