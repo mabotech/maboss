@@ -80,7 +80,7 @@ module.controller("BuilderCtrl", function($scope, $builder, $validator) {
     */
     $scope.$watch("input", function(newVal, oldVal) {
         // console.log(JSON.stringify(newVal), oldVal);
-        $scope.input_json = JSON.stringify($scope.input, null, 4);
+        $scope.input_json = typeof( JSON.stringify($scope.input, null, 4) );
     }, true);
     $scope.defaultValue = {};
     $scope.defaultValue[textbox.id] = "default value";

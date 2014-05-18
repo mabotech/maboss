@@ -2,37 +2,29 @@
 
 // uglifyjs form.js -b  --comments all 
 /**
-  * Company Controllers
-  * Copyright
-  * License MIT
-  */
+* Company Controllers
+* Copyright
+* License MIT
+*/
 /**
-  * CompanyFormCtrl
-  * view of entity form
-  *  Create or update
-  * @params
-  */
+* CompanyFormCtrl
+* view of entity form
+*  Create or update
+* @params
+*/
 function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService, common) {
     /**
-        * @init
-        *   Initialize
-        */
+* @init
+*   Initialize
+*/
     $scope.init = function() {
-        
         //check auth
-        if(common.auth()){
-            //window.location="/login";
-        }else{      
-            //window.location="/url";
-            //current app:
-            //$location.path("/login");      
-        }
-        
+        if (common.auth()) {} else {}
         $scope.table = "facility";
         $scope.facility_id = $routeParams.id;
         /*
-        Model defination
-        */
+Model defination
+*/
         $scope.facility = {
             //id: null,
             //seq: null,
@@ -41,11 +33,11 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
             company: null,
             purchasingorganization: null,
             /*
-                codesystemtype: null,
-                domainmanagerid: null,
-                formattype: null,
-                objectclass: null,
-                */
+codesystemtype: null,
+domainmanagerid: null,
+formattype: null,
+objectclass: null,
+*/
             modifiedon: null,
             modifiedby: null,
             createdon: null,
@@ -54,9 +46,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
         };
         //get company for select2
         //$scope.get_company();
-        
         $scope.get_purchasingorganization();
-        
         if ($scope.facility_id === undefined) {
             common.elog("new/insert");
         } else {
@@ -65,17 +55,17 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
         }
     };
     /*    
-     Purchasingorganization  selection
-    */
+Purchasingorganization  selection
+*/
     /*
-    $scope.purchasingorganization = [ {
-        id: "CCI",
-        text: "C-C-I"
-    }, {
-        id: "MT",
-        text: "M-T"
-    } ];
-    */
+$scope.purchasingorganization = [ {
+id: "CCI",
+text: "C-C-I"
+}, {
+id: "MT",
+text: "M-T"
+} ];
+*/
     $scope.get_purchasingorganization = function() {
         var jsonrpc_params = {
             jsonrpc: "2.0",
@@ -87,7 +77,6 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
                 key: "company",
                 value: "texths",
                 languageid: "1033"
-                //filter: term
             }
         };
         $http({
@@ -106,8 +95,8 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
         placeholder: "Purchasing organization"
     };
     /*
-    Company selection
-    */
+Company selection
+*/
     $scope.company_sel = {
         placeholder: "选择Company",
         //minimumInputLength: 1,
@@ -157,21 +146,21 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
     // $scope.facility -> $scope.t_facility || $scope.obj ?
     // entity
     /**
-        * @save
-        */
+* @save
+*/
     $scope.save = function() {
         $scope.post();
     };
     /**
-        * @refresh
-        */
+* @refresh
+*/
     $scope.refresh = function() {
         $scope.get();
     };
     $scope.validate = function() {};
     /**
-        * @post
-        */
+* @post
+*/
     $scope.post = function() {
         common.elog("post");
         common.elog($scope.facility.texths);
@@ -184,7 +173,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
             params: {
                 method: "mtp_upsert_cs8",
                 table: $scope.table,
-                pkey:"facility",
+                pkey: "facility",
                 //eneity
                 columns: $scope.facility,
                 context: {
@@ -225,8 +214,8 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
     };
     // <- end post
     /**
-        * @get
-        */
+* @get
+*/
     $scope.get = function() {
         common.elog("post");
         var jsonrpc_params = {
@@ -238,7 +227,7 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
                 table: $scope.table,
                 //eneity
                 pkey: "facility",
-                id:$scope.facility_id,
+                id: $scope.facility_id,
                 cols: Object.keys($scope.facility),
                 languageid: "1033",
                 context: {
@@ -277,4 +266,4 @@ function FacilityFormCtrl($scope, $routeParams, $location, $http, sessionService
 }
 
 // <- End controller
-FacilityFormCtrl.$inject = [ "$scope", "$routeParams", "$location", "$http" , "sessionService", "common"];
+FacilityFormCtrl.$inject = [ "$scope", "$routeParams", "$location", "$http", "sessionService", "common" ];
