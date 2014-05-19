@@ -16,7 +16,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             params.method = "mtp_select_cf2";
-            var jsonrpc_params = {
+            var payload = {
                 jsonrpc: "2.0",
                 id: rpc_id,
                 method: "call",
@@ -31,7 +31,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             $http({
                 method: "POST",
                 url: "/api/callproc.call",
-                data: jsonrpc_params
+                data: payload
             }).success(function(data, status) {
                 var result = [];
                 if (data.result.rows) {
@@ -58,7 +58,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             //defer
             var deferred = $q.defer();
             //jsonrpc payload
-            var jsonrpc_params = {
+            var payload = {
                 jsonrpc: "2.0",
                 id: rpc_id,
                 method: "call",
@@ -81,7 +81,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             $http({
                 method: "POST",
                 url: "/api/callproc.call",
-                data: jsonrpc_params
+                data: payload
             }).success(function(data, status) {
                 //$scope.data =  JSON.stringify(data, null, 4);
                 if (data.result.returning.length === 0) {
@@ -112,7 +112,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             params.method = "mtp_delete_cf2";
-            var jsonrpc_params = {
+            var payload = {
                 jsonrpc: "2.0",
                 id: rpc_id,
                 method: "call",
@@ -127,7 +127,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             $http({
                 method: "POST",
                 url: "/api/callproc.call",
-                data: jsonrpc_params
+                data: payload
             }).success(function(data, status) {
                 var result = {};
                 deferred.resolve(result);
@@ -144,7 +144,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             rpc_id = rpc_id + 1;
             var deferred = $q.defer();
             params.method = "mtp_fetch_one_cf1";
-            var jsonrpc_params = {
+            var payload = {
                 jsonrpc: "2.0",
                 id: rpc_id,
                 method: "call",
@@ -164,7 +164,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             $http({
                 method: "POST",
                 url: "/api/callproc.call",
-                data: jsonrpc_params
+                data: payload
             }).success(function(data, status) {
                 if (data.result.returning.length === 0) {}
                 var result = {};
@@ -184,7 +184,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             // method
             params.method = "mtp_search_cf4";
             //construct jsonrpc msg
-            var jsonrpc_params = {
+            var payload = {
                 jsonrpc: "2.0",
                 id: rpc_id,
                 method: "call",
@@ -194,7 +194,7 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
             $http({
                 method: "POST",
                 url: "/api/callproc.call",
-                data: jsonrpc_params
+                data: payload
             }).success(function(data, status) {
                 var result = {};
                 
