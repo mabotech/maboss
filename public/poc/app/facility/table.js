@@ -16,11 +16,14 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
     $scope.pkey = "facility";
     //configuration for datatables 
     
+    //var texts_languageid = {msgid:text}; 
+    
     var _t = function(msgid){
         
         return "更新时间";
         
-        }
+    };
+        
     $scope.columns = [ {
         data: "facility",
         title: "Facility Code",
@@ -52,7 +55,7 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
     /*
      call service
     */
-    var list = function(data, callback) {
+    var fetch = function(data, callback) {
         var cols = [];
         var i;
         for (i = 0; i < data.columns.length; i++) {
@@ -70,7 +73,7 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
             //hardcode
             languageid: "1033"
         };
-        dataService.list(params).then(function(result) {
+        dataService.fetch(params).then(function(result) {
             var rdata = {
                 data: result.data,
                 recordsTotal: result.total,
@@ -98,7 +101,7 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
             sLengthMenu: "_MENU_"
         },
         ajax: function(data, callback, setting) {
-            list(data, callback);
+            fetch(data, callback);
         },
         columns: $scope.columns,
         columnDefs:{

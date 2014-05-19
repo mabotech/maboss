@@ -1,12 +1,12 @@
 "use strict";
 
-// uglifyjs list.js -b  --comments all 
+// uglifyjs fetch.js -b  --comments all 
 /**
- * FacilityListCtrl
- * view of engity list
+ * FacilityfetchCtrl
+ * view of engity fetch
  * save pagination and filter params in session?
  */
-//function FacilityListCtrl($scope, $routeParams, $http,  sessionService, entity, common) {
+//function FacilityfetchCtrl($scope, $routeParams, $http,  sessionService, entity, common) {
 var module = angular.module("maboss.FacilityListCtrl", []);
 
 module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "dataService", "common", function($scope, $routeParams, $http, sessionService, dataService, common) {
@@ -60,13 +60,13 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         var filter = $routeParams.filter;
     // filter in url
         if (filter) {
-            //facility list with given company
+            //facility fetch with given company
             //hardcode
             $scope.domain = [ [ [ "company", "=", "MTP" ] ] ];
-          //  list();
+          //  fetch();
         }
         //get data
-       list();
+       fetch();
     };
     // <-- init end
     //----------------------------------------------------
@@ -98,7 +98,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
         context.limit = $scope.limit;
         //hardcode
         sessionService.put("FACILITY", context);
-        list();
+        fetch();
     };
     /*
     on filter change
@@ -115,7 +115,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             // hardcode
             $scope.domain = [ [ [ "facility", "ilike", $scope.filter + "%" ] ], [ [ "texths", "ilike", $scope.filter + "%" ] ] ];
         }
-       list();
+       fetch();
     };
     /*
      on_page_change
@@ -123,7 +123,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
     $scope.page_changed = function(page) {
         common.elog("page_changed");
         $scope.currentPage = page;
-        list();
+        fetch();
     };
     /*
        * ng-class
@@ -156,15 +156,16 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
           //  $scope.sort_icons[col_seq] = SORT_UP_ICON;
         }
          $scope.sort_icons[col_seq] = SORT_ICON[$scope.sort_dir];
-        list();
+        fetch();
     };
     // <-- End sort
     //----------------------------------------------------
     /*
+        fetch
         construct jsonrpc call in service, if switch to other web service 
         provider, just modify the service lay
       */
-    var list = function() {
+    var fetch = function() {
         // construct jsonrpc params
         var params = {
             table: $scope.table,
@@ -178,7 +179,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             //hardcode
             languageid: "1033"
         };
-        dataService.list(params).then(function(result) {
+        dataService.fetch(params).then(function(result) {
             //common.elog(data);
             $scope.facility_list = result.data;
             // data.result.rows;
@@ -188,7 +189,7 @@ module.controller("FacilityListCtrl", [ "$scope", "$routeParams", "$http", "sess
             common.elog(result);
         });
     };
-    // <- End list
+    // <- End fetch
     // initialize controller
     init();
 } ]);

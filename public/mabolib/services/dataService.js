@@ -4,7 +4,7 @@
 /**
   *Data  Services
   */
-angular.module("service.dataService", []).factory("dataService", [ "$q", "$http", function($q, $http) {
+angular.module("service.dataService", []).factory("dataService", [ "$q", "$http", "$log", function($q, $http, $log) {
     // jsonrpc id
     var rpc_id = 0;
     //methods
@@ -92,15 +92,15 @@ angular.module("service.dataService", []).factory("dataService", [ "$q", "$http"
                     //Message.post();
                     //console.log();
                     //debug.error("msg");
-                    console.log("");
+                    $log.debug("no data");
                 }
                 deferred.resolve(data);
                 //show success msg
-                console.log("");
+                $log.debug("success");
             }).error(function(reason, status) {
                 deferred.reject(reason);
                 //show error msg
-                console.log("");
+                $log.error(reason);
             });
             return deferred.promise;
         },
