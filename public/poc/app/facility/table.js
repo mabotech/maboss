@@ -9,7 +9,7 @@
 //function FacilityListCtrl($scope, $routeParams, $http,  sessionService, entity, common) {
 var module = angular.module("maboss.FacilityTableCtrl", []);
 
-module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "dataService", "common", function($scope, $routeParams, $http, sessionService, dataService, common) {
+module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "sessionService", "dataService", "$log", function($scope, $routeParams, $http, sessionService, dataService, $log) {
     //table name
     $scope.table = "facility";
     //primary key
@@ -73,14 +73,17 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
             //hardcode
             languageid: "1033"
         };
+        //fetch
         dataService.fetch(params).then(function(result) {
-            var rdata = {
-                data: result.data,
-                recordsTotal: result.total,
-                recordsFiltered: result.count
-            };
-            callback(rdata);
+            //$log.debug(JSON.stringify(result));
+                $log.debug("fetch success", result);
+                result.recordsTotal = result.total,
+                result.recordsFiltered= result.count
+ 
+           $log.debug(JSON.stringify(result));
+            callback(result);
         }, function(result) {
+            $log.error("error", result);
             var rdata = {
                 data: []
             };
@@ -101,6 +104,7 @@ module.controller("FacilityTableCtrl", [ "$scope", "$routeParams", "$http", "ses
             sLengthMenu: "_MENU_"
         },
         ajax: function(data, callback, setting) {
+           // $log.debug(JSON.stringify(data));
             fetch(data, callback);
         },
         columns: $scope.columns,

@@ -9,6 +9,7 @@ angular.module('maboss', [
   'ui.select2',
   //'maboss.filters',
   'maboss.services',
+  'service.jsonrpc',
   'service.dataService',
  // 'maboss.directives',
  //controllers
