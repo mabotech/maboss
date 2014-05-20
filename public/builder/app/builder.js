@@ -35,8 +35,8 @@ module.run([ "$builder", function($builder) {
 /**
   *  BuilderCtrl
   */
-module.controller("BuilderCtrl", function($scope, $builder, $validator) {
-    var checkbox, textbox;
+module.controller("BuilderCtrl", function($scope, $timeout, $builder, $validator) {
+    var checkbox, textbox, rtext;
     // readonly
     //$scope.r = 1;
     $scope.get_readonly = function() {
@@ -44,24 +44,51 @@ module.controller("BuilderCtrl", function($scope, $builder, $validator) {
         return true;
     };
     //obj
+    
+    $scope.r = 0;
+    
     textbox = $builder.addFormObject("default", {
         component: "textInput",
         label: "Name",
+        name:"n_input",
         description: "Your name",
         placeholder: "Your name",
         required: true,
-        editable: false
+        editable: false,
+         readonly:false
     });
     //obj
     checkbox = $builder.addFormObject("default", {
         component: "checkbox",
+        name:"n_checkbox",
         label: "Pets",
         description: "Do you have any pets?",
         options: [ "Dog", "Cat" ]
     });
-    $builder.addFormObject("default", {
-        component: "sampleInput"
+    // readonly test
+    rtext = $builder.addFormObject("default", {
+        component: "sampleInput",
+        name:"mabo",
+     //   readonly:true,
+        placeholder:"test readonly"
     });
+    
+    var vchange = function(){
+        
+        console.log("timer",rtext.readonly);
+        
+        if (rtext.readonly == true){
+        rtext.readonly = false;
+        }else{
+            rtext.readonly = true;
+            }
+            
+            $timeout(vchange, 6000);
+            
+    };
+
+    $timeout(vchange, 6000);
+
     $scope.form = $builder.forms["default"];
     $scope.form_json = JSON.stringify($scope.form, null, 4);
     /*

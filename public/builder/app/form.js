@@ -21,6 +21,7 @@ angular.module("fbpoc.FormCtrl", []).controller("FormCtrl", [ "$scope", "$builde
     };
     var sdict = {
         component: "select",
+       // id:"company",
         // editable: true,
         label: "Select",
         name: "company",
