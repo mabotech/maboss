@@ -9,14 +9,16 @@ angular.module('fbpoc', [
   'builder.components', 
   'validator.rules',
   //controllers
+  'service.jsonrpc',
+  'service.dataService',
   'fbpoc.BuilderCtrl',
-  'fbpoc.FormCtrl'
+  'fbpoc.CompanyFormCtrl'
 ]).
 config(['$routeProvider', function($routeProvider) {
 
  $routeProvider.when('/builder', {templateUrl: 'app/builder.html', controller: 'BuilderCtrl'});
   
-  $routeProvider.when('/form', {templateUrl: 'app/form.html', controller: 'FormCtrl'});
+  $routeProvider.when('/form', {templateUrl: 'app/form.html', controller: 'CompanyFormCtrl'});
   
   $routeProvider.otherwise({redirectTo: '/builder'});
 }]).
@@ -52,22 +54,16 @@ config(['$builderProvider',function($builder) {
     //  registerComponent
     return $builder.registerComponent("select4", {
         group: "from html",
-        label: "Select3",
+        label: "Select4",
         description: "From html template",
         placeholder: "placeholder",
-        required: false,
+        required: false,    
         validationOptions: [ {
             label: "none",
             rule: "/.*/"
         }, {
             label: "number",
             rule: "[number]"
-        }, {
-            label: "email",
-            rule: "[email]"
-        }, {
-            label: "url",
-            rule: "[url]"
         } ],
         templateUrl: "/builder/app/components/select4/template.html",
         popoverTemplateUrl: "/builder/app/components/select4/popoverTemplate.html"

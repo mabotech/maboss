@@ -28,8 +28,8 @@
         save one
          */
         save: function(options) {
-          options.method = "mtp_upsert_cs8";
-          options.columns = options.model;
+          options.method = "mtp_upsert_cs9";
+          //options.columns = options.model;
           return jsonrpc.call(options);
         },
 
