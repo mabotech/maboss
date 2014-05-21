@@ -59,11 +59,13 @@ module.controller("BuilderCtrl", function($scope, $timeout, $builder, $validator
     });
     //obj
     checkbox = $builder.addFormObject("default", {
-        component: "checkbox",
+        component: "select4",
         name:"n_checkbox",
         label: "Pets",
         description: "Do you have any pets?",
-        options: [ "Dog", "Cat" ]
+        //options: [{'val':'1','text':'one'}, {'val':'2', 'text':'two'}, {'val':'3','text':'three'}]//[ "Dog", "Cat" ]
+        options: [['1','one'], ['2','two'],['3','three'], ['0','zero']]
+        //options:[ "Dog", "Cat" ]
     });
     // readonly test
     rtext = $builder.addFormObject("default", {
@@ -110,8 +112,8 @@ module.controller("BuilderCtrl", function($scope, $timeout, $builder, $validator
         $scope.input_json = typeof( JSON.stringify($scope.input, null, 4) );
     }, true);
     $scope.defaultValue = {};
-    $scope.defaultValue[textbox.id] = "default value";
-    $scope.defaultValue[checkbox.id] = [ true, true ];
+    $scope.defaultValue[textbox.id] = "default_value";
+    $scope.defaultValue[checkbox.id] =1;
     /*
     submit
     */

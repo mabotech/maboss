@@ -30,7 +30,20 @@
          */
         var component;
         copyObjectToScope(formObject, $scope);
-        $scope.optionsText = formObject.options.join('\n');
+          
+        if (formObject.options[0] !== undefined && formObject.options[0].length>1){
+             var i ;
+            var t = []
+            for(i =0; i < formObject.options.length; i ++){
+                x = formObject.options.join(',');
+                t.push(x);
+                $scope.optionsText = t.join('\n');
+            }
+             $scope.optionsText = formObject.options.join('\n');
+            
+        }else{
+            $scope.optionsText = formObject.options.join('\n');
+        }
         $scope.$watch('[name, readonly, label, description, placeholder, required, options, validation]', function() { //mabo
           formObject.label = $scope.label;
           formObject.name = $scope.name; //mabo
@@ -49,9 +62,15 @@
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               x = _ref[_i];
-              if (x.length > 0) {
-                _results.push(x);
+              p = x.split(',');  //mabo
+              if (p.length > 1) { //mabo
+                item = [p[0], p[1]]; //mabo
+                _results.push(item); //mabo
               }
+              else if(x.length>0){  //mabo
+                  console.log(x);
+                  _results.push(x);
+                }
             }
             return _results;
           })();
@@ -525,7 +544,8 @@
             return $(element).html(view);
           });
           if (!scope.$component.arrayToText && scope.formObject.options.length > 0) {
-            scope.inputText = scope.formObject.options[0];
+            //scope.inputText = scope.formObject.options[0];
+              console.log(scope.inputText);//mabo
           }
           return scope.$watch("default[" + scope.formObject.id + "]", function(value) {
             if (!value) {
@@ -534,6 +554,7 @@
             if (scope.$component.arrayToText) {
               return scope.inputArray = value;
             } else {
+                console.log(value);//mabo
               return scope.inputText = value;
             }
           });
