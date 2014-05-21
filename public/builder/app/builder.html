@@ -16,6 +16,27 @@
 
                 </div>
             </div>
+            <hr/>
+            <h4>Form Objects:</h4>
+            <table class="table">
+            <tr>    
+<th>#</th>            
+            
+            <th>Label</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>ID</th>
+            </tr>
+            <tr ng-repeat="object in form">
+            <td>{{$index}}</td>
+            
+            <td>{{object.label}}</td>
+            <td>{{object.name}}</td>
+            <td>{{object.component}}</td>
+            <td>{{object.id}}</td>
+            </tr>
+            </table>
+            
         </div>
         <div class="col-md-6">
             <div fb-components></div>
