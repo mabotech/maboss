@@ -9,17 +9,17 @@ v2 = i_json.v2
 
 data = {}
 
-try	 
-	rtn =plv8.execute(sql_select, v2)	 
+try
+    rtn =plv8.execute(sql_select, v2)
 
-	if rtn.length == 0
-		throw "no data found"
+    if rtn.length == 0
+        throw "no data found"
 
-	data = get_data(i_json.type, rtn)
+    data = get_data(i_json.type, rtn)
 
 catch error
-	plv8.elog(LOG, sql_select, JSON.stringify(i_json))
-	data = {"error_msg":"#{error}"}
+    plv8.elog(LOG, sql_select, JSON.stringify(i_json))
+    data = {"error_msg":"#{error}"}
 
 return data
-	
+

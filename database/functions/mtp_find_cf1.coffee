@@ -16,47 +16,47 @@ v_offset = i_json.offset
 v_limit = i_json.limit
 
 if i_json.cols
-	v_cols = i_json.cols.join(",")
+    v_cols = i_json.cols.join(",")
 
 if not v_filter
-	v_filter = "true"
+    v_filter = "true"
 
 if not v_orderby
-	v_orderby = "1"	
+    v_orderby = "1"
 
 if not v_offset
-	v_offset = 0
+    v_offset = 0
 
 if not v_limit
-	v_limit = 25
+    v_limit = 25
 
 v_sql = "select count(1) as total from #{v_table} where #{v_filter}"
 
 try
-	total = plv8.execute( v_sql )[0]["total"]
+    total = plv8.execute( v_sql )[0]["total"]
 catch err
-	plv8.elog(DEBUG, v_sql)
-	msg = "#{err}"
-	return {"error":msg, "sql":v_sql}
-	
-if total== 0
-	
-	return {"error":"no data", "sql":v_sql}
+    plv8.elog(DEBUG, v_sql)
+    msg = "#{err}"
+    return {"error":msg, "sql":v_sql}
 
-v_sql = "select #{v_cols} 
-	from #{v_table} 
-	where #{v_filter}  
-	order by #{v_orderby} 
-	offset #{v_offset} limit #{v_limit}"
+if total== 0
+
+    return {"error":"no data", "sql":v_sql}
+
+v_sql = "select #{v_cols}
+    from #{v_table}
+    where #{v_filter}
+    order by #{v_orderby}
+    offset #{v_offset} limit #{v_limit}"
 
 try
-	rtn = plv8.execute(v_sql)
+    rtn = plv8.execute(v_sql)
 catch err
-	plv8.elog(DEBUG, v_sql)
-	msg = "#{err}"
-	
+    plv8.elog(DEBUG, v_sql)
+    msg = "#{err}"
+
 if msg != ""
-	return {"error":msg, "sql":v_sql}
+    return {"error":msg, "sql":v_sql}
 
 count = rtn.length
 

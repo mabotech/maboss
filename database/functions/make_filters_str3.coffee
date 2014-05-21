@@ -9,22 +9,22 @@ st = []
 y = {"|":" OR ","&":" AND ", "!" : " NOT "}
 
 while n>0
-    
+
     n = n - 1
-    
+
     if v_domain[n] not in ["|","&", "!"]
-        
-        # in / not in 
+
+        # in / not in
         if typeof (v_domain[n][2]) == 'object'
-        
+
             vlist = []
-            
+
             arr = v_domain[n][2]
-            
+
             #add single quote for value
             for i in [0 ..arr.length-1]
                 vlist.push("'#{arr[i]}'")
-            
+
             arr_str = vlist.join(", ")
             arr_str = "(#{arr_str})"
             in_ = [ v_domain[n][0], v_domain[n][1], arr_str ].join(' ')
@@ -50,4 +50,4 @@ while n>0
 #result
 return st.pop()
 
-    
+

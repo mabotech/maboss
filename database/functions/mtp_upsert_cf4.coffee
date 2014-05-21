@@ -19,102 +19,102 @@ v_user = i_json.context.user
 v_rowversion = i_json.columns.rowversion
 
 if not v_rowversion
-	v_rowversion = 1
+    v_rowversion = 1
 
 if not languageid
-	#throw("please provide languageid")
-	return {"error":"please provide languageid"}
+    #throw("please provide languageid")
+    return {"error":"please provide languageid"}
 
 for key in Object.keys(i_json.columns)
 
-	if key == 'id'
-		if i_json.columns['id'] != ''
-			#update  = true
-			v_id = i_json.columns['id']
-		else
-			continue
+    if key == 'id'
+        if i_json.columns['id'] != ''
+            #update  = true
+            v_id = i_json.columns['id']
+        else
+            continue
 
-	cols.push(key)
-	
-	if key != 'texths'
-		x = i_json.columns[key]
+    cols.push(key)
 
-		if typeof(x) == 'string'
-		
-			y = x.split('::')
-			
-			if y.length == 2
-				v = "'#{y[0]}'::#{y[1]}"
-				vals.push(v)
-			
-			else
-				x = x.replace("'","''")  # escape single quote
-				v = "'#{x}'"
-				vals.push(v)
-		else
-			vals.push(x)
-	else
-		val = i_json.columns[key]
-		val = val.replace("'","''") # escape single quote
-		v = "hstore('#{languageid}', '#{val}')"
-		vals.push(v)	
+    if key != 'texths'
+        x = i_json.columns[key]
+
+        if typeof(x) == 'string'
+
+            y = x.split('::')
+
+            if y.length == 2
+                v = "'#{y[0]}'::#{y[1]}"
+                vals.push(v)
+
+            else
+                x = x.replace("'","''")  # escape single quote
+                v = "'#{x}'"
+                vals.push(v)
+        else
+            vals.push(x)
+    else
+        val = i_json.columns[key]
+        val = val.replace("'","''") # escape single quote
+        v = "hstore('#{languageid}', '#{val}')"
+        vals.push(v)
 
 if v_id != undefined and v_id != ""
-	#build update sql
-	
-	#c= cols.join(",")	 
-	#v = vals.join(",")
-	
-	fields = []
+    #build update sql
 
-	for i in [0 ..cols.length-1]
+    #c= cols.join(",")
+    #v = vals.join(",")
 
-		col = cols[i]
-		val = vals[i]
+    fields = []
 
-		if col in ["id","modifiedon","modifiedby","rowversion"]
-			continue
-		
-		if col == "texths"
-			fields.push("#{col} = #{col}||#{val}")
-		else
-			
-			fields.push("#{col} = #{val}")
-		
-	setfields = fields.join(", ")
-	
-	v_sql = "update #{v_table} set #{setfields}, modifiedon = now(), modifiedby = '#{v_user}', rowversion = rowversion + 1 
-		where id='#{v_id}' and rowversion = #{v_rowversion} returning id, seq, modifiedon, rowversion"
-	
+    for i in [0 ..cols.length-1]
+
+        col = cols[i]
+        val = vals[i]
+
+        if col in ["id","modifiedon","modifiedby","rowversion"]
+            continue
+
+        if col == "texths"
+            fields.push("#{col} = #{col}||#{val}")
+        else
+
+            fields.push("#{col} = #{val}")
+
+    setfields = fields.join(", ")
+
+    v_sql = "update #{v_table} set #{setfields}, modifiedon = now(), modifiedby = '#{v_user}', rowversion = rowversion + 1
+        where id='#{v_id}' and rowversion = #{v_rowversion} returning id, seq, modifiedon, rowversion"
+
 else
-	#build insert sql
+    #build insert sql
 
-	t_cols = []
-	t_vals = []
+    t_cols = []
+    t_vals = []
 
-	for i in [0 .. cols.length-1 ]
-		
-		if cols[i] in ["id", "modifiedon", "modifiedby", "createdon", "createdby", "rowversion"]
-			#alert?
-			continue
-		else
-			t_cols.push(cols[i])
-			t_vals.push(vals[i])
+    for i in [0 .. cols.length-1 ]
 
-	v_cols= t_cols.join(", ")
+        if cols[i] in ["id", "modifiedon", "modifiedby", "createdon", "createdby", "rowversion"]
+            #alert?
+            continue
+        else
+            t_cols.push(cols[i])
+            t_vals.push(vals[i])
 
-	v_vals = t_vals.join(", ")
+    v_cols= t_cols.join(", ")
 
-	v_sql = "insert into #{v_table} (#{v_cols}, modifiedon, modifiedby, createdon, createdby) 
-			values(#{v_vals}, now(), '#{v_user}', now(), '#{v_user}') returning id, seq, createdon, rowversion"
+    v_vals = t_vals.join(", ")
+
+    v_sql = "insert into #{v_table} (#{v_cols}, modifiedon, modifiedby, createdon, createdby)
+            values(#{v_vals}, now(), '#{v_user}', now(), '#{v_user}') returning id, seq, createdon, rowversion"
 
 try
-	result = plv8.execute( v_sql )
+    result = plv8.execute( v_sql )
 catch err
-	plv8.elog(DEBUG, v_sql)
-	msg = "#{err},#{v_sql}"
-	#return {"sql":v_sql,"error":msg}
-	throw(msg)
-	
+    plv8.elog(DEBUG, v_sql)
+    msg = "#{err},#{v_sql}"
+    #return {"sql":v_sql,"error":msg}
+    throw(msg)
+
 return {"result":result, "sql":v_sql}
 
