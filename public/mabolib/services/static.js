@@ -11,6 +11,7 @@ angular.module("service.static", []).factory("static", [ "$q", "$http", function
         Name:"maboss",
         GET:"",
         SAVE:"",
-        DEL:""
+        DEL:"",
+        UPSERT:"mtp_upsert_cs8"
     }
 } ]);

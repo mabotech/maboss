@@ -1,19 +1,20 @@
 
 <a href="#/builder">Builder</a>
  <div class="row">
-        <h2>Form</h2>
-        <hr/>
-        
-        
+        <h4>{{table}}</h4>
         <form class="form-horizontal">
+          <tabset>
+    <tab heading="General">
+        
             <div ng-model="zmodel" fb-form="zform" fb-default="defaultValue"></div>
             <div class="form-group">
                 <div class="col-md-8 col-md-offset-4">
                     <input type="submit" ng-click="submit()" class="btn btn-default"/>
                 </div>
             </div>
-        </form>
         
+        </tab>
+        <tab heading="System">
         <!-- Start system -->
         <div class="panel panel-default">
         <div class="panel-body">
@@ -49,7 +50,8 @@
           </div>
         </div>
       </div><!-- End system -->
-        
+        </tab>
+        <tab heading="Debug">
         
         
          <div class="checkbox">
@@ -65,4 +67,9 @@
             </label>
         </div>
         <pre ng-if="isShowScope2">{{zmodel}}</pre>
+        
+        
+        </tab>
+        </tabset>
+        </form>
     </div>

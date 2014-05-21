@@ -2,9 +2,9 @@
 (function() {
   "use strict";
   angular.module("fbpoc.CompanyFormCtrl", []).controller("CompanyFormCtrl", [
-    "$scope", "$builder", "$validator", "dataService", "$log", function($scope, $builder, $validator, dataService, $log) {
-      var init, init_select, name_pos, o_code_format_type, o_company, o_currencycode, o_domainmanagerid, o_objectclass, o_texths, obj_list, table;
-      table = "company";
+    "$scope", "$routeParams", "$log", "$builder", "$validator", "sessionService", "dataService", function($scope, $routeParams, $log, $builder, $validator, sessionService, dataService) {
+      var get_kv, init, init_select, name_pos, o_code_format_type, o_company, o_currencycode, o_domainmanagerid, o_objectclass, o_texths, obj_list, set_sysdata;
+      $scope.table = "company";
       $scope.system = {
         modifiedon: null,
         modifiedby: null,
@@ -67,6 +67,7 @@
         required: false,
         editable: false
       };
+      $scope.pkey = 'company';
       obj_list = [o_company, o_texths, o_currencycode, o_code_format_type, o_domainmanagerid, o_objectclass];
       init_select = function() {};
       init = function() {
@@ -87,7 +88,45 @@
         $scope.zform = $builder.forms["zform"];
         init_select();
       };
-      $scope.submit = function() {
+      get_kv = function(field) {
+        return dataService.getkv(params).then(function(data) {
+          return $log.debug(data);
+        }, function(result) {
+          return $log.debug("error", data);
+        });
+      };
+      init_select = function() {
+        var field, select_fields, _i, _len, _results;
+        select_fields = [];
+        _results = [];
+        for (_i = 0, _len = select_fields.length; _i < _len; _i++) {
+          field = select_fields[_i];
+          _results.push(get_kv(field));
+        }
+        return _results;
+      };
+      set_sysdata = function(data) {
+        var col, cols, _i, _len, _results;
+        cols = ["modifiedon", "modifiedby", "createdon", "createdby", "rowversion"];
+        _results = [];
+        for (_i = 0, _len = cols.length; _i < _len; _i++) {
+          col = cols[_i];
+          _results.push($scope.system[col] = data[col]);
+        }
+        return _results;
+      };
+      $scope.get = function() {
+        return dataService.get(params).then(function(data) {
+          $log.debug(data);
+          return $scope.defaultValue[0] = "abc";
+        }, function(result) {
+          return $log.debug("error", result);
+        });
+      };
+      $scope.refresh = function() {
+        return $scope.get();
+      };
+      $scope.save = function() {
         var context, fields, item, params, _i, _len, _ref;
         fields = {};
         if ($scope.system.rowversion) {
@@ -107,8 +146,8 @@
           }
         }
         params = {
-          table: 'company',
-          pkey: 'company',
+          table: $scope.table,
+          pkey: $scope.pkey,
           columns: fields,
           context: context
         };
