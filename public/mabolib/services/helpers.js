@@ -5,7 +5,7 @@
   /*
   Mabo Services
    */
-  angular.module("service.utils", []).factory("utils", function() {
+  angular.module("service.helpers", []).factory("helpers", function() {
     return {
       log: function(msg) {
         return console.log(msg);
