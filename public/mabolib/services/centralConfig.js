@@ -1,12 +1,10 @@
 'use strict';
 //uglifyjs centralConfig.js -b  --comments all 
-angular.module("service.centralConfig", []).factory("centralConfig", function() {
+ 
 
-    return {
-
-config: function(model){
+var centralConfig = function(module){
     
-    model.config(['$builderProvider',function($builder) {
+    module.config(['$builderProvider',function($builder) {
     //  registerComponent
     return $builder.registerComponent("sampleInput", {
         group: "from html",
@@ -51,11 +49,9 @@ config: function(model){
         templateUrl: "/builder/app/components/select4/template.html",
         popoverTemplateUrl: "/builder/app/components/select4/popoverTemplate.html"
     });
-}
 
-
-]);   
+    }]);
     
-    }
+};
+ 
     
-}});

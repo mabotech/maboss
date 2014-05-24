@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('fbpoc', [
+var module = angular.module('fbpoc', [
   'ngRoute',
   'ui.bootstrap',
   //form builder
@@ -10,10 +10,15 @@ angular.module('fbpoc', [
   'validator.rules',
   //controllers
   'service.jsonrpc',
+  'service.sessionService',
   'service.dataService',
   'fbpoc.BuilderCtrl',
   'fbpoc.CompanyFormCtrl'
-]).
+]);
+
+centralConfig(module);
+
+/*
 config(['$routeProvider', function($routeProvider) {
 
  $routeProvider.when('/builder', {templateUrl: 'app/builder.html', controller: 'BuilderCtrl'});
@@ -32,7 +37,7 @@ config(['$builderProvider',function($builder) {
         required: false,
         validationOptions: [ {
             label: "none",
-            rule: "/.*/"
+            rule: "/.* /"
         }, {
             label: "number",
             rule: "[number]"
@@ -60,7 +65,7 @@ config(['$builderProvider',function($builder) {
         required: false,    
         validationOptions: [ {
             label: "none",
-            rule: "/.*/"
+            rule: "/.* /"
         }, {
             label: "number",
             rule: "[number]"
@@ -73,3 +78,4 @@ config(['$builderProvider',function($builder) {
 
 ])
 ;
+*/

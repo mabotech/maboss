@@ -2,6 +2,7 @@
 
 #uglifyjs centralConfig.js -b  --comments all 
 angular.module("service.centralConfig", []).factory "centralConfig", ->
+
     config: (model) ->
         
         #  registerComponent
