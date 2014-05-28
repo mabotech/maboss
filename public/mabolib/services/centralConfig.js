@@ -1,10 +1,11 @@
 'use strict';
 //uglifyjs centralConfig.js -b  --comments all 
  
-
-var centralConfig = function(module){
+var centralConfig = function(app){
     
-    module.config(['$builderProvider',function($builder) {
+    //console.log("central config");
+    
+    app.config(['$builderProvider',function($builder) {
     //  registerComponent
     return $builder.registerComponent("sampleInput", {
         group: "from html",
@@ -29,8 +30,6 @@ var centralConfig = function(module){
         popoverTemplateUrl: "/builder/app/components/c1/popoverTemplate.html"
     });
 }
-
-
 ]). config(['$builderProvider',function($builder) {
     //  registerComponent
     return $builder.registerComponent("select4", {

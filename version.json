@@ -1,4 +1,8 @@
 {
-    "version":"0.0.3",
-    "date":"2014-05-03"    
+    full: '0.0.3',
+    major: 0,
+    minor: 0,
+    dot: 3,
+    date: "2014-05-03",
+    codeName: 'seed'
 }
