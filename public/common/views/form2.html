@@ -1,0 +1,38 @@
+<!--   tidy -xml -i -utf8 -w 300  -->
+<!--  form view -->
+<div class="row">
+  <div class="col-md-8">
+    <div style="float:left;">{{table}} - id</div>
+    <div style="float:right;">
+      <input type="submit" class="btn btn-default" ng-click="submit()" value="Save" />
+      <input type="submit" class="btn btn-default" ng-click="refresh()" value="Refresh" />
+      <a class="btn btn-default" href="#/{{table}}.table">Data</a>
+    </div>
+  </div>
+</div>
+<!-- End row -->
+<div class="row">
+  <div class="col-md-8">
+    <tabset>
+      <tab heading="General">
+        <br />
+        <form class="form-horizontal">
+          <div ng-model="zmodel" fb-form="zform" fb-default="defaultValue"></div>
+          <div class="form-group">
+            <div class="col-md-8">
+              <!--  col-md-offset-4 -->
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="System">
+        <br />
+      </tab>
+            <tab heading="Debug">
+        <br />
+      </tab>
+    </tabset>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<!-- End row -->

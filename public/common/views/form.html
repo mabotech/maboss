@@ -1,11 +1,74 @@
+<!--   tidy -xml -i -utf8 -w 300  -->
 <!--  form view -->
 <div class="row">
-    <form class="form-horizontal">
-        <div ng-model="zmodel" fb-form="zform" fb-default="defaultValue"></div>
-        <div class="form-group">
-            <div class="col-md-8 col-md-offset-4">
-                <input type="submit" ng-click="submit()" class="btn btn-default"/>
-            </div>
-        </div>
-    </form>
+  <div class="col-md-8">
+    <div style="float:left;">{{table}} - id</div>
+    <div style="float:right;">
+      <input type="submit" class="btn btn-default" ng-click="submit()" value="Save" />
+      <input type="submit" class="btn btn-default" ng-click="refresh()" value="Refresh" />
+      <a class="btn btn-default" href="#/{{table}}.table">Data</a>
+    </div>
+  </div>
 </div>
+<!-- End row -->
+<div class="row">
+  <div class="col-md-8">
+    <tabset>
+      <tab heading="General">
+        <br />
+        <form class="form-horizontal">
+          <div ng-model="zmodel" fb-form="zform" fb-default="defaultValue"></div>
+          <div class="form-group">
+            <div class="col-md-8">
+              <!--  col-md-offset-4 -->
+            </div>
+          </div>
+        </form>
+      </tab>
+      <tab heading="System">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="id_modifiedon">Modified on:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="id_modifiedon" ng-model="system.modifiedon" readonly="readonly" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="id_modifiedby">Modified by:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="id_modifiedby" ng-model="system.modifiedby" readonly="readonly" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="id_createdon">Created on:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="id_createdon" ng-model="system.createdon" readonly="readonly" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="id_createdby">Created by:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="id_createdby" ng-model="system.createdby" readonly="readonly" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label" for="id_rowversion">Row version:</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" id="id_rowversion" ng-model="system.rowversion" readonly="readonly" />
+            </div>
+          </div>
+        </div>
+      </div>
+      </tab>
+        <tab heading="Text Translation">
+        <br />
+      </tab>
+            <tab heading="Debug">
+        <br />
+      </tab>
+    </tabset>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+<!-- End row -->

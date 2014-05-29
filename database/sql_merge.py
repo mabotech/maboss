@@ -13,7 +13,11 @@ def main():
     line = "/*============================================*/\n"
 
     for filename in sql_files:
-        print filename
+        
+        
+        if filename.count("diff.sql")==1:
+            print filename
+            continue
         
         with open(filename, 'r') as fileh:
             contents = "".join([contents , fileh.read() , ";\n",line])

@@ -5,7 +5,7 @@
   /*
    * Company form
    */
-  angular.module("maboss.CompanyFormCtrl", []).controller("CompanyFormCtrl", [
+  angular.module("fbpoc.CompanyFormCtrl", []).controller("CompanyFormCtrl", [
     "$scope", "$routeParams", "$log", "$builder", "$validator", "contextService", "dataService", "translationService", "helpers", function($scope, $routeParams, $log, $builder, $validator, contextService, dataService, translationService, helpers) {
       var get_kv, init, init_edit, init_select, name_pos, o_code_format_type, o_company, o_currencycode, o_domainmanagerid, o_objectclass, o_texths, obj_list, _t;
       $scope.table = "company";
@@ -76,7 +76,7 @@
       obj_list = [o_company, o_texths, o_currencycode, o_code_format_type, o_domainmanagerid, o_objectclass];
       init_edit = function() {
         var id;
-        id = $routeParams.id;
+        id = $routeParams;
         if (id) {
           return $scope.get();
         }
@@ -141,8 +141,6 @@
               $scope.system[col] = data[col]
        */
       $scope.get = function() {
-        var params;
-        params = {};
         dataService.get(params).then(function(data) {
           $log.debug(data);
           return $scope.defaultValue[0] = "abc";

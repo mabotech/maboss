@@ -77,6 +77,7 @@
       init_edit = function() {
         var id;
         id = $routeParams.id;
+          console.log(id);
         if (id) {
           return $scope.get();
         }
@@ -141,8 +142,9 @@
               $scope.system[col] = data[col]
        */
       $scope.get = function() {
-        var params;
-        params = {};
+        
+        var params= {};
+              
         dataService.get(params).then(function(data) {
           $log.debug(data);
           return $scope.defaultValue[0] = "abc";
