@@ -1,0 +1,29 @@
+
+<html>
+<head>
+  <title>Graph | DOT Language</title>
+
+  <script type="text/javascript" src="/components/vis/dist/vis.js"></script>
+</head>
+<body>
+<div id="mygraph"></div>
+
+<script type="text/javascript">
+  var container = document.getElementById('mygraph');
+  var data = {
+    dot: 'digraph { Company -> 2; 2 -> 3; 2 -- 4; 2 -> Company[color=red] }'
+  };
+  var graph = new vis.Graph(container, data);
+  
+  graph.on('select', onSelect);
+
+  
+  function onSelect (properties) {
+  console.log('selected nodes: ' + properties.nodes);
+}
+
+
+
+</script>
+</body>
+</html>
