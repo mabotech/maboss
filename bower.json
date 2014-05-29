@@ -16,7 +16,10 @@
         "angular-ui-utils":"*",
         "angular-bootstrap":"*",
         "angular-ui-select2":"*",
-
+      
+       "angular-form-builder":"",      
+       "state-machine":"*",
+      
         "select2":"*",
         "underscore":"*",
         "moment":"*",
