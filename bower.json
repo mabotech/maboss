@@ -9,12 +9,15 @@
   "dependencies": {
         "jquery":"*",
         "angular": "1.2.x",
+        "angular-route": "~1.2.x",       
+      
         "angular-mocks": "~1.2.x",
         "bootstrap": "~3.1.1",
         "font-awesome":"*",
-        "angular-route": "~1.2.x",
+
         "angular-ui-utils":"*",
         "angular-bootstrap":"*",
+       "angular-ui-router":"*",
         "angular-ui-select2":"*",
       
        "angular-form-builder":"",      
