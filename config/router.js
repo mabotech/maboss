@@ -3,11 +3,13 @@
  * router configuration
  */
  
-var Router = require('koa-router')
+//var Router = require('koa-router')
 
 var mount = require('koa-mount')
 
-var api = new Router();
+//var api = new Router();
+
+var router = require('../lib/router')
 
 // app
 var poc = require('../app/poc');
@@ -24,23 +26,25 @@ module.exports = {
          */
         app_mount : function (app){
             
-            api.get('/', portal.index);
+            router.get('/', portal.index);
 
-            api.post('/poc.test', poc.test);
+            router.post('/poc.test', poc.test);
 
-            api
-                .post('/fetch', dataset.fetch)
-                .post('/work', dataset.work);
+            router
+                .post('/fetch', dataset.fetch);
+            router.post('/work', dataset.work);
 
-            api
-                .post('/callproc.pgtime', callproc.pgtime)
-                .post('/callproc.call', callproc.call);
+            router
+                .post('/callproc.pgtime', callproc.pgtime);
+             router.post('/callproc.call', callproc.call);
 
-            api
-                .get('/datatables.call', datatables.call);
+            router.get('/datatables.call', datatables.call);
             
             //mount
-            app.use(mount('/api', api.middleware()));
+            var router_middleware = router.get_middleware();
+            app.use(mount('/api', router_middleware));
+            
+            //app.use(mount('/api', api.middleware()));
             
             //app.use(mount('/web', api.middleware()));
             

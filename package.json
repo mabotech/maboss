@@ -33,10 +33,12 @@
     "dependencies": {
         "koa": "*",
         "koa-route": "*",
+        "koa-router":"*",
         "koa-error": "*",
         "koa-session": "*",
         "koa-body": "*",
         "pg": "",
+        "pg.js": "",
         "koa-pg": "*",
         "winston": "*",
         "nconf": "*",
