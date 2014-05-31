@@ -3,13 +3,16 @@
  * router configuration
  */
  
-//var Router = require('koa-router')
+ var winston = require('winston');
+var logger = winston.loggers.get('router');
+ 
+var Router = require('koa-router')
 
 var mount = require('koa-mount')
 
-//var api = new Router();
 
-var router = require('../lib/router')
+
+//var router = require('../lib/router')
 
 // app
 var poc = require('../app/poc');
@@ -19,6 +22,8 @@ var callproc = require('../app/callproc');
 
 var datatables = require('../app/datatables');
 
+var api = new Router();
+
 module.exports = {
         
         /*
@@ -26,26 +31,34 @@ module.exports = {
          */
         app_mount : function (app){
             
-            router.get('/', portal.index);
+            api.get( '/', portal.index);
 
-            router.post('/poc.test', poc.test);
+            api.post( '/poc.test', poc.test);
 
-            router
-                .post('/fetch', dataset.fetch);
-            router.post('/work', dataset.work);
+            api
+                .post('/fetch', dataset.fetch)
+            .post( '/work', dataset.work);
 
-            router
-                .post('/callproc.pgtime', callproc.pgtime);
-             router.post('/callproc.call', callproc.call);
+            api
+                .post( '/callproc.pgtime', callproc.pgtime)
+             .post( '/callproc.call', callproc.call);
 
-            router.get('/datatables.call', datatables.call);
+            api.get( '/datatables.call', datatables.call);
             
             //mount
             //var router_middleware = router.get_middleware();
             
             //app.use(mount('/api', router_middleware));
-            app.use(router.mount_middleware('/api'))
-            //app.use(mount('/api', api.middleware()));
+            //app.use(router.mount_middleware(api, '/api'))
+            
+            
+            app.use(mount('/api', api.middleware()));
+            
+            var i=0;
+            for(i=0;i <api.routes.length; i++){
+                logger.debug(api.routes[i]);
+                
+            }
             
             //app.use(mount('/web', api.middleware()));
             
