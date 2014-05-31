@@ -41,9 +41,10 @@ module.exports = {
             router.get('/datatables.call', datatables.call);
             
             //mount
-            var router_middleware = router.get_middleware();
-            app.use(mount('/api', router_middleware));
+            //var router_middleware = router.get_middleware();
             
+            //app.use(mount('/api', router_middleware));
+            app.use(router.mount_middleware('/api'))
             //app.use(mount('/api', api.middleware()));
             
             //app.use(mount('/web', api.middleware()));
