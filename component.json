@@ -6,7 +6,8 @@
     "version": "0.0.1",
     "keywords": ["MES"],
     "dependencies": {
-        "FortAwesome/Font-Awesome": "*"
+        "FortAwesome/Font-Awesome": "*", 
+        "stacktracejs/stacktrace.js":"*"
     },
     "development": {},
     "license": "MIT"

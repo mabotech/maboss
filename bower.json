@@ -22,6 +22,8 @@
       
        "angular-form-builder":"",      
        "state-machine":"*",
+
+        "stacktrace.js":"*",
       
         "select2":"*",
         "underscore":"*",

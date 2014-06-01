@@ -6,6 +6,7 @@ backup/
 
 # contents in public/
 # js/css libs
+components/*
 public/libs/*
 public/bower_components/*
 public/components/*

@@ -37,6 +37,7 @@
         "koa-error": "*",
         "koa-session": "*",
         "koa-body": "*",
+        "stacktrace-js":"*",
         "pg": "",
         "pg.js": "",
         "koa-pg": "*",
