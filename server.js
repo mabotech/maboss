@@ -69,6 +69,23 @@ winston.loggers.add('app_debug', {
     }
 });
 
+// category: client
+winston.loggers.add('client', {
+    console: {
+        //silent:true,
+        level: 'debug',
+        //colorize: 'true',
+        label: 'client'
+    },
+    file: {
+        filename: 'logs/client.log',
+        level: 'debug',
+        json: false,
+        maxsize: 10240000,
+        maxFiles: 10
+    }
+});
+
 /*
  * category: performance logging
  */

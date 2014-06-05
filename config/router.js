@@ -20,6 +20,8 @@ var portal = require('../app/portal');
 var dataset = require('../app/dataset');
 var callproc = require('../app/callproc');
 
+var client = require('../app/client');
+
 var datatables = require('../app/datatables');
 
 var api = new Router();
@@ -44,6 +46,8 @@ module.exports = {
              .post( '/callproc.call', callproc.call);
 
             api.get( '/datatables.call', datatables.call);
+            
+            api.get( '/client.log', client.log);
             
             //mount
             //var router_middleware = router.get_middleware();
