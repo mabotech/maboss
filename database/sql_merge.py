@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 """
 merge sql scripts to one file.
@@ -27,7 +27,7 @@ def main():
         with open(filename, 'r') as fileh:
             contents = "".join([contents , fileh.read() , ";\n", line])
             
-    output = "pg_functions_%s.sql" % (strftime("%Y%m%d%H%M%S", localtime()))
+    output = "../working/pg_functions_%s.sql" % (strftime("%Y%m%d%H%M%S", localtime()))
 
     with open(output, 'w') as fileh:
         fileh.write(contents)

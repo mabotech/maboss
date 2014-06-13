@@ -16,6 +16,7 @@ public/maboss/*
 public/devoops/*
 
 # Runtime data
+working/*
 pids
 *.pid
 *.seed

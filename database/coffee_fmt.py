@@ -1,6 +1,4 @@
-
-
-
+# -*- coding: utf-8 -*-
 
 def clean(lines):
     new_lines = []
