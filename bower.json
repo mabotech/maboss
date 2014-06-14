@@ -8,6 +8,10 @@
   "private": true,
   "dependencies": {
         "jquery":"*",
+      
+        "json-editor":"*",
+        "socket.io":"*",
+      
         "angular": "1.2.x",
         "angular-route": "~1.2.x",       
       
@@ -23,8 +27,6 @@
        "angular-form-builder":"",      
        "state-machine":"*",
 
-        "stacktrace.js":"*",
-      
         "select2":"*",
         "underscore":"*",
         "moment":"*",

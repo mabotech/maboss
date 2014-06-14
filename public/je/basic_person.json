@@ -1,0 +1,43 @@
+{
+  "title": "Person",
+  "type": "object",
+  "id": "person",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "First and Last name",
+      "minLength": 4
+    },
+    "age": {
+      "type": "integer",
+      "default": 21,
+      "minimum": 18,
+      "maximum": 99
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "vtype":{
+      "type":"string",
+    "minLength":4
+    },
+        "vtype2":{
+      "type":"string",
+              "format":"datetime"
+
+    },
+        "vtype3":{
+      "type":"string",
+            "format":"date"
+
+    },
+        "vtype4":{
+      "type":"string",
+  "format":"color"
+    }
+  }
+}

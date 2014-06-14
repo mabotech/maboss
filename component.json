@@ -2,9 +2,9 @@
     "name": "maboss",
     "componentsDirectory": "public/components",
     "repo": "mabotech/maboss",
-    "description": "MES platform",
+    "description": "Web App platform",
     "version": "0.0.1",
-    "keywords": ["MES"],
+    "keywords": ["Web","App"],
     "dependencies": {
         "FortAwesome/Font-Awesome": "*", 
         "stacktracejs/stacktrace.js":"*"

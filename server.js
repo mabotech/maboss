@@ -1,3 +1,4 @@
+"use strict";
 /*
  * maboss server
  * version: 0.0.1
