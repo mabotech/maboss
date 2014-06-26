@@ -4,6 +4,9 @@
   angular.module("fbpoc.CompanyFormCtrl", []).controller("CompanyFormCtrl", [
     "$scope", "$routeParams", "$log", "$builder", "$validator", "sessionService", "dataService", function($scope, $routeParams, $log, $builder, $validator, sessionService, dataService) {
       var get_kv, init, init_select, name_pos, o_code_format_type, o_company, o_currencycode, o_domainmanagerid, o_objectclass, o_texths, obj_list, set_sysdata;
+        
+        $("div.fb-builder").popover('hide');
+        
       $scope.table = "company";
       $scope.system = {
         modifiedon: null,

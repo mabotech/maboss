@@ -27,7 +27,7 @@
     },
         "vtype2":{
       "type":"string",
-              "format":"datetime"
+              "format":"datetime-local"
 
     },
         "vtype3":{
