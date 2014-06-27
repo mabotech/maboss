@@ -209,75 +209,61 @@ app.use(function *(next){
 //
 app.use(session());
 
-// authentication
-require('./config/auth')
+//---
 
+// body parser
+var bodyParser = require('koa-bodyparser')
+app.use(bodyParser())
+
+// authentication
+require('./auth')
 var passport = require('koa-passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
-// public routes
-var Router = require('koa-router')
-
-var pub = new Router()
-
-pub.get('/', function*() {
-  this.body = {"redirect":"/api/login"};//yield this.render('login')
-})
-
-pub.post('/custom', function*(next) {
-  var ctx = this
-  yield passport.authenticate('local', function*(err, user, info) {
-    if (err) throw err
-    if (user === false) {
-      ctx.status = 401
-      ctx.body = { success: false }
-    } else {
-      yield ctx.login(user)
-      ctx.body = { success: true }
-    }
-  }).call(this, next)
-})
-
-var LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(function(username, password, done) {
-  // retrieve user ...
-  if (username === 'test' && password === 'test') {
-    done(null, user)
-  } else {
-    done(null, false)
-  }
+// append view renderer
+var views = require('koa-render')
+app.use(views('./views', {
+  map: { html: 'handlebars' },
+  cache: false
 }))
 
+// public_area routes
+var Router = require('koa-router')
+
+var public_area = new Router()
+
+public_area.get('/api/abc', function*() {
+  this.body = yield this.render('login')
+})
+
 // POST /login
-pub.post('/api/login',
+public_area.post('/api/login',
   passport.authenticate('local', {
-    successRedirect: '/app',
-    failureRedirect: '/'
+    successRedirect: '/maboss',
+    failureRedirect: '/api/abc'
   })
 )
 
-pub.get('/api/logout', function*(next) {
+public_area.get('/logout', function*(next) {
   this.logout()
   this.redirect('/')
 })
 
-app.use(pub.middleware())
+
+
+app.use(public_area.middleware())
 
 // Require authentication for now
 app.use(function*(next) {
   if (this.isAuthenticated()) {
-    logger.debug("authenticated")
     yield next
   } else {
-      logger.debug("not authenbticated")
-    
-       this.throw(401);
-   
-      //this.redirect('/')
+    this.redirect('/')
   }
 })
+
+//---
 
 /*
  * init
