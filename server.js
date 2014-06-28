@@ -150,7 +150,7 @@ nconf.file('config/config.json');
 
 //var route = require('./config/route');
 
-var router = require('./config/router');
+var config_router = require('./config/router');
 
 var app = koa();
 
@@ -209,59 +209,14 @@ app.use(function *(next){
 //
 app.use(session());
 
+var config_login = require("./config/login");
+
+//login
+app = config_login.login_mount(app);
+
 //---
 
 // body parser
-var bodyParser = require('koa-bodyparser')
-app.use(bodyParser())
-
-// authentication
-require('./auth')
-var passport = require('koa-passport')
-app.use(passport.initialize())
-app.use(passport.session())
-
-// append view renderer
-var views = require('koa-render')
-app.use(views('./views', {
-  map: { html: 'handlebars' },
-  cache: false
-}))
-
-// public_area routes
-var Router = require('koa-router')
-
-var public_area = new Router()
-
-public_area.get('/api/abc', function*() {
-  this.body = yield this.render('login')
-})
-
-// POST /login
-public_area.post('/api/login',
-  passport.authenticate('local', {
-    successRedirect: '/maboss',
-    failureRedirect: '/api/abc'
-  })
-)
-
-public_area.get('/logout', function*(next) {
-  this.logout()
-  this.redirect('/')
-})
-
-
-
-app.use(public_area.middleware())
-
-// Require authentication for now
-app.use(function*(next) {
-  if (this.isAuthenticated()) {
-    yield next
-  } else {
-    this.redirect('/')
-  }
-})
 
 //---
 
@@ -388,6 +343,7 @@ app.use(function * (next) {
     
     
     logger.debug("info", this.res._headers)
+    var k;
     for(k in Object.keys(this)){
         
      //   logger.debug("info",k );    
@@ -413,7 +369,8 @@ app.use(function * (next) {
         */
         //logger.debug("error",Object.keys(this));
     
-    } else if (this.path == '/api/datatables.call'){
+    } 
+    /*else if (this.path == '/api/datatables.call'){
         var data;
         if(this.body.rows){
                 data = this.body.rows   
@@ -429,7 +386,9 @@ app.use(function * (next) {
               "data":data         
             };
         
-    }else {
+    }
+    */
+    else {
 
         //make jsonrpc reply.
         this.body = {
@@ -448,7 +407,7 @@ app.use(function * (next) {
 //app = route.add(app);
 
 //mount Router
-app = router.app_mount(app);
+app = config_router.app_mount(app);
 
 /*
 app.use(router(app));
