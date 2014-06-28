@@ -291,13 +291,7 @@ app.use(function * (next) {
     //this.throw("test throw", 500);
 
     var n = this.session.views || 0;
-    logger.debug("performance");
-    var k;
-    logger.debug( JSON.stringify(this.session.passport));
-    
-    for(k in this.session.passport){
-    logger.debug("session:", k);
-    }
+
     this.session.views = ++n;
 
     if (this.session.views < 1) {

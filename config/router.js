@@ -1,9 +1,9 @@
-
+"use strict";
 /*
  * router configuration
  */
  
- var winston = require('winston');
+var winston = require('winston');
 var logger = winston.loggers.get('router');
  
 var Router = require('koa-router')
@@ -15,10 +15,14 @@ var mount = require('koa-mount')
 //var router = require('../lib/router')
 
 // app
+var register = require('../lib/register');
+
+var callproc = require('../lib/callproc');
+
 var poc = require('../app/poc');
 var portal = require('../app/portal');
 var dataset = require('../app/dataset');
-var callproc = require('../app/callproc');
+
 
 var client = require('../app/client');
 
@@ -47,7 +51,7 @@ module.exports = {
 
             api.get( '/datatables.call', datatables.call);
             
-            api.get( '/client.log', client.log);
+            api.post( '/client.log', client.log);
             
             //mount
             //var router_middleware = router.get_middleware();
@@ -55,14 +59,19 @@ module.exports = {
             //app.use(mount('/api', router_middleware));
             //app.use(router.mount_middleware(api, '/api'))
             
+            var url_prefix = '/api'
+            app.use(mount(url_prefix, api.middleware()));
             
-            app.use(mount('/api', api.middleware()));
-            
-            var i=0;
-            for(i=0;i <api.routes.length; i++){
-                logger.debug(api.routes[i]);
-                
-            }
+            register.register_url(url_prefix, api);
+            /*
+                var i=0;
+                for(i=0;i <api.routes.length; i++){
+                    var path = api.routes[i].path;
+                    var methods = api.routes[i].methods;
+                    logger.debug(url_prefix,path , methods);
+                    
+                }
+                */
             
             //app.use(mount('/web', api.middleware()));
             
