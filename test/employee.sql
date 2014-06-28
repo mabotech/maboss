@@ -1,0 +1,1 @@
+select mt_employee_login_cs1 as result from mt_employee_login_cs1('mabo','pw');

@@ -55,6 +55,7 @@ maboss directory:
 - AngularJSx
 - [hackathon-starter](https://github.com/sahat/hackathon-starter "hackathon-starter")
 - [x-editable](http://vitalets.github.io/x-editable/ "x-editable") 
+- [mabotree](https://github.com/mabotech/mabotree)
 
 Open source components: 
 
@@ -62,6 +63,7 @@ Open source components:
 - PostgreSQL, PLV8
 - Redis
 - ...
+
 
 
 License
