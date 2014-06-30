@@ -150,7 +150,8 @@ nconf.file('config/config.json');
 
 //var route = require('./config/route');
 
-var config_router = require('./config/router');
+var config_login = require("./routes/login");
+var config_router = require('./routes/router');
 
 var app = koa();
 
@@ -221,10 +222,6 @@ app.use(function * (next) {
 //
 app.use(session());
 
-var config_login = require("./config/login");
-
-//login
-app = config_login.login_mount(app);
 
 //---
 
@@ -237,7 +234,10 @@ app = config_login.login_mount(app);
  */
 
 var con_string = nconf.get('db').con_string;
+
 app.use(koaPg(con_string));
+
+
 
 /*
  * body parse
@@ -373,6 +373,9 @@ app.use(function * (next) {
     }
 
 });
+
+//login
+app = config_login.login_mount(app);
 
 //mount Router
 app = config_router.app_mount(app);

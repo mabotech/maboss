@@ -45,10 +45,12 @@ module.exports = {
 
         //app.use(public_.middleware());
         
-                    var url_prefix = '/api'
+            var url_prefix = '/api'
             app.use(mount(url_prefix, public_.middleware()));
-            
-            register.register_url(url_prefix, public_);
+        
+            logger.debug("app.pg:", this);
+        
+           // register.register_url(url_prefix, public_);
 
         // Require authentication for now
         app.use(function * (next) {           

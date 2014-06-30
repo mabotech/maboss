@@ -47,7 +47,7 @@ module.exports = {
 
             api
                 .post( '/callproc.pgtime', callproc.pgtime)
-             .post( '/callproc.call', callproc.call);
+             .post( '/callproc.call', callproc.wcall);//for web call
 
             api.get( '/datatables.call', datatables.call);
             
@@ -62,7 +62,7 @@ module.exports = {
             var url_prefix = '/api'
             app.use(mount(url_prefix, api.middleware()));
             
-            register.register_url(url_prefix, api);
+            //register.register_url(url_prefix, api);
             /*
                 var i=0;
                 for(i=0;i <api.routes.length; i++){
