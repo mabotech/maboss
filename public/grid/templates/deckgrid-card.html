@@ -12,15 +12,20 @@
 
         <div class="photo-wrapper">
                   
-        <span> &nbsp;&nbsp;{{card.id}}</span>
+        <span class="card-name"> &nbsp;&nbsp;{{card.id}}</span>
             <img src="" data-ng-src="{{card.src}}" class="animation-fade" data-imageloaded data-loadedclass="animation-faded">
         </div>
 
 
         <div class="photo-description">
-            <span>{{card.name}}</span> 
-        <p>{{card.data}}%<br/>
-        {{card.downtime}}</p>
+            <span class="card-name">{{card.name}}</span> 
+         <br/>
+   
+        <span class="card-name">{{card.data}}%</span> <br/>
+        <span class="card-name">{{card.downtime}}</span> 
+         <div style="background-color:{{card.color2}};text-align:center;">
+     {{card.status2}}
+            </div>
             <div style="background-color:{{card.color}};text-align:center;">
             {{card.status}} [{{card.runtime}}] 
             </div>

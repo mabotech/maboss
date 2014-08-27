@@ -12,9 +12,10 @@
  */
 
 body {
-    background:rgba(0, 0, 0, .04);
+    background:#161616; /*rgba(0, 0, 0, .04);*/
     font-family: 'Open Sans', sans-serif;
     padding-bottom:50px;
+   
 }
 
 a {
@@ -141,7 +142,65 @@ img {
     width:100%;
 }
 
+/* majj */
+
+.logo{
+  float:left; 
+  width:158px;
+  height:50px;
+  margin-left:15px;
+ /* position:relative; */
+  background: #525252 url(foton2.png) 0 0 ; 
+}
+
+.topL{
+ float:left;
+  font-size:138%;
+    padding:10px;
+    color:#FFF;
+    
+}
+
+.topR{
+ float:left;
+ padding:10px;
+ color:#FFF;
+}
+
+.rate_label {
+/*background:#c11cc1;*/
+ margin:10px;   
+  text-align:center;
+  font-size:138%;
+    padding:10px;
+    color:#FFF;
+}
+
+.lbl{
+
+ float:left;
+ margin:10px;   
+  text-align:center;
+  font-size:200%;
+    padding:10px;
+    color:#FFF;
+
+}
+
+
+.rate {
+ float:left;
+
+background:#EEE;
+ margin:7px;   
+  text-align:center;
+  font-size:200%;
+    padding:7px;
+    color:#2ECC40;
+}
+
 .deckgrid {
+ /*   background:#ccc ; */
     margin:10px;  /* 100, auto; majj */
     padding:10px;
     width:1500px;
@@ -158,7 +217,8 @@ img {
 }
 
 .photo {
-    background:#fff url(images/spinner.gif) center 30px no-repeat;
+    background:#444 url(images/spinner.gif) center 30px no-repeat;
+    color:#fff;
     border:1px solid rgba(0, 0, 0, .15);
     border-radius:3px;
     margin:0 10px 10px 0;
@@ -166,7 +226,7 @@ img {
 }
 
 .photo .photo-index {
-    background:rgba(0, 0, 0, .5);
+    background:rgba(0, 0, 0, .9);
     color:#fff;
     font-size:130%;
     position:absolute;
@@ -186,6 +246,11 @@ img {
 
 .photo .photo-description {
     padding:15px;
+     color:#FFF;
+}
+
+.card-name {
+     color:#FFF;
 }
 
 

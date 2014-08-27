@@ -2,27 +2,61 @@
 <!doctype html>
 <html>
     <head>
-        <title>angular-deckgrid</title>
+        <title>Monitor</title>
         <meta charset="utf-8">
         <meta name="viewport" content="user-scalable=no, width=device-width, minimum-scale=1, maximum-scale=1">
 
         <!--link href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
         <link href="styles/hint.css" rel="stylesheet" type="text/css"-->
-
+ <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/main.css">
     </head>
     <body data-ng-app="kanban.deckgrid">
+    
    <div ng-controller="HomeController">
-        <div class="container" data-ng-view>
-       
+   <div class="row">
+   	<div class="logo col-md-1"> </div>
+   	<div class="topL col-md-6">试验中心设备实时监控</div>
+   	<div  class="topR col-md-3">{{current_time}}
+    <a href="/kanban" class="btn  btn-default">KANBAN</a>
+    </div>
+   </div>
+   
+        <!--div class="container"-->
+       <div class="row">
+       <div class="col-md-9" data-ng-view></div>
+        <div class="col-md-3">
+          
+            </div>
+            
+       </div>
+      
+        
+        <div class="row">
+            <div class="col-md-8">
+            <flot dataset="dataset" options="options" height="160px"></flot>
+            
+            <flot dataset="dataset" options="options2" height="160px"></flot>
+            
+            </div>
+            <div class="col-md-2" >
+            
+			<div class="row"><div class="rate">27.1%</div><div class="lbl">当日</div></div>
+			<div class="row"><div class="rate">32.5%</div><div class="lbl">2日</div></div>
+			<div class="row"><div class="rate">63.7%</div><div class="lbl">4日</div></div>
+			<div class="row"><div class="rate">44.3%</div><div class="lbl">7日</div></div>      
+ <div class="rate_label">Utilization</div>            
+            </div>
         </div>
-         
-        <flot dataset="dataset" options="options" width="1000px" height="380px"></flot>
+          <!--/div-->
     </div>
  
         <!--script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script-->
         <script src="/components/flot/jquery.js"></script>
+        
+        <script src="/components/moment/min/moment.min.js"></script>
+        
         <script src="/components/flot/jquery.flot.js"></script>
         <script src="/components/flot/jquery.flot.stack.js"></script>
         <script src="/components/flot/jquery.flot.resize.js"></script>
