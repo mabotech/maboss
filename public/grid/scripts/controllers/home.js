@@ -36,6 +36,13 @@ angular.module('kanban.deckgrid').controller('HomeController', [
                 
                 
            $scope.dataset = [{ data: [], yaxis: 1 },{ data: [], yaxis:1 },{ data: [], yaxis: 1 },{ data: [], yaxis:1 },{ data: [], yaxis:1 }];
+               
+            $scope.dataset2 = [
+                    { label:"故障",data: [], yaxis: 1,color:"#FF4136" },
+                    { label:"闲置",data: [], yaxis:1,color:"#FFDC00" },
+                    { label:"维护",data: [], yaxis: 1 ,color:"#B10DC9" },
+                    { label:"运行",data: [], yaxis:1,color:"#2ECC40"  },
+                    {label:"休息", data: [], yaxis:1 ,color:"#0074D9" }];
           
           var stack = 0,
 			bars = false,
@@ -102,13 +109,13 @@ angular.module('kanban.deckgrid').controller('HomeController', [
 					stack: stack,
                  
 					lines: {
-						show: false,
-						fill: true,
+						show: true,
+						fill: false,
                         fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.9 } ] },
 						steps: steps
 					},
 					bars: {
-						show: true,
+						show: false,
                          lineWidth: 1,
                         fill: true,
                           fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.9 } ] },
@@ -136,11 +143,11 @@ angular.module('kanban.deckgrid').controller('HomeController', [
         function update(){
             
             $scope.dataset = [
-                    { label:"故障",data: [], yaxis: 1,color:"#FF4136" },
-                    { label:"闲置",data: [], yaxis:1,color:"#FFDC00" },
-                    { label:"维护",data: [], yaxis: 1 ,color:"#B10DC9" },
-                    { label:"运行",data: [], yaxis:1,color:"#2ECC40"  },
-                    {label:"休息", data: [], yaxis:1 ,color:"#0074D9" }];
+                    { label:"故障",data: [], yaxis: 1 },
+                    { label:"闲置",data: [], yaxis:1},
+                    { label:"维护",data: [], yaxis: 1  },
+                    { label:"运行",data: [], yaxis:1  },
+                    {label:"占用", data: [], yaxis:1 }];
             
           for (var i = 0; i < 10; i += 1) {
             // console.log(i);
@@ -154,7 +161,31 @@ angular.module('kanban.deckgrid').controller('HomeController', [
                 $scope.dataset[3].data.push([i, v4]);
               
             //   $scope.dataset[4].data.push([i, 3.5-v1-v2-v3-v4]);
-          }                
+          }        
+
+
+           $scope.dataset2 = [
+                    { label:"故障",data: [], yaxis: 1,color:"#FF4136" },
+                    { label:"闲置",data: [], yaxis:1,color:"#FFDC00" },
+                    { label:"维护",data: [], yaxis: 1 ,color:"#B10DC9" },
+                    { label:"运行",data: [], yaxis:1,color:"#2ECC40"  },
+                    {label:"占用", data: [], yaxis:1 ,color:"#0074D9" }];
+            
+          for (var i = 0; i < 10; i += 1) {
+            // console.log(i);
+              var v1 = Math.abs(Math.sin( Math.random(i)))
+                $scope.dataset2[0].data.push([i, v1]);
+              var v2 = Math.abs(Math.sin(i+Math.random(1)))
+                $scope.dataset2[1].data.push([i, v2]);
+              var v3 =  Math.abs(Math.sin(i+1+Math.random(2)))
+                $scope.dataset2[2].data.push([i,v3]);
+              var v4 = Math.abs(Math.sin(i+2+Math.random(3)))
+                $scope.dataset2[3].data.push([i, v4]);
+              
+            //   $scope.dataset[4].data.push([i, 3.5-v1-v2-v3-v4]);
+          }      
+
+          
                 $scope.$apply(  )
          // plot.draw()
           //console.log(1);
