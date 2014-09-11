@@ -1,0 +1,64 @@
+{
+    "schema": {
+        "type": "object",
+        "title": "Comment",
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string"
+            },
+            "color": {
+                "title": "颜色",
+                "type": "string",
+                "format": "color"
+            },
+            "date": {
+                "title": "Date",
+                "type": "string",
+                "format": "date"
+
+            },
+            "email": {
+                "title": "Email",
+                "type": "string",
+                "default": "abc@123.com",
+                "pattern": "^\\S+@\\S+$",
+                "description": "Email will be used for evil."
+            },
+            "comment": {
+                "title": "Comment[readonly]",
+                "type": "string",
+                "readonly": true,
+                "default": "abc123",
+                "maxLength": 20,
+                "validationMessage": "Don't be greedy!"
+            }
+        },
+        "required": ["name", "email", "comment"]
+    },
+    "form": [
+        "name",
+
+        {
+            "key": "color",
+            "colorFormat": "hex"
+        },
+
+        {
+            "key": "date",
+            "minDate": "2014-01-01"
+
+
+        }, {
+            "key": "email",
+            "type": "string"
+        }, {
+            "key": "comment",
+            "type": "color"
+        }, {
+            "type": "submit",
+            "style": "btn-info",
+            "title": "OK"
+        }
+    ]
+}
