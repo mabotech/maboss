@@ -1,0 +1,17 @@
+
+  body,html {
+    min-height: 1400px;
+  }
+
+  .alert .form-group {
+    margin-bottom: 0px;
+  }
+
+  .red {
+    border: 1px solid red;
+    background: #fee;
+  }
+
+  .ace_editor { font-size: 20px !important;}
+  .form {  height: 400px;  }
+  .schema {  height: 800px;  }
