@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Bootstrap Schema Form example</title>
+  <title>Edit - SF</title>
   <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="/components/pickadate/lib/themes/classic.css">
@@ -11,12 +11,12 @@
   <link rel="stylesheet" href="/components/spectrum/spectrum.css">
   <link rel="stylesheet" href="schema.css">
 </head>
-<body ng-app="test" ng-controller="TestCtrl">
+<body ng-app="test" ng-controller="EditCtrl">
 
 <div class="col-md-12">
   <h1>Schema Form Example</h1>
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <h3>The Generated Form</h3>
       <form name="ngform"  sf-model="modelData" sf-form="form" sf-schema="schema" ng-submit="submitForm(ngform,modelData)"></form>
       <h3>Model</h3>
@@ -68,6 +68,6 @@
 
 <script type="text/javascript" src="/components/angular-schema-form-colorpicker/bootstrap-colorpicker.min.js"></script>
 
-<script type="text/javascript" src="testCtrl.js"></script>
+<script type="text/javascript" src="editCtrl.js"></script>
 </body>
 </html>

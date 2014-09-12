@@ -26,6 +26,8 @@
     "angular-ui-sortable": "*",
     "angular-form-builder": "",
       "bootstrap-vertical-tabs":"*",
+      "html5-boilerplate":"*",
+      "modernizr":"*",
     "state-machine": "*",
     "select2": "*",
     "underscore": "*",
