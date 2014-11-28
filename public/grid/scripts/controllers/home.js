@@ -21,13 +21,16 @@ angular.module('kanban.deckgrid').controller('HomeController', [
         'use strict';
 
         $scope.photos = [
-                {id: '00045', name: '耐久 1', src: '/grid/p1.png',status:"故障",color:"#FF4136",data:"35",downtime:"0.1",runtime:"0:20",color2:"#FF4136",status2:"."},
-                {id: '00046', name: '耐久 2', src: '/grid/p1.png',status:"运行",color:"#00FF00",data:"76",downtime:"0.2",runtime:"1:10",color2:"#00FF00",status2:"."},
-                {id: '00093', name: '耐久 3', src: '/grid/p1.png',status:"闲置",color:"#FFF000",data:"53",downtime:"0.3",runtime:"0:25",color2:"#FFF000",status2:"."},
-                {id: '00096', name: '重鼓 1', src: '/grid/p3.png',status:"占用",color:"#39CCCC",data:"27",downtime:"0.2",runtime:"1:52",color2:"#F012BE",status2:"车辆维护"},
-                {id: '00094', name: '排放 1', src: '/grid/p1.png',status:"维护",color:"#FF00FF",data:"56",downtime:"0.4",runtime:"0:10",color2:"#FF00FF",status2:"."},
-                {id: '00090', name: '高低温 1', src: '/grid/p2.png',status:"运行",color:"#00FF00",data:"67",downtime:"0.5",runtime:"0:20",color2:"#00FF00",status2:"."},
-                {id: '00097', name: '四驱转鼓 1', src: '/grid/p5.png',status:"闲置",color:"#FFFF00",data:"55",downtime:"0.1",runtime:"1:26",color2:"#FFFF00",status2:"."},
+                {id: '耐久试验室-#1', name: '耐久 1', src: '/grid/p1.png',status:"故障",color:"#FF4136",data:"35",downtime:"0.1",runtime:"0:20",color2:"#FF4136",status2:"."},
+                {id: '耐久试验室-#2', name: '耐久 2', src: '/grid/p1.png',status:"运行",color:"#00FF00",data:"76",downtime:"0.2",runtime:"1:10",color2:"#00FF00",status2:"."},
+                {id: '耐久试验室-#3', name: '耐久 3', src: '/grid/p1.png',status:"闲置",color:"#FFF000",data:"53",downtime:"0.3",runtime:"0:25",color2:"#FFF000",status2:"."},
+                {id: '性能试验室', name: '重鼓 1', src: '/grid/p3.png',status:"占用",color:"#39CCCC",data:"27",downtime:"0.2",runtime:"1:52",color2:"#F012BE",status2:"车辆维护"},
+                {id: '环境试验室-1', name: '常温 1', src: '/grid/p2.png',status:"运行",color:"#00FF00",data:"67",downtime:"0.5",runtime:"0:20",color2:"#00FF00",status2:"."},
+                {id: '环境试验室-2', name: '高低温 1', src: '/grid/p2.png',status:"运行",color:"#00FF00",data:"67",downtime:"0.5",runtime:"0:20",color2:"#00FF00",status2:"."},
+                {id: '环境试验室-3', name: '排放 1', src: '/grid/p1.png',status:"维护",color:"#FF00FF",data:"56",downtime:"0.4",runtime:"0:10",color2:"#FF00FF",status2:"."},
+
+                {id: '高温四驱', name: '四驱转鼓 1', src: '/grid/p5.png',status:"闲置",color:"#FFFF00",data:"55",downtime:"0.1",runtime:"1:26",color2:"#FFFF00",status2:"."},
+
           //       {id: 'e-8', name: '四驱转鼓 2', src: '/grid/p5.png',status:"闲置",color:"#FFFF00",data:"37",downtime:"0.6",runtime:"3:05"},
             //    {id: 'photo-7', name: '', src: '/grid/p6.png'},
               //  {id: 'photo-6', name: 'Awesome photo', src: '/grid/p1.png'},
@@ -42,7 +45,8 @@ angular.module('kanban.deckgrid').controller('HomeController', [
                     { label:"闲置",data: [], yaxis:1,color:"#FFDC00" },
                     { label:"维护",data: [], yaxis: 1 ,color:"#B10DC9" },
                     { label:"运行",data: [], yaxis:1,color:"#2ECC40"  },
-                    {label:"休息", data: [], yaxis:1 ,color:"#0074D9" }];
+                      { label:"占位",data: [], yaxis:1,color:"#2ECC40"  },
+                    {label:"待机", data: [], yaxis:1 ,color:"#0074D9" }];
           
           var stack = 0,
 			bars = false,
@@ -144,10 +148,12 @@ angular.module('kanban.deckgrid').controller('HomeController', [
             
             $scope.dataset = [
                     { label:"故障",data: [], yaxis: 1 },
-                    { label:"闲置",data: [], yaxis:1},
+                    { label:"停用",data: [], yaxis:1},
                     { label:"维护",data: [], yaxis: 1  },
                     { label:"运行",data: [], yaxis:1  },
-                    {label:"占用", data: [], yaxis:1 }];
+                      { label:"故障",data: [], yaxis:1  },
+                    {label:"占用", data: [], yaxis:1 },
+                     {label:"待机", data: [], yaxis:1 }];
             
           for (var i = 0; i < 10; i += 1) {
             // console.log(i);
@@ -166,10 +172,12 @@ angular.module('kanban.deckgrid').controller('HomeController', [
 
            $scope.dataset2 = [
                     { label:"故障",data: [], yaxis: 1,color:"#FF4136" },
-                    { label:"闲置",data: [], yaxis:1,color:"#FFDC00" },
+                    { label:"停用",data: [], yaxis:1,color:"#FFDC00" },
                     { label:"维护",data: [], yaxis: 1 ,color:"#B10DC9" },
                     { label:"运行",data: [], yaxis:1,color:"#2ECC40"  },
-                    {label:"占用", data: [], yaxis:1 ,color:"#0074D9" }];
+                    { label:"故障",data: [], yaxis:1,color:"#2ECC40"  },
+                    { label:"占用",data: [], yaxis:1,color:"#2ECC40"  },
+                    {label:"待机", data: [], yaxis:1 ,color:"#0074D9" }];
             
           for (var i = 0; i < 10; i += 1) {
             // console.log(i);

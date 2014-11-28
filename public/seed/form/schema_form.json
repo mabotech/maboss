@@ -7,6 +7,10 @@
                 "title": "Name",
                 "type": "string"
             },
+            "title": {
+                "type": "string",
+                "enum": []
+              },
             "color": {
                 "title": "颜色",
                 "type": "string",
@@ -38,7 +42,10 @@
     },
     "form": [
         "name",
-
+        {"key":"title"
+         
+            
+            },
         {
             "key": "date",
             "minDate": "2014-01-01"
