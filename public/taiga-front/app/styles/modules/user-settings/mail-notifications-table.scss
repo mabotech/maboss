@@ -1,0 +1,49 @@
+.policy-table {
+    .policy-table-row {
+        @include table-flex(stretch, center, flex, row, wrap, center);
+        border-bottom: 1px solid $whitish;
+    }
+
+    .policy-table-header {
+        @extend %bold;
+        border-bottom: 2px solid $gray-light;
+    }
+
+    .policy-table-project ,
+    .policy-table-all,
+    .policy-table-involved,
+    .policy-table-none {
+        padding: 1rem;
+    }
+
+    .policy-table-project {
+        @include table-flex-child(3, 0, 0);
+    }
+
+    .policy-table-all,
+    .policy-table-involved,
+    .policy-table-none {
+        @include table-flex-child(1, 0, 0);
+    }
+    input {
+        display: none;
+        &:checked {
+            +label {
+                @include transition(background .3s linear);
+                background: $green-taiga;
+            }
+        }
+    }
+    label {
+        background: $gray-light;
+        border-radius: 5px;
+        color: $white;
+        display: block;
+        padding: .5rem;
+        &:hover {
+            @include transition(background .3s linear);
+            background: $fresh-taiga;
+            cursor: pointer;
+        }
+    }
+}

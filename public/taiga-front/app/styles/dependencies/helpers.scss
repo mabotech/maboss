@@ -1,0 +1,108 @@
+//Flexbox FTW
+%table-flex {
+    align-content: stretch;
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+%table-flex-child {
+    flex-basis: 300px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 300px;
+}
+
+
+// __Font Sizes__ //
+%xsmall {font-size: .5rem;}
+%small {font-size: .8rem;}
+%medium {font-size: 1rem;}
+%large {font-size: 1.2rem;}
+%larger {font-size: 1.6rem;}
+%xlarge {font-size: 2rem;}
+%xxlarge {font-size: 3rem;}
+
+// __Font Types__ //
+%title {font-family: 'OpenSans-CondLight', Arial, Helvetica, sans-serif;}
+%text {font-family: 'opensans-regular', Arial, Helvetica, sans-serif; line-height: 1.3rem;}
+%bold {font-family: 'opensans-semibold', Arial, Helvetica, sans-serif;}
+%taiga {font-family: 'taiga';}
+
+%lightbox {
+    background: rgba($white, .95);
+    bottom: 0;
+    display: none;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99910;
+    .close {
+        @extend %large;
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+    }
+    &.open {
+        @include table-flex(center, center, flex, row, wrap, center);
+        @include transition (opacity .3s ease);
+        opacity: 1;
+    }
+    &.close {
+        @include transition (opacity .3s ease);
+        opacity: 0;
+    }
+    .title {
+        text-align: center;
+    }
+    input,
+    textarea,
+    select {
+        margin-bottom: 1rem;
+    }
+    textarea {
+        resize: vertical;
+    }
+    .button-green,
+    .button-gray {
+        display: block;
+        padding: 12px;
+        text-align: center;
+    }
+}
+
+%button {
+    @extend %medium;
+    @extend %title;
+    @include transition (background .3s linear);
+    display: inline-block;
+    padding: 7px 40px 6px;
+    text-transform: uppercase;
+    &:hover {
+        @include transition (background .3s linear);
+    }
+    &.loading {
+        span {
+            @include animation (loading .5s linear);
+            @include animation (spin 1s linear infinite);
+        }
+    }
+    .icon {
+        margin-right: .3rem;
+    }
+}
+
+// Background
+%triangled-bg {
+    background: url('/images/bg.png') no-repeat center center;
+    background-size: cover;
+}
+
+%background-taiga {
+    background: url('/images/invitation_bg.jpg') no-repeat center center;
+    background-size: cover;
+}

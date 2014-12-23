@@ -1,0 +1,120 @@
+.invitation-main {
+    @extend %background-taiga;
+    @include table-flex(center, center, flex, row, wrap, center);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    .invitation-container {
+        @include table-flex-child(0, 650px, 0, 650px);
+    }
+    .logo {
+        margin: 1rem auto;
+        width: 150px;
+    }
+    .avatar {
+        margin: 0 auto 1rem;
+        text-align: center;
+        width: 250px;
+        .person-name {
+            @extend %xlarge;
+            @extend %title;
+            color: $white;
+            text-transform: uppercase;
+        }
+        img {
+            display: block;
+            text-align: center;
+            width: 50px;
+        }
+    }
+    .invitation-text {
+        @extend %xlarge;
+        @extend %title;
+        color: $white;
+        line-height: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+        .project-name {
+            @extend %xxlarge;
+            display: block;
+        }
+    }
+    .invitation-form {
+        @include table-flex();
+        fieldset {
+            margin-bottom: .5rem;
+        }
+        input {
+            background: $white;
+            color: $gray;
+            position: relative;
+            @include placeholder {
+                color: $gray-light;
+            }
+        }
+        input:focus {
+            +.forgot-pass {
+                @include transition(opacity .5s linear);
+                opacity: 0;
+            }
+        }
+        .forgot-pass {
+            @extend %small;
+            @include transition(all .3s linear);
+            color: $gray-light;
+            opacity: 1;
+            position: absolute;
+            right: 1rem;
+            top: .5rem;
+            &:hover {
+                @include transition(color .3s linear);
+                color: $grayer;
+            }
+        }
+        .button {
+            color: $white;
+            display: block;
+            text-align: center;
+            &:hover {
+                background: $fresh-taiga;
+            }
+        }
+        .button-github {
+            &:hover {
+                background: $black;
+            }
+        }
+    }
+    .login-form,
+    .register-form {
+        @include table-flex-child(1, 200px, 0, 200px);
+        padding: 1rem;
+        text-align: center;
+        .form-header {
+            color: #999;
+        }
+    }
+    .register-form {
+        fieldset {
+            &:last-child {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+    .register-text {
+        @extend %small;
+        color: $white;
+        a {
+            color: $green-taiga;
+            &:hover {
+                color: $fresh-taiga;
+            }
+        }
+    }
+    .login-form {
+        border-right: 1px solid $white;
+    }
+}

@@ -1,0 +1,239 @@
+.backlog-table-header,
+.backlog-table-body {
+    @include table-flex();
+    width: 100%;
+    &.show-tags {
+        .tags-block {
+            display: block;
+        }
+    }
+    .row {
+        @extend %small;
+        @include table-flex();
+        border-bottom: 1px solid $gray-light;
+        padding: .5rem 0 .5rem .5rem;
+        text-align: left;
+        width: 100%;
+    }
+    .backlog-table-title,
+    .backlog-table-subtitle,
+    .row {
+        &:hover {
+            background: transparent;
+        }
+        .user-stories {
+            width: 100%;
+
+        }
+        .status {
+            @include table-flex-child(0, 150px, 0);
+        }
+        .points {
+            @include table-flex-child(0, 125px, 0);
+        }
+
+    }
+    .status,
+    .points {
+        position: relative;
+        text-align: right;
+        .popover {
+            a {
+                text-align: left;
+                width: 100%;
+            }
+            .point {
+                text-align: center;
+            }
+        }
+        .icon {
+            color: $gray-light;
+            margin-left: .2rem;
+        }
+    }
+    .pop-status {
+        @include popover(200px, 0, 65%, '', '');
+        padding-right: 1rem;
+        &.fix {
+            bottom: 0;
+            top: auto;
+        }
+    }
+    .pop-role {
+        @include popover(200px, 0, 65%, '', '');
+        a {
+            &.active {
+                background: $fresh-taiga;
+                color: $white;
+            }
+        }
+    }
+    .pop-points {
+        @include popover(150px, '', 30px, 10px, '');
+        padding-right: 3rem;
+    }
+    .pop-points-open {
+        @include popover(200px, 0, 260px, '', '');
+        li {
+            display: inline-block;
+            width: 23%;
+        }
+        a {
+            display: block;
+            text-align: center;
+            &:hover,
+            &.active {
+                background: $fresh-taiga;
+                color: $white;
+            }
+        }
+    }
+}
+
+.backlog-table-header {
+    .backlog-table-title {
+        @extend %medium;
+        @extend %bold;
+        border-bottom: 2px solid $gray-light;
+        flex-wrap: nowrap;
+        padding-right: 30px;
+    }
+    .points {
+        cursor: pointer;
+    }
+    .header-points {
+        span {
+            color: $gray-light;
+        }
+    }
+}
+
+.backlog-table-body {
+    .row {
+        border-bottom: 1px solid darken($whitish, 4%);
+        cursor: move;
+        flex-wrap: nowrap;
+        position: relative;
+        &:hover {
+            @include transition (background .2s ease-in);
+            background: lighten($green-taiga, 60%);
+            .us-settings,
+            .icon-drag-v {
+                @include transition (all .2s ease-in);
+                opacity: 1;
+            }
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+        &.sortable-placeholder {
+            background: $whitish;
+            height: 40px;
+        }
+        &.ui-sortable-helper {
+            @include transition (background .2s ease-in);
+            background: lighten($green-taiga, 60%);
+            box-shadow: 1px 1px 10px rgba($black, .1);
+        }
+        .points {
+            .not-clickable {
+                &:hover {
+                    color: $black;
+                    cursor: text;
+                }
+            }
+        }
+    }
+    .row-selected {
+        @include transition (background .2s ease-in);
+        background: lighten($green-taiga, 60%);
+    }
+    .user-story-name {
+        @include table-flex($flex-wrap: nowrap);
+        input {
+            @include flex-shrink(0);
+            margin-right: 1rem;
+            vertical-align: super;
+            &:checked {
+                +a {
+                    @include transition (color .2s ease-in);
+                    color: $fresh-taiga;
+                }
+            }
+        }
+        a {
+            display: inline-block;
+            flex-grow: 20;
+            max-width: 90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .tags-block {
+        display: none;
+        margin-bottom: .3rem;
+        .tag {
+            @extend %small;
+            margin-right: .5rem;
+            padding: .2rem .5rem;
+        }
+    }
+    .blocked {
+        background: $red-light;
+        border-bottom: 1px solid $white;
+        color: $white;
+        &:hover {
+            @include transition (background .2s ease-in);
+            background: $red;
+        }
+        a {
+            color: $white !important;
+            &:hover {
+                color: $white;
+            }
+        }
+        .icon {
+            color: $white;
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+    .doom-line {
+        background: $red;
+        margin: .2rem 0;
+        padding: .6rem 0;
+        position: relative;
+        width: 100%;
+        span {
+            @extend %small;
+            @extend %title;
+            color: $white;
+            position: absolute;
+            right: .5rem;
+            top: -3px;
+        }
+    }
+    .us-settings a,
+    .icon-drag-v {
+        @extend %large;
+        @include transition (all .2s ease-in);
+        color: $gray-light;
+        width: 30px;
+        &:hover {
+            @include transition (all .2s ease-in);
+            color: $grayer;
+        }
+    }
+    .us-settings {
+        flex-shrink: 0;
+        margin: 0 0 0 2rem;
+        opacity: 0;
+    }
+    .icon-drag-v {
+        cursor: move;
+        opacity: 0;
+        padding: .1rem .5rem 0 0;
+    }
+}

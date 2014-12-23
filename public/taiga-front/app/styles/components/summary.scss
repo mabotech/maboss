@@ -1,0 +1,110 @@
+.summary {
+    @include clearfix;
+    background: $grayer;
+    color: $white;
+    margin-bottom: 2rem;
+    padding: 1em;
+    ul {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+    .data {
+        float: left;
+        margin-right: 1em;
+        margin-top: 4px;
+        .number {
+            color: $fresh-taiga;
+            top: 0;
+        }
+
+    }
+    .icon {
+        @extend %large;
+        float: left;
+    }
+    .number {
+        @extend %xlarge;
+        @extend %bold;
+        float: left;
+        margin-right: .3rem;
+        position: relative;
+        top: 5px;
+    }
+
+    .description {
+        // line-height: 0;
+        @extend %small;
+        @extend %text;
+        float: left;
+        line-height: .9rem;
+    }
+}
+
+.summary-progress-bar {
+    background: $whitish;
+    float: left;
+    height: 30px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    padding: 3px;
+    position: relative;
+    width: 15%;
+    .current-progress {
+        background: $fresh-taiga;
+        height: 24px;
+    }
+    .defined-points {
+        background: $red-light;
+        height: 24px;
+        position: absolute;
+        width: calc(100% - 6px);
+    }
+    .project-points-progress {
+        background: $white;
+        height: 24px;
+        position: absolute;
+    }
+    .closed-points-progress {
+        background: $fresh-taiga;
+        height: 24px;
+        position: absolute;
+    }
+}
+
+
+.large-summary {
+    ul {
+        border-right: 1px solid $whitish;
+        margin-right: 1rem;
+        vertical-align: top;
+        &:last-of-type {
+            border: 0;
+            margin: 0;
+        }
+    }
+    .icon {
+        @extend %xlarge;
+        margin-right: .4rem;
+        &.icon-stats {
+            @include transition(color .3s linear);
+            color: $gray;
+            float: right;
+            &:hover {
+                @include transition(color .3s linear);
+                color: $fresh-taiga;
+            }
+            &.active {
+                color: $fresh-taiga;
+                &:hover {
+                    @include transition(color .3s linear);
+                    color: $gray;
+                }
+            }
+        }
+    }
+}

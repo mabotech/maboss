@@ -1,0 +1,67 @@
+.admin-functionalities {
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .functionality {
+        @include transition(all .2s linear);
+        @include table-flex(center, center, flex, column, wrap, center);
+        background-color: $whitish;
+        display: inline-block;
+        margin-bottom: .3rem;
+        margin-right: .3rem;
+        min-height: 14px;
+        opacity: .5;
+        padding: 1rem;
+        position: relative;
+        vertical-align: top;
+        width: 32%;
+        &:nth-child(3n+1) {
+            margin-right: 0;
+        }
+        &.active {
+            background-color: #e9f0da;
+            opacity: 1;
+        }
+        .icon {
+            @extend %xxlarge;
+            @include table-flex-child(1, 120px, 0, 100%);
+            margin: 0 auto;
+            min-height: 60px;
+            text-align: center;
+        }
+        .desc {
+            @include table-flex-child(1 , 0, 0, 100%);
+        }
+        .activate-input {
+            display: none;
+            +label {
+                color: $white;
+                cursor: pointer;
+                display: block;
+                text-align: center;
+            }
+        }
+        span {
+            font-weight: bold;
+        }
+        p {
+            margin-bottom: 1rem;
+            min-height: 4.5rem;
+        }
+        select {
+            margin-top: 1rem;
+        }
+    }
+    .videoconference-attributes {
+        select {
+            margin-bottom: .5rem;
+        }
+    }
+    .button-green {
+        color: $white;
+        display: block;
+        text-align: center;
+    }
+}

@@ -1,0 +1,30 @@
+.login-form-container {
+    .login-password {
+        position: relative;
+    }
+    input:focus {
+        +.forgot-pass {
+            @include transition(opacity .5s linear);
+            opacity: 0;
+        }
+    }
+    .forgot-pass {
+        @extend %small;
+        @include transition(all .3s linear);
+        color: $gray-light;
+        opacity: 1;
+        position: absolute;
+        right: 1rem;
+        top: .5rem;
+        &:hover {
+            @include transition(color .3s linear);
+            color: $grayer;
+        }
+    }
+    .remember-me {
+        vertical-align: top;
+        +label {
+            cursor: pointer;
+        }
+    }
+}

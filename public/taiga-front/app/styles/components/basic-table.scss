@@ -1,0 +1,19 @@
+.basic-table {
+    @include table-flex(stretch, center, flex, column, wrap, flex-start);
+    width: 100%;
+    .row {
+        @include table-flex(stretch, center, flex, row, nowrap, flex-start);
+        border-bottom: 1px solid darken($whitish, 4%);
+        padding: .3rem 0;
+        text-align: left;
+        width: 100%;
+        @for $i from 1 through 8 {
+            .width-#{$i} {
+                @include table-flex-child($i, 50px, 0);
+            }
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+}

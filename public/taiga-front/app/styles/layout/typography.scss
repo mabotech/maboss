@@ -1,0 +1,269 @@
+// Typography
+
+// Font face
+
+@each $font-face in OpenSans-CondLight, opensans-regular, opensans-semibold, taiga {
+    @font-face {
+        font-family: '#{$font-face}';
+        src: url('../fonts/#{$font-face}.eot?#iefix') format('embedded-opentype'),
+            url('../fonts/#{$font-face}.woff') format('woff'),
+            url('../fonts/#{$font-face}.ttf')  format('truetype'),
+            url('../fonts/#{$font-face}.svg#{$font-face}') format('svg');
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $blackish;
+    font-weight: normal;
+    a {
+        font-weight: inherit;
+    }
+}
+
+h1 {
+    @extend %xxlarge;
+    @extend %title;
+    line-height: 3.4rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    span {
+        @extend %xxlarge;
+        line-height: 3.4rem;
+        margin-right: .5rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+        white-space: nowrap;
+        &.green,
+        &:last-child {
+            flex-shrink: 0;
+        }
+    }
+    .project-name {
+        display: inline-block;
+        max-width: 60%;
+    }
+    .project-name-short {
+        display: inline-block;
+        max-width: 40%;
+    }
+    .green {
+        color: $green-taiga;
+    }
+    .date {
+        @include ellipsis(500px);
+        color: $gray-light;
+    }
+}
+
+h2 {
+    @extend %xlarge;
+    @extend %title;
+    margin-bottom: 1rem;
+}
+
+p {
+    margin: 0 0 20px;
+    img {
+        margin: 0;
+    }
+}
+
+em { font-style: italic; }
+strong {
+    font-weight: bold;
+}
+
+hr {
+    border: solid #ddd;
+    border-width: 1px 0 0;
+    clear: both;
+    height: 0;
+    margin: 10px 0 30px;
+}
+
+// __Links__
+a,
+a:visited {
+    color: $grayer;
+    text-decoration: none;
+    &:hover {
+        @include transition (color .3s linear);
+        color: $green-taiga;
+    }
+}
+
+// Taiga Icons
+
+[data-icon]:before {
+    content: attr(data-icon);
+    font-family: 'taiga' !important;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    speak: none;
+    text-transform: none !important;
+}
+
+[class^='icon-']:before,
+[class*=' icon-']:before {
+    font-family: 'taiga' !important;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    speak: none;
+    text-transform: none !important;
+}
+
+.icon-backlog:before {
+    content: 'a';
+}
+.icon-issues:before {
+    content: 'b';
+}
+.icon-kanban:before {
+    content: 'c';
+}
+.icon-search:before {
+    content: 'd';
+}
+.icon-wiki:before {
+    content: 'e';
+}
+.icon-settings:before {
+    content: 'f';
+}
+.icon-move:before {
+    content: 'g';
+}
+.icon-filter:before {
+    content: 'h';
+}
+.icon-arrow-up:before {
+    content: 'i';
+}
+.icon-arrow-right:before {
+    content: 'j';
+}
+.icon-arrow-left:before {
+    content: 'k';
+}
+.icon-arrow-bottom:before {
+    content: 'l';
+}
+.icon-edit:before {
+    content: 'm';
+}
+.icon-delete:before {
+    content: 'n';
+}
+.icon-iocaine:before {
+    content: 'o';
+}
+.icon-drag-h:before {
+    content: 'p';
+}
+.icon-drag-v:before {
+    content: 'q';
+}
+.icon-document:before {
+    content: 'r';
+}
+.icon-plus:before {
+    content: 's';
+}
+.icon-reload:before {
+    content: 't';
+}
+.icon-warning:before {
+    content: 'u';
+}
+.icon-notification-error:before {
+    content: 'v';
+}
+.icon-github:before {
+    content: 'w';
+}
+.icon-check-square:before {
+    content: 'x';
+}
+.icon-warning-alt:before {
+    content: 'y';
+}
+.icon-floppy:before {
+    content: 'z';
+}
+.icon-comment:before {
+    content: 'A';
+}
+.icon-documents:before {
+    content: 'B';
+}
+.icon-attachments:before {
+    content: 'C';
+}
+.icon-caret-up:before {
+    content: 'D';
+}
+.icon-caret-down:before {
+    content: 'E';
+}
+.icon-bulk:before {
+    content: 'F';
+}
+.icon-idea:before {
+    content: 'G';
+}
+.icon-spinner:before {
+    content: 'H';
+}
+.icon-minimize:before {
+    content: 'I';
+}
+.icon-maximize:before {
+    content: 'J';
+}
+.icon-stats:before {
+    content: 'K';
+}
+.icon-copy:before {
+    content: 'L';
+}
+.icon-team:before {
+    content: 'M';
+}
+.icon-vfold:before {
+    content: 'N';
+}
+.icon-vunfold:before {
+    content: 'O';
+}
+.icon-video:before {
+    content: 'P';
+}
+.icon-help:before {
+    content: 'U';
+}
+.icon-bug:before {
+    content: 'Q';
+}
+.icon-briefcase:before {
+    content: 'R';
+}
+.icon-writer:before {
+    content: 'S';
+}
+.icon-tasks:before {
+    content: 'T';
+}

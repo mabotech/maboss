@@ -1,0 +1,468 @@
+.lightbox {
+    @extend %lightbox;
+}
+
+.markdown-preview {
+    display: inline-block;
+    margin-bottom: .5rem;
+    a {
+        @extend %button;
+        @extend %small;
+        color: $gray-light;
+        padding: 3px 20px;
+        &:first-child {
+            border-right: 1px solid $gray-light;
+        }
+        &:hover {
+            @include transition(color .2s linear);
+            color: $grayer;
+        }
+    }
+    .active {
+        color: $grayer;
+    }
+}
+
+.lightbox-generic-form {
+    form {
+        @include table-flex-child(0, 600px, 0, 600px);
+    }
+
+    fieldset {
+        position: relative;
+    }
+
+    textarea {
+        margin-bottom: 1rem;
+        max-height: 9rem;
+        min-height: 7rem;
+    }
+
+    label {
+        @extend %button;
+        @include transition(all .2s ease-in);
+        border: 1px solid $gray-light;
+        color: $grayer;
+        cursor: pointer;
+        display: block;
+        padding: 7px 30px;
+        &:hover {
+            span {
+                color: $white;
+            }
+        }
+        span {
+            color: $grayer;
+            vertical-align: middle;
+        }
+    }
+
+    .settings {
+        @include table-flex(flex-start, stretch, flex, row, wrap, flex-start);
+        margin-bottom: 1rem;
+
+        fieldset {
+            @include table-flex-child(1, 30%, 0);
+            margin-right: .5rem;
+            text-align: center;
+            &:last-child {
+                margin: 0;
+            }
+        }
+
+        .requirement,
+        .iocaine {
+            &:hover {
+                @include transition(all .2s ease-in);
+                background: $fresh-taiga;
+                border: 1px solid $fresh-taiga;
+                color: $white;
+
+            }
+        }
+
+        .blocked {
+            padding: 8px 30px;
+            &:hover {
+                @include transition(all .2s ease-in);
+                background: $red-light;
+                border: 1px solid $red-light;
+                color: $white;
+            }
+        }
+
+
+        .client-requirement,
+        .team-requirement,
+        .iocaine-flag {
+            input {
+                &:checked {
+                    +label {
+                        background: $fresh-taiga;
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        .blocking-flag {
+            input {
+                &:checked {
+                    +label {
+                        background: $red;
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+    }
+    .points-per-role {
+        .popover {
+            @include popover(200px, $top: 105%, $left: 35%, $arrow-width: 10px, $arrow-top: -5px, $arrow-left: 10px);
+        }
+    }
+}
+
+.lightbox-generic-bulk {
+    form {
+        @include table-flex-child(0, 600px, 0, 600px);
+    }
+    textarea {
+        margin-bottom: 1rem;
+        max-height: 12rem;
+        min-height: 15rem;
+    }
+}
+
+.lightbox-search {
+    form {
+        @include table-flex-child(0, 600px, 0, 600px);
+    }
+    input {
+        margin-bottom: 1rem;
+    }
+}
+
+.lightbox-add-member {
+    .add-member-wrapper {
+        @include table-flex();
+        margin-bottom: .5rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        fieldset {
+            position: relative;
+            &:first-child {
+                @include table-flex-child(3, 400px);
+            }
+            &:last-child {
+                @include table-flex-child(1, 200px);
+                margin-left: .5rem;
+            }
+        }
+    }
+    .extra-text {
+        margin-top: 1rem;
+    }
+    input[type=email],
+    select {
+        margin-bottom: 0;
+    }
+    select {
+        width: 80%;
+    }
+    .icon {
+        @extend %large;
+        margin-left: .5rem;
+    }
+    .icon-delete {
+        &:hover {
+            color: $red;
+        }
+    }
+    .button {
+        margin-top: 1rem;
+    }
+    .help-text {
+        @extend %small;
+        padding: .5rem 1rem;
+    }
+    .checksley-error-list {
+        right: .5rem;
+        li {
+            display: none;
+            &:first-child {
+                display: block;
+            }
+        }
+    }
+}
+
+.lightbox-sprint-add-edit {
+    form {
+        @include table-flex-child(0, 600px, 0, 600px);
+    }
+    .last-sprint-name {
+        @include transition (opacity .3s linear);
+        color: $gray;
+        opacity: 1;
+        position: absolute;
+        right: 1rem;
+        top: .7rem;
+        &.disappear {
+            @include transition (opacity .3s linear);
+            opacity: 0;
+        }
+    }
+    .dates {
+        margin-bottom: 1rem;
+        div {
+            float: left;
+            margin-right: 1%;
+            position: relative;
+            width: 49%;
+            &:last-child {
+                margin: 0;
+                width: 50%;
+            }
+        }
+    }
+    .delete-sprint {
+        @extend %small;
+        color: $grayer;
+        display: block;
+        margin-top: 1rem;
+        text-align: right;
+        a {
+            @include transition (color .3s linear);
+            color: $gray-light;
+            margin-left: .5rem;
+            &:hover {
+                @include transition (color .3s linear);
+                color: $red;
+            }
+        }
+    }
+}
+
+.lightbox-generic-ask {
+    form {
+        @include table-flex-child(0, 420px, 0, 420px);
+    }
+    .subtitle,
+    .message {
+        display: block;
+        line-height: 2rem;
+        text-align: center;
+    }
+    .subtitle {
+        @extend %large;
+        @extend %title;
+    }
+    .options {
+        @include table-flex();
+        a {
+            @include table-flex-child(1, 0, 0);
+            padding: 8px 0;
+            text-align: center;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+}
+
+.lightbox-ask-choice {
+    text-align: center;
+    form {
+        @include table-flex-child(0, 420px, 0);
+    }
+    .question,
+    .subtitle {
+        display: block;
+        line-height: 1.5rem;
+        text-align: center;
+    }
+    .subtitle {
+        @extend %large;
+        @extend %title;
+    }
+    .replacement {
+        display: block;
+        span {
+            display: block;
+        }
+    }
+    .options {
+        @include table-flex();
+        a {
+            @include table-flex-child(1, 0, 0);
+            padding: 8px 0;
+            text-align: center;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+}
+
+.lightbox-delete-account {
+    form {
+        @include table-flex-child(0, 420px, 0, 420px);
+    }
+    .question,
+    .subtitle {
+        display: block;
+        line-height: 2rem;
+        text-align: center;
+    }
+    .subtitle {
+        @extend %large;
+        @extend %title;
+    }
+    .newsletter {
+        margin-top: 1rem;
+        text-align: center;
+        input {
+            margin-right: .5rem;
+            +label {
+                @extend %small;
+                @extend %text;
+            }
+        }
+    }
+    .options {
+        @include table-flex();
+        a {
+            @include table-flex-child(1, 0, 0);
+            padding: 8px 0;
+            text-align: center;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+}
+
+.lightbox-delete-project {
+    form {
+        @include table-flex-child(0, 420px, 0, 420px);
+    }
+    .question,
+    .subtitle {
+        display: block;
+        line-height: 2rem;
+        text-align: center;
+    }
+    .subtitle {
+        @extend %large;
+        @extend %title;
+    }
+    .options {
+        @include table-flex();
+        a {
+            @include table-flex-child(1, 0, 0);
+            padding: 8px 0;
+            text-align: center;
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+}
+
+
+.lightbox-generic-success,
+.lightbox-generic-error {
+    section {
+        @include table-flex-child(0, 420px, 0, 420px);
+    }
+    h2 {
+        line-height: 2rem;
+    }
+}
+
+.lightbox-create-issue {
+    form {
+        @include table-flex-child(0, 600px, 0, 600px);
+    }
+
+    .fieldset-row {
+        @include table-flex();
+        fieldset {
+            @include table-flex-child(1, 100px, 0, 30%);
+            margin-right: .5rem;
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    textarea {
+        margin-bottom: 1rem;
+        max-height: 12rem;
+        min-height: 8rem;
+    }
+}
+
+.lightbox-block {
+    .form {
+        @include table-flex-child(0, 420px, 0, 420px);
+    }
+    textarea {
+        margin-bottom: 1rem;
+        max-height: 12rem;
+        min-height: 8rem;
+    }
+}
+
+.lightbox-select-user {
+    .form {
+        @include table-flex-child(0, 600px, 0, 600px);
+    }
+    .watchers {
+        margin-top: 1rem;
+        min-height: 440px;
+
+        .watcher-name {
+            @include table-flex-child(12, 0);
+        }
+    }
+    .watcher-single {
+        position: relative;
+        &:hover,
+        &.active {
+            background: lighten($green-taiga, 55%);
+            cursor: pointer;
+        }
+        &:hover {
+            @include transition(background .3s linear);
+        }
+        &.active {
+            .icon {
+                opacity: 1;
+                right: 1rem;
+                top: 1.3rem;
+            }
+        }
+    }
+    .more-watchers {
+        @extend %title;
+        @extend %medium;
+        padding: .5rem;
+        text-align: center;
+    }
+}
+
+.lb-create-edit-userstory {
+    .points-per-role {
+        margin-bottom: 1rem;
+        li {
+            margin: .5rem .1rem;
+        }
+    }
+}

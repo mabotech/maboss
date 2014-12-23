@@ -1,0 +1,176 @@
+.attachments {
+    margin-bottom: 2rem;
+}
+
+.attachments-header {
+    @include table-flex(space-between, center, flex, row, wrap, space-between);
+    background: $whitish;
+    padding: .5rem 1rem;
+    .attachments-title {
+        @extend %medium;
+        @extend %bold;
+        color: $grayer;
+    }
+    .attachments-num,
+    .attachments-text {
+        margin-right: .1rem;
+    }
+    .icon {
+        @extend %large;
+        color: $grayer;
+        cursor: pointer;
+        &:hover {
+            @include transition (color .2s ease-in);
+            color: $green-taiga;
+        }
+    }
+}
+
+.single-attachment {
+    @extend %small;
+    @include table-flex();
+    align-items: center;
+    border-bottom: 1px solid $whitish;
+    padding: .5rem 0 .5rem 1rem;
+    position: relative;
+    &:hover {
+        .attachment-settings {
+            .settings {
+                @include transition (opacity .2s ease-in);
+                opacity: 1;
+            }
+        }
+    }
+    &.ui-sortable-helper {
+        @include transition (background .2s ease-in);
+        background: lighten($green-taiga, 60%);
+        box-shadow: 1px 1px 10px rgba($black, .1);
+    }
+    &.deprecated {
+        color: $gray-light;
+        .attachment-name a {
+            color: $gray-light;
+        }
+    }
+    &.sortable-placeholder {
+        background: $whitish;
+        height: 40px;
+    }
+    .attachment-name {
+        @extend %bold;
+        @include ellipsis(200px);
+        @include table-flex-child(1, 35%, 0);
+        padding-right: 1rem;
+        .icon {
+            margin-right: .5rem;
+        }
+    }
+    .attachment-size {
+        @include table-flex-child(1, 15%, 0);
+        color: $gray-light;
+        margin-right: .5rem;
+    }
+    .attachment-comments {
+        @include table-flex-child(1, 35%, 0);
+        span {
+            color: $gray;
+        }
+    }
+    .attachment-settings {
+        @include table-flex-child(1, 15%, 0);
+        .settings,
+        .editable-settings {
+            @extend %large;
+            color: $gray-light;
+            display: block;
+            position: absolute;
+            &:hover {
+                color: $green-taiga;
+            }
+        }
+        .settings {
+            opacity: 0;
+            top: .5rem;
+        }
+        .editable-settings {
+            opacity: 1;
+            top: 1rem;
+        }
+        .icon-edit,
+        .icon-floppy {
+            right: 3.5rem;
+        }
+        .icon-delete {
+            right: 2rem;
+            &:hover {
+                color: $red;
+            }
+        }
+        .icon-drag-v {
+            cursor: move;
+            right: 0;
+        }
+    }
+    .icon-delete {
+        @extend %large;
+        color: $gray-light;
+        &:hover {
+            color: $red;
+        }
+    }
+    .editable-attachment-deprecated {
+        padding-left: 1rem;
+        span {
+            color: $gray-light;
+        }
+        input[type="checkbox"] {
+            margin-right: .2rem;
+            vertical-align: middle;
+            &:checked {
+                + span {
+                    color: $grayer;
+                }
+            }
+        }
+    }
+    .percentage {
+        background: rgba($green-taiga, .1);
+        bottom: 0;
+        height: 40px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 45%;
+    }
+}
+
+.more-attachments {
+    @extend %small;
+    border-bottom: 1px solid $gray-light;
+    display: block;
+    padding: 1rem 0 1rem 1rem;
+    span {
+        color: $gray-light;
+    }
+    .more-attachments-num {
+        color: $green-taiga;
+        margin-left: .5rem;
+    }
+    &:hover {
+        @include transition (background .2s ease-in);
+        background: lighten($green-taiga, 60%);
+    }
+}
+
+.add-attach {
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    input {
+        display: none;
+    }
+    span {
+        @extend %small;
+        color: $gray-light;
+    }
+}

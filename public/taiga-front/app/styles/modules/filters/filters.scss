@@ -1,0 +1,110 @@
+.filters {
+    h1 {
+        vertical-align: baseline;
+        .icon {
+            margin: 0;
+        }
+        a {
+            vertical-align: baseline;
+        }
+    }
+    h2 {
+        @extend %large;
+        margin-top: 1rem;
+        .icon-arrow-right {
+            @extend %medium;
+            vertical-align: middle;
+        }
+    }
+    input[type="text"] {
+        background: $grayer;
+        color: $white;
+        @include placeholder {
+            color: $gray-light;
+        }
+    }
+    .icon-search {
+        color: $gray-light;
+        position: absolute;
+        right: .7rem;
+        top: .7rem;
+    }
+}
+
+.filters-inner {
+    @include transition (all .1s ease-in);
+    opacity: 0;
+    .loading {
+        background: $grayer;
+        border: 1px solid #b8b8b8;
+        display: inline-block;
+        margin: 0;
+        padding: 8px;
+        text-align: center;
+        width: 100%;
+        .icon-spinner {
+            color: $whitish;
+            float: none;
+        }
+        span {
+            @include animation (loading .5s linear);
+            @include animation (spin 1s linear infinite);
+        }
+    }
+}
+
+.filters-applied {
+    margin-top: .5rem;
+    .single-filter {
+        margin-bottom: .5rem;
+    }
+}
+
+.filters-step-cat {
+    .save-filters {
+        color: $white;
+        display: block;
+        text-align: center;
+    }
+    .my-filter-name {
+        background: $grayer;
+        color: $whitish;
+        width: 100%;
+        @include placeholder {
+            color: $gray-light;
+        }
+    }
+}
+
+.filters-cats {
+    margin-top: 2rem;
+    li {
+        border-bottom: 1px solid $gray-light;
+        text-transform: uppercase;
+    }
+    .custom-filters {
+        .title {
+            color: $green-taiga;
+        }
+    }
+    a {
+        @include transition (color .2s ease-in);
+        color: $grayer;
+        display: block;
+        padding: .5rem 0 .5rem .5rem;
+        &:hover {
+            @include transition (color .2s ease-in);
+            color: $green-taiga;
+            .icon {
+                @include transition (opacity .2s ease-in);
+                opacity: 1;
+            }
+        }
+    }
+    .icon {
+        @include transition (opacity .2s ease-in);
+        color: $grayer;
+        float: right;
+        opacity: 0;
+    }
+}

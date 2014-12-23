@@ -1,0 +1,31 @@
+.us-created-by {
+    @include table-flex();
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+    position: relative;
+    .user-avatar {
+        @include table-flex-child(0, 40px, 0);
+        img {
+            border-radius: 8%;
+            width: 100%;
+        }
+    }
+    .created-by {
+        @include table-flex-child(3, 70px, 0);
+        margin-left: .5rem;
+        .created-title,
+        .created-date {
+            @extend %small;
+            color: $gray-light;
+            display: block;
+        }
+        .created-user {
+            @extend %large;
+            color: $green-taiga;
+            cursor: default;
+            &.editable {
+                cursor: pointer;
+            }
+        }
+    }
+}

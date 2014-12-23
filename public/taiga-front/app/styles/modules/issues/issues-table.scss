@@ -1,0 +1,99 @@
+.issues-table {
+    @include table-flex();
+    margin-bottom: 2rem;
+    &.empty {
+        display: none;
+    }
+    .row {
+        &:hover {
+            @include transition (background .2s ease-in);
+            background: lighten($green-taiga, 60%);
+        }
+        .icon {
+            display: inline;
+        }
+    }
+    .row-selected {
+        @include transition (background .2s ease-in);
+        background: lighten($green-taiga, 60%);
+    }
+    .title {
+        @extend %medium;
+        @extend %bold;
+        border-bottom: 1px solid $gray-light;
+        &:hover {
+            background: transparent;
+        }
+        div {
+            cursor: pointer;
+        }
+    }
+    .table-main {
+        @extend %small;
+        border-bottom: 1px solid darken($whitish, 4%);
+    }
+    .avatar {
+        @include table-flex(stretch, center, flex, row, wrap, flex-start);
+        img {
+            width: 35px;
+        }
+        figcaption {
+            @include table-flex-child(1, 60%, 0);
+            margin-left: .5rem;
+        }
+    }
+    .level-field {
+        @include table-flex-child(1, 70px, 0);
+        text-align: center;
+    }
+    .subject {
+        @include table-flex-child(7, 300px, 0);
+        padding-right: 1rem;
+        span {
+            &:first-child {
+                margin-right: .5rem;
+            }
+        }
+    }
+    .issue-field,
+    .assigned-field,
+    .created-field {
+        @include table-flex-child(1, 100px, 0);
+        padding: 0 1rem;
+        position: relative;
+        text-align: left;
+    }
+    .assigned-field {
+        @include table-flex-child(2, 100px, 0);
+    }
+    .issue-assignedto {
+        cursor: pointer;
+        position: relative;
+        &:hover {
+            .icon {
+                @include transition(opacity .3s linear);
+                opacity: 1;
+            }
+        }
+        figcaption {
+            max-width: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .icon {
+            @include transition(opacity .3s linear);
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            top: .5rem;
+        }
+    }
+    .pop-status {
+        @include popover(200px, 20px, 0, '', '');
+        &.fix {
+            bottom: 0;
+            top: auto;
+        }
+    }
+}

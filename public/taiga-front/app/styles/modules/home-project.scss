@@ -1,0 +1,38 @@
+.home-project-info-list {
+    @include table-flex();
+    li {
+        @include table-flex-child(1, 0, 0, auto);
+        margin-right: 1rem;
+    }
+    .info-num {
+        @extend %xlarge;
+        @extend %bold;
+        float: left;
+        margin-right: .3rem;
+        position: relative;
+        top: 5px;
+    }
+    .info-text {
+        @extend %small;
+        float: left;
+        line-height: .9rem;
+    }
+}
+
+.project-data-container {
+    @include table-flex();
+    p {
+        @include table-flex-child(3, 0, 0);
+    }
+    ul {
+        @include table-flex-child(1, 0, 0);
+    }
+    li {
+        display: inline-block;
+        margin-right: .1rem;
+        width: 10%;
+        figure {
+            width: 100%;
+        }
+    }
+}

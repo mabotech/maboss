@@ -1,0 +1,244 @@
+.sprints {
+    .summary {
+        @include clearfix;
+        background: $gray-light;
+        ul {
+            width: 40%;
+        }
+        li {
+            color: $grayer;
+        }
+    }
+    .new-sprint {
+        float: right;
+        .button {
+            padding: .5rem 1.5rem;
+        }
+    }
+    .sprint-name {
+        a {
+            @extend %large;
+            @extend %title;
+            @include ellipsis($width: 90%);
+            display: inline-block;
+            margin-right: 3px;
+        }
+    }
+    .sprint {
+        margin-bottom: 2rem;
+        overflow: hidden;
+        header {
+            position: relative;
+        }
+
+        &:hover {
+            .icon-edit {
+                @include transition (opacity .2s ease-in);
+                opacity: 1;
+            }
+        }
+        .icon {
+            display: inline-block;
+        }
+        .icon-arrow-up {
+            @include transform(rotate(180deg));
+            @include transition (all .2s linear);
+            vertical-align: baseline;
+            &.active {
+                @include transform(rotate(0));
+                @include transition (all .2s linear);
+            }
+            &:hover {
+                @include transition(color .2s linear);
+                color: $fresh-taiga;
+            }
+        }
+        .icon-edit {
+            @include transition (opacity .2s ease-in);
+            color: $gray-light;
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            vertical-align: baseline;
+            &:hover {
+                @include transition (color .2s ease-in);
+                color: $green-taiga;
+            }
+        }
+        .number {
+            @extend %large;
+        }
+        .description {
+            @extend %xsmall;
+            line-height: .6rem;
+            margin-top: 5px;
+        }
+        .sprint-summary {
+            @include table-flex();
+        }
+        .sprint-date {
+            @extend %large;
+            @extend %title;
+            @include table-flex-child(1, 0, 0);
+            color: $gray-light;
+        }
+        .sprint-points {
+            @include table-flex-child(1, 0, 0);
+        }
+        ul {
+            float: right;
+            margin: 0;
+        }
+        li {
+            display: inline-block;
+            &:first-child {
+                margin-right: 3px;
+            }
+        }
+    }
+    .sprint-progress-bar {
+        background: $gray-light;
+        border-radius: 2px;
+        height: 8px;
+        margin-bottom: 1rem;
+        margin-top: .5rem;
+        position: relative;
+        width: 100%;
+        .current-progress {
+            background: $green-taiga;
+            border-radius: 2px;
+            height: 8px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: calc(30% - 4px);
+        }
+    }
+    .sprint-table {
+        .row {
+            @include table-flex();
+            border-bottom: 1px solid $gray-light;
+            padding: .5em 0;
+            text-align: left;
+            width: 100%;
+            &:hover {
+                @include transition (background .2s ease-in);
+                background: lighten($gray-light, 12%);
+                cursor: move;
+            }
+            &:last-child {
+                border-bottom: 0;
+            }
+            &.sortable-placeholder {
+                background: lighten($gray-light, 12%);
+                height: 40px;
+            }
+            &.ui-sortable-helper {
+                @include transition (background .2s ease-in);
+                background: lighten($green-taiga, 60%);
+                box-shadow: 1px 1px 10px rgba($black, .1);
+            }
+
+        }
+        .column-us {
+            @extend %small;
+            @include table-flex-child(3, 0, 0);
+            padding: 0 4px;
+        }
+        .us-name {
+            @include ellipsis(250px);
+            display: block;
+            &.closed {
+                color: lighten($gray-light, 5%);
+            }
+            &.blocked {
+                color: $red;
+            }
+        }
+        .column-points {
+            @include table-flex-child(1, 0, 0);
+            padding: 0 4px;
+            text-align: right;
+            &.closed {
+                color: lighten($gray-light, 5%);
+            }
+            &.blocked {
+                color: $red;
+            }
+        }
+    }
+    .button-gray {
+        display: block;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    .us-item-row {
+        .tags-block,
+        .us-settings,
+        .status,
+        .icon-drag-v,
+        .popover,
+        input {
+            display: none;
+        }
+        .user-story-name {
+            @extend %small;
+            line-height: 1rem;
+            margin-top: 5px;
+        }
+    }
+}
+
+// If Sprint is open but date is old
+.sprint-old-open {
+    .sprint-name {
+        .icon-arrow-up {
+            @include transform(rotate(180deg));
+            @include transition (all .2s linear);
+            vertical-align: baseline;
+            &.active {
+                @include transform(rotate(0));
+                @include transition (all .2s linear);
+            }
+            &:hover {
+                @include transition(color .2s linear);
+                color: $fresh-taiga;
+            }
+        }
+    }
+}
+
+// If sprint is closed and date is old
+.sprint-closed {
+    .sprint-table {
+        display: none;
+    }
+    .sprint-name {
+        .icon-arrow-up {
+            @include transform(rotate(180deg));
+            @include transition (all .2s linear);
+            vertical-align: baseline;
+            &.active {
+                @include transform(rotate(0));
+                @include transition (all .2s linear);
+            }
+            &:hover {
+                @include transition(color .2s linear);
+                color: $fresh-taiga;
+            }
+        }
+    }
+    .number,
+    .description {
+        color: $gray-light;
+    }
+    .sprint-progress-bar {
+        .current-progress {
+            background: darken($gray-light, 10%);
+        }
+    }
+    .button-gray {
+        background: $gray-light;
+    }
+}

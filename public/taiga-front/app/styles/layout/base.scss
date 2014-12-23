@@ -1,0 +1,165 @@
+// Basic layout styles
+html {
+    min-height: 100%;
+    width: 100%;
+}
+body {
+    @extend %text;
+    background: #fff; // fallback
+    color: #444;
+    -webkit-font-smoothing: antialiased; // Fix for webkit renderin
+    min-height: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+    .master {
+        @include transition (transform 1s ease);
+        &.ng-animate {
+            @include transition();
+        }
+    }
+    .menu {
+        @include transform(translate3d(0, 0, 0));
+        @include transition (transform 1s ease);
+    }
+    &.open-projects-nav {
+        .projects-nav {
+            @include transform(translate3d(0, 0, 0));
+            @include transition (transform 1s ease);
+        }
+        .master {
+            @include transform(translate3d(300px, 0, 0));
+            @include transition (transform 1s ease);
+            &.ng-animate {
+                @include transition();
+            }
+        }
+        .menu {
+            @include transform(translate3d(300px, 0, 0));
+            @include transition (transform 1s ease);
+        }
+        .projects-nav-overlay {
+            @include transform(translate3d(300px, 0, 0));
+            @include transition (all 1s ease);
+            opacity: .9;
+        }
+        &.closed-projects-nav {
+            .projects-nav {
+                @include transform(translate3d(-300px, 0, 0));
+                @include transition (transform 1s ease);
+            }
+            .projects-nav-overlay {
+                @include transition (all 1s ease);
+                @include transform(translate3d(0, 0, 0));
+                opacity: 0;
+            }
+            .master {
+                @include transform(translate3d(0, 0, 0));
+            }
+            .menu {
+                @include transform(translate3d(0, 0, 0));
+            }
+        }
+    }
+    &.loading-project {
+        overflow: hidden;
+        .projects-nav-overlay {
+            @include transition (opacity 1s ease);
+            opacity: 1;
+            overflow: hidden;
+            div {
+                @include transition (opacity 1s ease);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.loader-active {
+    overflow: hidden;
+}
+
+.master {
+    background: $white;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+}
+
+.wrapper {
+    @include display(flex);
+    min-height: 100vh;
+    padding-left: 90px;
+}
+
+.menu-secondary {
+    @include flex(1);
+    background: $whitish;
+    min-width: 0;
+    padding: 2rem 1rem;
+    width: 260px;
+    &.filters-bar {
+        @include flex(0);
+        @include transition(all .2s linear);
+        padding: 0;
+        width: 0;
+        &.active {
+            @include flex(1);
+            @include transition(all .2s linear);
+            padding: 2em 1em;
+            width: 210px;
+            .filters-inner {
+                @include transition (all .4s ease-in);
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.menu-tertiary {
+    @include flex(1);
+    background-color: $dark-grayish-lime-green;
+    padding: 2em 1em;
+}
+
+.extrabar {
+    background: $whitish;
+}
+
+.main {
+    @include flex(4);
+    padding: 2rem;
+    padding-bottom: 1rem;
+    min-width: 600px;
+}
+
+.icon {
+    @extend %taiga;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.header-with-actions {
+    @include display(flex);
+    @include align-content(stretch);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    @include justify-content(space-between);
+    margin-bottom: 1rem;
+    .action-buttons {
+        @include flex-shrink(0);
+    }
+    .button {
+        color: $white;
+        float: right;
+        margin-left: 10px;
+        &:hover {
+            color: $white;
+        }
+    }
+    h1 {
+        margin-bottom: 0;
+    }
+}

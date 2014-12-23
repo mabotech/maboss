@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html ng-app="demoApp">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'-->
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="css/multiple-date-picker.css" media="screen" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/lodash.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/multipleDatePicker.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <title>Multiple date picker</title>
+  </head>
+
+  <body ng-controller="demoController">
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Multipledatepicker</h1>
+          <h2>angular simple multiple dates picker</h2>
+        </header>
+
+        <hr>
+
+        <section id="main_content">
+          <h2><a class="anchor"><span class="octicon octicon-link"></span></a>What is MultipleDatePicker ?</h2>
+
+          <p>MultipleDatePicker is an Angular directive to show a simple calendar allowing user to select multiple dates, a callback is called, you can specify some off days or already selected days.</p>
+
+          <h2><a class="anchor"><span class="octicon octicon-link"></span></a>Get it bower style</h2>
+          <pre><code>bower install multiple-date-picker</code></pre>
+
+          <h2><a class="anchor"><span class="octicon octicon-link"></span></a>Get it git style</h2>
+          <pre><code>git clone https://github.com/arca-computing/MultipleDatePicker.git</code></pre>
+
+
+          <h2><a class="anchor"><span class="octicon octicon-link"></span></a>Time to use it</h2>
+          <h3><a class="anchor"><span class="octicon octicon-link"></span></a>Include files</h3>
+          <p>If you are using bower and grunt, you can use <a href="https://github.com/taptapship/wiredep">wiredep</a> to auto include dependencies in your html file. If you want to include files manually, add those two :</p>
+          <pre><code>&lt;script type="text/javascript" src="multipleDatePicker.min.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" type="text/css" href="multiple-date-picker.css"/&gt;</code></pre>
+
+          <h3><a class="anchor"><span class="octicon octicon-link"></span></a>Add it to your angular app</h3>
+          <pre><code>var app = angular.module('myApp', ['multipleDatePicker']);</code></pre>
+
+          <h3><a class="anchor"><span class="octicon octicon-link"></span></a>Add it in your html</h3>
+
+          <pre><code>&lt;div&gt;
+  &lt;multiple-date-picker/&gt;
+&lt;/div&gt;</code></pre>
+<div><multiple-date-picker/></div>
+          <br>
+          <p>It will use the max width of it's parent, so If you want to reduce it specify a width (or use Bootstrap/Foundation).</p>
+          <pre><code>&lt;div style="width:50%"&gt;
+  &lt;multiple-date-picker/&gt;
+&lt;/div&gt;</code></pre>
+<div style="width:50%"><multiple-date-picker/></div>
+        </section>
+        <hr>
+        <h3><a class="anchor"><span class="octicon octicon-link"></span></a>Add some options</h3>
+        <p>You can give option directly in the html.</p>
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Click callback</h4>
+        <p class="warning">Option "callback" has been deprecated, please use "day-click" instead</p>
+        <p>The callback will be called everytime a date is clicked. <strong>Be aware that the date (timestamp) given to the callback is a day at midnight</strong>.</p>
+        <p>This exemple shows how to pass a scope function that will prompt an alert with infos.</p>
+        <pre><code>&lt;multiple-date-picker day-click="logInfos"/&gt;</code></pre>
+        <p>The <code>logInfos</code> function will be called with a preventable event and the moment object:</p>
+        <pre><code>$scope.logInfos = function(event, date) {
+    event.preventDefault() // prevent the select to happen
+    console.log(date.valueOf()) //will give you the timestamp
+    //reproduce the standard behavior
+    date.selected = !date.selected
+}
+        </code></pre>
+        <div><multiple-date-picker day-click="doDate"/></div>
+        <hr>
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Hover callback</h4>
+        <pre><code>&lt;multiple-date-picker day-hover="logInfos"/&gt;</code></pre>
+        <p>Same options as before</p>
+        <pre><code>$scope.logInfos = function(event, date) {
+    event.preventDefault() // prevent the date.hover to be toggled
+    console.log(date.valueOf()) //will give you the timestamp
+    if(event.type == 'mouseover') {
+      //we're on it!
+    }
+  }
+        </code></pre>
+        <div><multiple-date-picker day-hover="doDate"/></div>
+        <small>This will be showed to the web console</small>
+        <hr>
+
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Days-off</h4>
+        <p>Those dates are not selectable (like bank days). It's an array of milliseconds timestamps.</p>
+        <pre><code>&lt;multiple-date-picker days-off="[1404770400000, 1405029600000]"/&gt;</code></pre>
+        <p>The live demo reprensent the 14h day off this month with this code sample. oneDayOff is a scope variable.</p>
+        <pre><code>&lt;multiple-date-picker days-off="oneDayOff"/&gt;</code></pre>
+        <div><multiple-date-picker days-off="oneDayOff"/></div>
+        <hr>
+
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Week-days-off</h4>
+        <p>Those are days for every week that are not selectable. Sunday = 0, Monday = 1 ... Saturday = 6.</p>
+        <pre><code>&lt;multiple-date-picker week-days-off="[0, 3]"/&gt;</code></pre>
+        <div><multiple-date-picker week-days-off="[0, 3]"/></div>
+        <hr>
+
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Days-selected</h4>
+        <p>Those are pre-selected dates when building the calendar. It's an array of milliseconds timestamps.</p>
+        <pre><code>&lt;multiple-date-picker days-selected="[1404770400000, 1405029600000]"/&gt;</code></pre>
+        <p>The live demo reprensent the 4th, 5th and 8th day this month with this code sample. selectedDays is a scope variable.</p>
+        <pre><code>&lt;multiple-date-picker days-off="selectedDays"/&gt;</code></pre>
+        <div><multiple-date-picker days-selected="selectedDays"/></div>
+        <hr>
+
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Disallow-back-past-months</h4>
+        <p>If true the back button to go previous month will be disabled if you are on today's month, so you can't go in past month</p>
+        <pre><code>&lt;multiple-date-picker disallow-back-past-months="true"/&gt;</code></pre>
+        <div><multiple-date-picker disallow-back-past-months="true"/></div>
+        <hr>
+
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Disallow-go-futur-months</h4>
+        <p>If true the back button to go next month will be disabled if you are on today's month, so you can't go the futur</p>
+        <pre><code>&lt;multiple-date-picker disallow-go-futur-months="true"/&gt;</code></pre>
+        <div><multiple-date-picker disallow-go-futur-months="true"/></div>
+        <hr>
+
+        <h4><a class="anchor"><span class="octicon octicon-link"></span></a>Let's get serious</h4>
+        <p>You can (of course) use all options at the same time.</p>
+        <pre><code>&lt;multiple-date-picker days-off="oneDayOff" days-selected="selectedDays" month-changed="doMonth" week-days-off="[0]" day-click="logInfos"/&gt;</code></pre>
+        <div><multiple-date-picker days-off="oneDayOff" days-selected="selectedDays" month-changed="doMonth" week-days-off="[0]" day-click="doDate"/></div>
+        <hr>
+
+        <h3><a class="anchor"><span class="octicon octicon-link"></span></a>Dependencies</h3>
+        <p>The calendar uses 3 dependencies you must add to your project : <a href="http://angularjs.org/">angular</a> of course, <a href="http://lodash.com">lodash</a> for some operations and <a href="http://momentjs.com/">moment.js</a>.</p>
+        <p>Because we use moment.js, you can load a language file and change the calendar language (days and months names), like this :</p>
+        <pre><code>moment.lang('fr');
+var app = angular.module...</code></pre>
+        <p>Week days order, week days names and month + year format cannot be changed with an option.</p>
+
+        <h2><a class="anchor"><span class="octicon octicon-link"></span></a>What's next ?</h2>
+        <p>We created this directive to have a simple calendar with multi-dates selection. We will keep it simple but any improvement is welcome.</p>
+
+        <footer>
+          Multipledatepicker is maintained by <a href="https://github.com/arca-computing">arca-computing</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+.search-result-table {
+
+    .empty {
+        .title {
+            border: 0;
+        }
+    }
+
+    .row {
+        @include table-flex($align-content: center, $align-items: center);
+        padding: .5rem;
+        &:hover {
+            @include transition (background .2s ease-in);
+            background: lighten($green-taiga, 60%);
+        }
+        .user-stories {
+            @include table-flex-child(5, 0, 1);
+        }
+        .status,
+        .points {
+            @include table-flex-child(1, 100px, 0);
+            padding: 0 1rem;
+            text-align: center;
+        }
+        .assigned-to {
+            @include table-flex-child(1, 250px, 0);
+        }
+    }
+    .row-selected {
+        @include transition (background .2s ease-in);
+        background: lighten($green-taiga, 60%);
+    }
+
+      // TODO: refactor xaviju
+    .user-story-name {
+        input {
+            vertical-align: top;
+        }
+        span {
+            display: inline-block;
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .icon {
+            @extend %medium;
+            color: $gray-light;
+            &:hover {
+                @include transition (color .3s linear);
+                color: $grayer;
+            }
+        }
+    }
+    .title {
+        @extend %medium;
+        @extend %bold;
+        border-bottom: 1px solid $gray-light;
+        &:hover {
+            background: transparent;
+        }
+    }
+    .table-main {
+        @extend %small;
+        border-bottom: 1px solid $gray-light;
+    }
+    .status,
+    .points {
+        position: relative;
+    }
+    .avatar {
+        align-items: center;
+        display: flex;
+        img {
+            flex-basis: 35px;
+        }
+        figcaption {
+            display: inline-block;
+            margin-left: .5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}

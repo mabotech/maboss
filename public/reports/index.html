@@ -1,0 +1,96 @@
+<!doctype html>
+<html ng-app="ReportsApp">
+<head>
+	<meta charset='utf-8'>
+	<title>Reports</title>
+
+	<!--
+	Loading Handsontable (full distribution that includes all dependencies apart from jQuery)
+	-->
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="bower_components/handsontable/dist/handsontable.full.css"/>
+    
+    <link data-jsfiddle="common" rel="stylesheet" media="screen" href="bower_components/bootstrap-3.3.1/css/bootstrap.min.css"></link>
+            <script src="/components/flot/jquery.js"></script>
+	<script data-jsfiddle="common" src="bower_components/angular/angular.js"></script>
+    
+    <script src="/components/flot/jquery.flot.js"></script>
+    <script src="/components/flot/jquery.flot.stack.js"></script>
+          <script src="/components/angular-flot/angular-flot.js"></script>
+    
+    
+    <script data-jsfiddle="common" src="bower_components/ui-bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    
+	<script data-jsfiddle="common" src="bower_components/handsontable/dist/handsontable.full.js"></script>
+  <script data-jsfiddle="common" src="dist/ngHandsontable.js"></script>
+  <script data-jsfiddle="common" src="app/js/ReportsApp.js"></script>
+
+	<!--
+	Loading app dependencies. They are used here only to enhance the examples on this page
+	-->
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="app/css/samples.css">
+	<script src="app/js/samples.js"></script>
+	<script src="app/js/highlight/highlight.pack.js"></script>
+	<link rel="stylesheet" media="screen" href="app/js/highlight/styles/github.css">
+	<link rel="stylesheet" href="app/css/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body ng-controller="ReportsCtrl">
+<div class="wrapper">
+<div class="wrapper-row">
+<div id="container">
+	<!--div class="columnLayout">
+
+		<div class="rowLayout">
+			<div class="descLayout">
+				<div class="pad" data-jsfiddle="example"-->
+                <div class="row">
+                <div style="float:left"></div>
+                <div style="float:right">
+                <button class="btn btn-success" href="#">Download Excel</button>
+                </div>
+                </div>
+                 <tabset>
+                 <tab>
+                 <tab-heading>设备工时统计 </tab-heading>
+                 <h2>2014年11月</h2>
+                  <flot dataset="dataset" options="options" height="200px" width="680px"></flot>
+                 
+          <div id="timesheet">
+						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns" height="300" width="800"></hot-table>
+					</div>
+                  </tab> 
+
+                 <tab>
+               <tab-heading>月度统计报表 </tab-heading>
+               
+               <h2>2014年11月试验中心主要设备（单班）利用率、完好率报表</h2>
+               <flot dataset="dataset2" options="options" height="200px" width="680px"></flot>
+          <div id="monthly">
+						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns" height="300" width="800"></hot-table>
+					</div>
+                  </tab> 
+                  
+                                   <tab>
+                                     <tab-heading>年度统计报表 </tab-heading>
+                                     <h2>2014年度试验中心主要设备（单班）利用率、完好率报表</h2>
+                 <flot dataset="dataset3" options="options" height="200px" width="680px"></flot>
+          <div id="yearly">
+						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns" height="300" width="800"></hot-table>
+					</div>
+                  </tab> 
+
+</tabset>
+                    
+                    
+				<!--/div>
+			</div>
+		</div>
+
+	</div-->
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

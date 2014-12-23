@@ -1,0 +1,119 @@
+// Buttons components
+.trans-button {
+    @extend %large;
+    @extend %title;
+    text-transform: uppercase;
+    &:hover,
+    &.active {
+        @include transition (color .3s linear);
+        color: $green-taiga;
+    }
+    .icon {
+        margin-right: .3rem;
+    }
+}
+
+.button {
+    @extend %button;
+}
+
+a.button-green {
+    background: $green-taiga;
+    color: $white;
+    vertical-align: middle;
+    &:hover,
+    &.active {
+        background: $fresh-taiga;
+    }
+    span {
+        color: $white;
+    }
+}
+
+.button-gray,
+a.button-gray {
+    background: $button-gray;
+    &:hover {
+        background: $fresh-taiga;
+        color: $white;
+    }
+    span {
+        color: $white;
+    }
+}
+
+a.button-blackish {
+    background: $blackish;
+    color: $whitish;
+    &:hover {
+        background: $button-gray-hover;
+        color: $white;
+    }
+    span {
+        color: $white;
+    }
+}
+
+a.button-red {
+    background: $red-light;
+    &:hover {
+        background: $red;
+        color: $white;
+    }
+    span {
+        color: $white;
+    }
+}
+
+a.button-orange {
+    background: $orange;
+    &:hover {
+        background: lighten($orange, 10%);
+        color: $white;
+    }
+    span {
+        color: $white;
+    }
+}
+
+a.button-block {
+    background: $white;
+    color: $red;
+    &:hover {
+        background: $red-light;
+        color: $white;
+    }
+}
+
+a.button-bulk {
+    @extend %button;
+    background: $green-taiga;
+    font-size: 22px;
+    margin-left: 2px;
+    padding: .3rem .5rem;
+    vertical-align: middle;
+    .icon {
+        @extend %medium;
+        color: $white;
+        margin-right: 0;
+    }
+    &:hover {
+        @include transition (background .3s linear);
+        background: $fresh-taiga;
+    }
+}
+.button-github {
+    @extend %button;
+    background: $grayer;
+    vertical-align: middle;
+    .icon {
+        @extend %large;
+        color: $white;
+        margin-right: .5rem;
+        vertical-align: text-bottom;
+    }
+    &:hover {
+        @include transition (background .3s linear);
+        background: $black;
+    }
+}

@@ -1,0 +1,48 @@
+.single-filter {
+    @extend %large;
+    @extend %title;
+    @include clearfix;
+    cursor: pointer;
+    display: block;
+    height: 32px;
+    margin-bottom: 1rem;
+    opacity: .5;
+    position: relative;
+    &:hover {
+        @include transition (opacity .2s linear);
+        color: $grayer;
+        opacity: 1;
+    }
+    &.selected,
+    &.active {
+        @include transition (opacity .2s linear);
+        color: $grayer;
+        opacity: 1;
+    }
+    .name,
+    .number {
+        padding: 8px 10px;
+    }
+    .name {
+        background: darken($whitish, 10%); // Fallback
+        display: block;
+        width: 100%;
+    }
+    .number {
+        background: darken($whitish, 20%); // Fallback
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .icon-delete {
+        @include transition(color .3s linear);
+        color: $grayer;
+        position: absolute;
+        right: .5rem;
+        top: .5rem;
+        &:hover {
+            @include transition(color .3s linear);
+            color: $red;
+        }
+    }
+}
