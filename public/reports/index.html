@@ -35,24 +35,23 @@
 </head>
 
 <body ng-controller="ReportsCtrl">
-<div class="wrapper">
-<div class="wrapper-row">
-<div id="container">
-	<!--div class="columnLayout">
+<!--div class="wrapper">
+<div class="wrapper-row"-->
+<div id="container-fluid">
 
-		<div class="rowLayout">
-			<div class="descLayout">
-				<div class="pad" data-jsfiddle="example"-->
-                <div class="row">
-                <div style="float:left"></div>
-                <div style="float:right">
-                <button class="btn btn-success" href="#">Download Excel</button>
-                </div>
-                </div>
-                 <tabset>
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-4">KPI及报表</div>
+  <div class="col-xs-6 col-md-4">
+   <button class="btn btn-success" href="#">Download Excel</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-sm-8">
+  
+   <tabset>
                  <tab>
-                 <tab-heading>设备工时统计 </tab-heading>
-                 <h2>2014年11月</h2>
+                 <tab-heading>设备工时统计</tab-heading>
+                 <h2>{{year}}年{{month}}月</h2>
                   <flot dataset="dataset" options="options" height="200px" width="680px"></flot>
                  
           <div id="timesheet">
@@ -61,36 +60,38 @@
                   </tab> 
 
                  <tab>
-               <tab-heading>月度统计报表 </tab-heading>
+               <tab-heading>月度统计报表</tab-heading>
                
-               <h2>2014年11月试验中心主要设备（单班）利用率、完好率报表</h2>
+               <h2>{{year}}年{{month}}月试验中心主要设备（单班）利用率、完好率报表</h2>
                <flot dataset="dataset2" options="options" height="200px" width="680px"></flot>
           <div id="monthly">
-						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns" height="300" width="800"></hot-table>
+          <br/>
+           Average:{{average}} %
+						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns2" height="350" width="900"></hot-table>
+                       
 					</div>
                   </tab> 
                   
                                    <tab>
-                                     <tab-heading>年度统计报表 </tab-heading>
-                                     <h2>2014年度试验中心主要设备（单班）利用率、完好率报表</h2>
-                 <flot dataset="dataset3" options="options" height="200px" width="680px"></flot>
+                                     <tab-heading>年度统计报表</tab-heading>
+                                     <h2>{{year}}年度试验中心主要设备（单班）利用率、完好率报表</h2>
+                 <flot dataset="dataset3" options="options3" height="200px" width="780px"></flot>
+                 <br/>
           <div id="yearly">
-						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns" height="300" width="800"></hot-table>
+						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns3" height="350" ></hot-table>
 					</div>
                   </tab> 
 
 </tabset>
-                    
-                    
-				<!--/div>
-			</div>
-		</div>
-
-	</div-->
+  
+  </div>
 </div>
 
+ 
 </div>
-</div>
+
+<!--/div>
+</div-->
 
 </body>
 </html>
