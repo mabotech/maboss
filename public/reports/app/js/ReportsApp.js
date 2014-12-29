@@ -219,12 +219,12 @@ angular.module("ReportsApp", [ "ui.bootstrap", "angular-flot", "ngHandsontable" 
     }, {
         data: "room",
         title: "检测试验单位",
-        width: 120,
+        width: 130,
         readOnly: true
     }, {
         data: "equipments",
         title: "设备仪器名称",
-        width: 150,
+        width: 180,
         readOnly: true
     }, {
         data: "equipmentNos",

@@ -44,7 +44,7 @@
 </div>
   <div class="col-xs-8 col-sm-6 col-md-4"><h2>KPI及报表</h2></div>
   <div class="col-xs-3 col-md-4">
-   <button class="btn btn-success" href="#">Download Excel</button>
+   <a class="btn btn-success" href="output/KPI20141216.xlsx">Download Excel</a>
   </div>
 </div>
 <div class="row">
@@ -55,8 +55,9 @@
    <tabset>
                  <tab>
                  <tab-heading>设备工时统计</tab-heading>
-                 <h2>{{year}}年{{month}}月</h2>
-                  <flot dataset="dataset" options="options" height="200px" width="680px"></flot>
+                 <!--h2>{{year}}年{{month}}月</h2-->
+                 <img src="output/monthly_workload_201412.png" width="700px"/>
+                  <!--flot dataset="dataset" options="options" height="200px" width="680px"></flot-->
                  
           <div id="timesheet">
 						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns" height="300" width="800"></hot-table>
@@ -66,8 +67,10 @@
                  <tab>
                <tab-heading>月度统计报表</tab-heading>
                
-               <h2>{{year}}年{{month}}月试验中心主要设备（单班）利用率、完好率报表</h2>
-               <flot dataset="dataset2" options="options" height="200px" width="680px"></flot>
+               <!--h2>{{year}}年{{month}}月试验中心主要设备（单班）利用率、完好率报表</h2>
+               <flot dataset="dataset2" options="options" height="200px" width="680px"></flot-->
+                <img src="output/monthly_util_201412.png" width="90%"/>
+                
           <div id="monthly">
           <br/>
            Average:{{average}} %
@@ -78,14 +81,38 @@
                   
                                    <tab>
                                      <tab-heading>年度统计报表</tab-heading>
-                                     <h2>{{year}}年度试验中心主要设备（单班）利用率、完好率报表</h2>
-                 <flot dataset="dataset3" options="options3" height="200px" width="780px"></flot>
+                                     <!--h2>{{year}}年度试验中心主要设备（单班）利用率、完好率报表</h2>
+                 <flot dataset="dataset3" options="options3" height="200px" width="780px"></flot-->
+                  <img src="output/yearly_201412.png" width="100%"/>
                  <br/>
           <div id="yearly">
 						<hot-table settings="{rowHeaders: false, contextMenu: true, afterChange: afterChange}" colHeaders="true" datarows="db.items" columns="db.dynamicColumns3" height="350" ></hot-table>
 					</div>
                   </tab> 
+ <tab>
+                 <tab-heading>Dashboard</tab-heading>
 
+<div class="row">
+<div class="col-sm-5">
+<img src="output/test03.png" width="100%"/>
+</div>
+<div class="col-sm-7">
+<img src="output/bullet02.png" width="100%"/>
+</div>
+
+</div>
+
+<div class="row">
+<div class="col-sm-5">
+<img src="output/area1.png" width="100%"/>
+</div>
+<div class="col-sm-7">
+<img src="output/test2.png" width="100%"/>
+</div>
+
+</div>
+
+</tab>
 </tabset>
   
   </div>
