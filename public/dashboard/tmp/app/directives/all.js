@@ -1,0 +1,20 @@
+define([
+  './arrayJoin',
+  './dashUpload',
+  './grafanaPanel',
+  './grafanaSimplePanel',
+  './ngBlur',
+  './dashEditLink',
+  './ngModelOnBlur',
+  './tip',
+  './confirmClick',
+  './configModal',
+  './spectrumPicker',
+  './bootstrap-tagsinput',
+  './bodyClass',
+  './templateParamSelector',
+  './graphiteSegment',
+  './grafanaVersionCheck',
+  './dropdown.typeahead'
+], function () {
+});
